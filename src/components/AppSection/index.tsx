@@ -13,16 +13,16 @@ export default function AppSection() {
   ]
 
   return (
-    <section className="w-full h-[675px] bg-section-light relative">
+    <section className="w-full h-[675px]  bg-[#DEDEDE] relative text-black">
       <div className="absolute left-[114px] top-[65px] flex flex-col gap-[42px] max-w-[606px] py-16">
         <h2 className="text-4xl font-bold">Arfve app</h2>
 
         {features.map((feature, index) => (
           <div key={index} className="flex flex-col gap-3">
-            <h3 className="text-[28px] font-semibold leading-[34px]">
+            <h3 className="text-[25px] font-semibold leading-[34px]">
               {feature.title}
             </h3>
-            <p className="text-lg font-medium leading-[22px]">
+            <p className="text-[18px] font-medium leading-[22px]">
               {feature.description}
             </p>
           </div>
