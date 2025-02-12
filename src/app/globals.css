@@ -3,14 +3,40 @@
 @tailwind utilities;
 
 :root {
+  /* Primary colors */
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Grays */
+  --gray-50: #DEDEDE;  /* Used in Hero, AppSection bg */
+  --gray-900: #1F1F1F; /* Used in Hero button */
+  --gray-950: #090909; /* Used in Testimonials bg */
+
+  /* Component specific */
+  --button-primary: var(--gray-900);
+  --section-light: var(--gray-50);
+  --section-dark: var(--gray-950);
+
+  /* Footer specific */
+  --footer-text: #666666;
+  --footer-link: #171717;
+  --footer-link-hover: #000000;
+  --footer-border: #E5E5E5;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --button-primary: var(--gray-50);
+    --section-light: var(--gray-900);
+    --section-dark: var(--gray-950);
+    
+    /* Footer dark mode */
+    --footer-text: #999999;
+    --footer-link: #ededed;
+    --footer-link-hover: #ffffff;
+    --footer-border: #1F1F1F;
   }
 }
 
@@ -18,4 +44,54 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Footer Typography */
+.footer-heading {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.footer-link {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--footer-text);
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--footer-link-hover);
+  text-decoration: none;
+}
+
+.footer-copyright {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--footer-text);
+}
+
+@layer utilities {
+  /* Hide scrollbar by default */
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  /* Track */
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    transition: background-color 0.2s ease;
+  }
+
+  /* Handle on hover */
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
 }
