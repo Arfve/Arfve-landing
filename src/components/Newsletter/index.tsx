@@ -1,30 +1,24 @@
 export default function Newsletter() {
   return (
-    <section className="flex justify-center items-center py-16 px-32 bg-[#090909]">
-      <div className="flex gap-16 max-w-[1192px] w-full">
-        <div className="flex flex-col gap-3">
-          <h2 className="text-[28px] font-semibold text-white">
-            Subscribe to our newsletter
-          </h2>
-          <div className="flex flex-col gap-2">
-            <p className="text-lg font-medium text-white">
-              Subscribe to our newsletter
-            </p>
-            <div className="flex gap-3">
-              <div className="flex border-b border-white pb-2.5 px-2.5 w-[242px]">
-                <input
-                  type="email"
-                  placeholder="email"
-                  className="bg-transparent text-white outline-none w-full"
-                />
-              </div>
-              <button className="px-4 py-3 border border-white rounded-lg text-white">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-} 
+    <section className="bg-black text-white flex flex-col md:flex-row justify-center items-center p-5 h-[202px] gap-10">
+  <h2 className="text-3xl font-bold mb-6 md:mb-0 md:mr-6">Subscribe to our newsletter</h2>
+  <div>
+    <p>Subscribe to our newsletter</p>
+  <form className="md:w-1/2 flex md:items-center md:gap-x-4">
+    <input
+      type="email"
+      required
+      className="w-full md:w-auto bg-black text-white rounded-md px-3.5 py-2.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 border-b border-white"
+      placeholder="Enter your email"
+    />
+    <button
+      type="submit"
+      className="flex-none rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm border border-white">
+      Subscribe
+    </button>
+  </form>
+  </div>
+ 
+</section>
+  );
+}
