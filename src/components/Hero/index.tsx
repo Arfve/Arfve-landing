@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[500px] md:h-[675px] bg-section-light px-6 py-12 md:p-0">
+    <section className="relative min-h-[500px] md:h-[675px] bg-[#dedede] px-6 py-12 md:p-0">
       {/* <div className="md:absolute md:right-[140px] md:top-[205px] flex flex-col gap-8 max-w-[509px] text-center md:text-left">
         <h1 className="text-4xl md:text-[64px] font-bold leading-tight md:leading-[77px]">
           Legacy 1
@@ -29,11 +29,11 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAYAAAByNR6YAAAAAXNSR0IArs
 " />
 
           <div className='flex flex-col items-start justify-center'>
-            <strong className='text-6xl mb-4'>
+            <strong className='text-6xl mb-4 text-black'>
               Legacy 1
             </strong>
-            <p className='text-xl my-4'>The first earbud with replaceable battery</p>
-            <button className='flex-none rounded-md bg-black px-3.5 py-2.5 text-sm text-white shadow-sm hover:bg-gray-800'>
+            <p className='text-xl my-4 text-black'>The first earbud with replaceable battery</p>
+            <button className='flex-none rounded-md bg-[#1f1f1f] px-3.5 py-2.5 text-sm text-white shadow-sm hover:bg-gray-800'>
               <p className='px-1'>
               Crowdfund it
               </p>
