@@ -1,20 +1,28 @@
 "use client"
 
 import Image from 'next/image'
-import { useState } from 'react'
 
-type TestimonialCardProps = {
+interface TestimonialCardProps {
   quote: string
   author: string
   role: string
-  imageUrl: string
+  imageUrl?: string
 }
 
 function TestimonialCard({ quote, author, role, imageUrl }: TestimonialCardProps) {
   return (
     <div className="flex-shrink-0 flex flex-col items-center gap-3 w-[200px] h-[310px]">
       <div className="flex justify-center items-center w-[200px] h-[200px] bg-[#DEDEDE] rounded-[20px] p-[10px] gap-[10px]">
-        <div className="w-[79px] h-[79px]" />
+        {imageUrl && (
+          <div className="relative w-[79px] h-[79px]">
+            <Image
+              src={imageUrl}
+              alt={`${author}'s testimonial`}
+              fill
+              style={{ objectFit: 'contain' }}
+            />
+          </div>
+        )}
       </div>
       <div className="flex flex-col items-start gap-3 w-[200px] h-[98px]">
         <p className="w-[200px] h-[48px] font-inter font-bold text-[20px] leading-[24px] text-white">
@@ -28,80 +36,47 @@ function TestimonialCard({ quote, author, role, imageUrl }: TestimonialCardProps
   )
 }
 
-export default function Testimonials() {
-  const testimonials = [
+interface TestimonialsProps {
+  title: string;
+  list: Array<{
+    quote: string;
+    author: string;
+    role: string;
+    imageUrl?: string;
+  }>;
+}
+
+export default function Testimonials({ title, list = [] }: TestimonialsProps) {
+  const defaultTestimonials = [
     {
-      quote: "The best product of the year",
-      author: "Tim Cook",
-      role: "CEO @ Apple",
-      imageUrl: "/testimonial-1.svg"
+      quote: "Amazing product!",
+      author: "John Doe",
+      role: "Tech Enthusiast",
+      imageUrl: ""
     },
     {
-      quote: "Revolutionary sound quality",
-      author: "Mark Zuckerberg",
-      role: "CEO @ Meta",
-      imageUrl: "/testimonial-2.svg"
-    },
-    {
-      quote: "Game-changing innovation",
-      author: "Sundar Pichai",
-      role: "CEO @ Google",
-      imageUrl: "/testimonial-3.svg"
-    },
-    {
-      quote: "Outstanding battery life",
-      author: "Satya Nadella",
-      role: "CEO @ Microsoft",
-      imageUrl: "/testimonial-4.svg"
-    },
-    {
-      quote: "Perfect for daily use",
-      author: "Jensen Huang",
-      role: "CEO @ NVIDIA",
-      imageUrl: "/testimonial-5.svg"
-    },
-    {
-      quote: "Exceptional design",
-      author: "Lisa Su",
-      role: "CEO @ AMD",
-      imageUrl: "/testimonial-6.svg"
-    },
-    {
-      quote: "Incredible experience",
-      author: "Andy Jassy",
-      role: "CEO @ Amazon",
-      imageUrl: "/testimonial-7.svg"
-    },
-    {
-      quote: "Next level audio",
-      author: "Pat Gelsinger",
-      role: "CEO @ Intel",
-      imageUrl: "/testimonial-8.svg"
-    },
-    {
-      quote: "Simply amazing",
-      author: "Elon Musk",
-      role: "CEO @ Tesla",
-      imageUrl: "/testimonial-9.svg"
+      quote: "Best earphones ever",
+      author: "Jane Smith",
+      role: "Music Producer",
+      imageUrl: ""
     }
   ]
 
+  const displayTestimonials = list.length > 0 ? list : defaultTestimonials
+
   return (
-    <section className="flex flex-col items-start w-full bg-[#090909]">
-      <div className="w-[1440px] mx-auto px-[124px]">
-        <div className="flex flex-col items-start py-16 gap-[42px]">
-          <h2 className="font-inter font-bold text-[40px] leading-[48px] text-white">
-            They talk about us
-          </h2>
-          <div className="flex flex-row items-center gap-[40px] w-[1400px] overflow-x-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20 hover:scrollbar-thumb-white/40">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard
-                key={index}
-                {...testimonial}
-              />
-            ))}
-          </div>
-        </div>
+    <section className="bg-[#090909] py-16 px-32">
+      <h2 className="text-[28px] font-semibold text-white mb-8">{title}</h2>
+      <div className="flex gap-8 overflow-x-auto">
+        {displayTestimonials.map((testimonial, index) => (
+          <TestimonialCard
+            key={index}
+            quote={testimonial.quote}
+            author={testimonial.author}
+            role={testimonial.role}
+            imageUrl={testimonial.imageUrl}
+          />
+        ))}
       </div>
     </section>
   )

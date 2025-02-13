@@ -8,16 +8,22 @@ import Testimonials from '@/components/Testimonials'
 import Newsletter from '@/components/Newsletter'
 import Footer from '@/components/Footer'
 
-export default function Home() {
+import { getHeaderData } from '@/lib/getHeaderData'
+import { getPageData } from '@/lib/getPageData'
+
+export default async function Home() {
+  const { menuItems } = await getHeaderData()
+  const pageData = await getPageData()
+
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
-      <Hero />
-      <Features />
-      <AppSection />
-      <ProductShowcase />
-      <Statement />
-      <Testimonials />
+      <Header menuItems={menuItems} />
+      <Hero {...pageData.hero} />
+      <Features {...pageData.features} />
+      <AppSection image={pageData.app?.image} />
+      <ProductShowcase {...pageData.crowdfunding} />
+      <Statement {...pageData.statement} />
+      <Testimonials {...pageData.testimonials} />
       <Newsletter />
       <Footer />
     </div>

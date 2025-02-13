@@ -1,17 +1,24 @@
 import Image from 'next/image'
 
-export default function Hero() {
+interface HeroProps {
+  title: string;
+  subtitle: string;
+  buttonText: string;
+  image?: string;
+}
+
+export default function Hero({ title, subtitle, buttonText, image }: HeroProps) {
   return (
     <section className="relative min-h-[500px] md:h-[675px] bg-[#dedede] px-6 py-12 md:p-0">
       {/* <div className="md:absolute md:right-[140px] md:top-[205px] flex flex-col gap-8 max-w-[509px] text-center md:text-left">
         <h1 className="text-4xl md:text-[64px] font-bold leading-tight md:leading-[77px]">
-          Legacy 1
+          {title}
         </h1>
         <p className="text-base md:text-lg font-medium">
-          The first earphones with a replaceable battery.
+          {subtitle}
         </p>
         <button className="w-[130px] h-[43px] bg-button-primary text-white rounded-lg mx-auto md:mx-0">
-          Learn more
+          {buttonText}
         </button>
       </div>
       <div className="mt-12 md:mt-0 md:absolute md:left-[383px] md:top-[296px] flex justify-center">

@@ -1,9 +1,9 @@
 import Image from 'next/image'
 
-type FeatureCardProps = {
+interface FeatureCardProps {
   title: string
   description?: string
-  imageUrl: string
+  imageUrl?: string
   className?: string
 }
 
@@ -11,12 +11,16 @@ function FeatureCard({ title, description, imageUrl, className = "" }: FeatureCa
   return (
     <div className={`bg-white rounded-[20px] shadow-[0px_0px_16.6px_rgba(0,0,0,0.1)] p-5 ${className}`}>
       <div className="flex justify-center items-center bg-[#DEDEDE] rounded-[20px] p-2.5 mb-2.5">
-        <Image
-          src={imageUrl}
-          alt={title}
-          width={79}
-          height={79}
-        />
+        {imageUrl && (
+          <div className="relative w-[79px] h-[79px]">
+            <Image
+              src={imageUrl}
+              alt={title}
+              fill
+              style={{ objectFit: 'contain' }}
+            />
+          </div>
+        )}
       </div>
       <div className="flex flex-col gap-2.5">
         <h3 className="text-lg font-medium">{title}</h3>
@@ -26,62 +30,96 @@ function FeatureCard({ title, description, imageUrl, className = "" }: FeatureCa
   )
 }
 
-export default function ProductShowcase() {
+interface Feature {
+  title: string;
+  description?: string;
+  image?: string;
+  className?: string;
+}
+
+interface ProductShowcaseProps {
+  features?: Feature[];
+  title?: string;
+  subtitle?: string;
+  buttonText?: string;
+}
+
+export default function ProductShowcase({ features = [], title, subtitle, buttonText }: ProductShowcaseProps) {
+  const defaultFeatures: Feature[] = [
+    {
+      title: "11mm speakers",
+      description: "for an exceptional sound",
+      className: "w-[295px] h-[322px]"
+    },
+    {
+      title: "Up to 34 hours of autonomy",
+      description: "Long-lasting battery life",
+      className: "w-[295px] h-[268px]"
+    },
+    {
+      title: "AI driven",
+      description: "Access in one click to your favorite LLM",
+      className: "w-[295px] h-[268px]"
+    },
+    {
+      title: "The best industry ANC",
+      description: "listen your music like at home",
+      className: "w-[336px] h-[261px]"
+    },
+    {
+      title: "AI driven",
+      description: "Access in one click to your favorite LLM",
+      className: "w-[336px] h-[268px]"
+    },
+    {
+      title: "AI driven",
+      description: "Access in one click to your favorite LLM",
+      className: "w-[336px] h-[331px]"
+    }
+  ]
+
+  const displayFeatures = features.length > 0 
+    ? features.map((f, i) => ({ ...f, className: defaultFeatures[i]?.className }))
+    : defaultFeatures
+
   return (
     <section className="flex justify-center items-center p-16 gap-2.5 bg-white">
       <div className="flex gap-16 max-w-[1312px]">
         <div className="flex gap-2.5">
           <div className="flex flex-col gap-2.5">
-            <FeatureCard
-              title="11mm speakers"
-              description="for an exceptional sound"
-              imageUrl="/feature-speakers.svg"
-              className="w-[295px] h-[322px]"
-            />
-            <FeatureCard
-              title="Up to 34 hours of autonomy"
-              imageUrl="/feature-battery.svg"
-              className="w-[295px] h-[268px]"
-            />
-            <FeatureCard
-              title="AI driven"
-              description="Access in one click to your favorite LLM"
-              imageUrl="/feature-ai.svg"
-              className="w-[295px] h-[268px]"
-            />
+            {displayFeatures.slice(0, 3).map((feature, index) => (
+              <FeatureCard
+                key={index}
+                title={feature.title}
+                description={feature.description}
+                imageUrl={feature.image}
+                className={feature.className}
+              />
+            ))}
           </div>
 
           <div className="flex flex-col gap-2.5">
-            <FeatureCard
-              title="The best industry ANC"
-              description="listen your music like at home"
-              imageUrl="/feature-anc.svg"
-              className="w-[336px] h-[261px]"
-            />
-            <FeatureCard
-              title="AI driven"
-              description="Access in one click to your favorite LLM"
-              imageUrl="/feature-ai-2.svg"
-              className="w-[336px] h-[268px]"
-            />
-            <FeatureCard
-              title="AI driven"
-              description="Access in one click to your favorite LLM"
-              imageUrl="/feature-ai-3.svg"
-              className="w-[336px] h-[331px]"
-            />
+            {displayFeatures.slice(3, 6).map((feature, index) => (
+              <FeatureCard
+                key={index + 3}
+                title={feature.title}
+                description={feature.description}
+                imageUrl={feature.image}
+                className={feature.className}
+              />
+            ))}
           </div>
         </div>
 
         <div className="flex flex-col gap-3 max-w-[607px] mt-auto">
           <h2 className="text-4xl font-bold leading-[48px]">
-            Go to the crownfunding platform
+            {title || "Go to the crowdfunding platform"}
           </h2>
           <p className="text-lg font-bold leading-[22px]">
-            Be one of the first backers and support the new AI revolution.
+            {subtitle || "Be one of the first backers and support the new AI revolution."}
           </p>
           <button className="w-[156px] h-[43px] bg-[#1F1F1F] text-white rounded-lg">
-            Support now
+            {buttonText || "Support now"}
           </button>
         </div>
       </div>

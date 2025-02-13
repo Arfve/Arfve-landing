@@ -10,14 +10,15 @@ export default function Footer() {
           {/* Left side with logo and navigation */}
           <div className="flex items-center gap-[41px]">
             {/* Logo with exact dimensions */}
-            <Link href="/" className="w-[113px] h-[41.12px]">
-              <Image
-                src="/logo.svg"
-                alt="Arfve Logo"
-                width={113}
-                height={41.12}
-                className="w-[113px] h-[41.12px]"
-              />
+            <Link href="/" className="block w-[113px] h-[41.12px]">
+              <div className="relative w-full h-full">
+                <Image
+                  src="/logo.svg"
+                  alt="Arfve Logo"
+                  fill
+                  style={{ objectFit: 'contain' }}
+                />
+              </div>
             </Link>
             
             {/* Frame 4 - Navigation Links with exact width and height */}
