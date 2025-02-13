@@ -1,6 +1,10 @@
 import Image from 'next/image'
 
-export default function AppSection() {
+interface AppSectionProps {
+  image?: string;
+}
+
+export default function AppSection({ image }: AppSectionProps) {
   const features = [
     {
       title: "Customize everthing",
@@ -30,12 +34,16 @@ export default function AppSection() {
       </div>
 
       <div className="absolute right-[140px] top-[309px]">
-        <Image
-          src="/app-preview.svg"
-          alt="Arfve App Preview"
-          width={79}
-          height={79}
-        />
+        <div className="relative w-[300px] h-[300px]">
+          {image && (
+            <Image
+              src={image}
+              alt="App Preview"
+              fill
+              style={{ objectFit: 'contain' }}
+            />
+          )}
+        </div>
       </div>
     </section>
   )
