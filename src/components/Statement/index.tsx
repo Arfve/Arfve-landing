@@ -9,27 +9,30 @@ interface StatementProps {
 
 export default function Statement({ title, content }: StatementProps) {
   return (
-    <section className="flex flex-col items-start px-[124px] py-[64px] gap-[64px] w-[1440px] h-[341.32px] bg-[#090909]">
+    <section className="flex flex-col items-start px-[124px] py-[64px] gap-[64px] w-full max-w-[1440px] mx-auto h-auto bg-[#090909]">
       {/* Main Content Container */}
-      <div className="flex flex-col items-start w-[1192px] mx-auto gap-[64px]">
+      <div className="flex flex-col items-start gap-[12px] w-full max-w-[1192px] mx-auto">
         {/* Logo */}
         <div className="w-[163px] h-[59.32px] relative">
           <Image
             src="/logo.svg"
             alt="Arfve Logo"
             width={163}
-            height={59}
-            className="w-[163px] h-[59.32px]"
+            height={59.32}
+            className="w-full h-full"
             priority
           />
         </div>
 
         {/* Content */}
-        <div className="flex flex-col items-start gap-[12px] w-[1192px] h-[90px]">
-          <h2 className="font-inter font-semibold text-[28px] leading-[34px] text-white">
+        <div className="flex flex-col items-start gap-[12px] w-full">
+          {/* Title */}
+          <h2 className="font-inter font-semibold text-[28px] leading-[34px] text-white w-full max-w-[1192px]">
             {title}
           </h2>
-          <p className="font-inter font-medium text-[18px] leading-[22px] text-white">
+
+          {/* Content */}
+          <p className="font-inter font-medium text-[18px] leading-[22px] text-white w-full max-w-[1192px]">
             {content}
           </p>
         </div>
