@@ -1,6 +1,7 @@
 import { shopifyFetch } from './shopify'
+import { HeaderData } from '@/types/shopify'
 
-export async function getHeaderData() {
+export async function getHeaderData(): Promise<HeaderData> {
   try {
     const { body } = await shopifyFetch({
       query: `
