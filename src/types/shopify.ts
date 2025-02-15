@@ -26,4 +26,35 @@ export interface ShopifyCart {
       currencyCode: string
     }
   }
+}
+
+export interface Metafield {
+  key: string
+  value: string
+  namespace: string
+}
+
+export interface HeaderData {
+  menuItems: ShopifyMenuItem[]
+}
+
+export interface FooterData {
+  menuItems: ShopifyMenuItem[]
+  socialLinks?: {
+    facebook?: string
+    twitter?: string
+    instagram?: string
+  }
+}
+
+export interface Testimonial {
+  quote: string
+  author: string
+  role: string
+  imageUrl?: string
+}
+
+export interface TestimonialsData {
+  title: string
+  list: Testimonial[]
 } 
