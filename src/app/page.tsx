@@ -10,10 +10,14 @@ import Footer from '@/components/Footer'
 
 import { getHeaderData } from '@/lib/getHeaderData'
 import { getPageData } from '@/lib/getPageData'
+import { getFooterData } from '@/lib/getFooterData'
+import { getTestimonialsData } from '@/lib/getTestimonialsData'
 
 export default async function Home() {
   const { menuItems } = await getHeaderData()
   const pageData = await getPageData()
+  const testimonialsData = await getTestimonialsData()
+  const footerData = await getFooterData()
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -23,9 +27,9 @@ export default async function Home() {
       <AppSection image={pageData.app?.image} />
       <ProductShowcase {...pageData.crowdfunding} />
       <Statement {...pageData.statement} />
-      <Testimonials {...pageData.testimonials} />
+      <Testimonials {...testimonialsData} />
       <Newsletter />
-      <Footer />
+      <Footer {...footerData} />
     </div>
   )
 }
