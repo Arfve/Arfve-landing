@@ -19,10 +19,6 @@ export default function TestimonialCard({ quote, author, role, imageUrl }: Testi
               alt={`${author}'s testimonial`}
               fill
               style={{ objectFit: 'contain' }}
-              onError={() => {
-                // Silently handle image load errors
-                console.debug(`Image load failed for testimonial by ${author}`);
-              }}
             />
           </div>
         ) : (
