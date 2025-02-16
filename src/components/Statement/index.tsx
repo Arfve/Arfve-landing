@@ -19,7 +19,7 @@ export default function Statement({ title, content }: StatementProps) {
             alt="Arfve Logo"
             width={163}
             height={59.32}
-            className="w-full h-full"
+            className="w-full h-auto"
             priority
           />
         </div>

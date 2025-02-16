@@ -4,12 +4,6 @@ import TestimonialCard from './TestimonialCard';
 import { TestimonialsData } from '@/types/shopify';
 
 export default function Testimonials({ title, list = [] }: TestimonialsData) {
-  console.log('Raw testimonials:', list);
-
-  if (list.length === 0) {
-    console.log('No testimonials found');
-  }
-
   return (
     <section className="w-full bg-[#090909] py-16 px-8 md:px-32">
       <div className="max-w-[1192px] mx-auto">
