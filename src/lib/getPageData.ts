@@ -27,6 +27,14 @@ export async function getPageData() {
             key
             namespace
             value
+            reference {
+              ... on MediaImage {
+                id
+                image {
+                  url
+                }
+              }
+            }
           }
         }
       }
@@ -35,15 +43,20 @@ export async function getPageData() {
 
   const metafields: Metafield[] = body?.data?.page?.metafields || [];
 
-  const findMetafield = (namespace: string, key: string) => 
-    metafields.find(m => m?.namespace === namespace && m?.key === key)?.value;
+  const findMetafield = (namespace: string, key: string) => {
+    const field = metafields.find(m => m?.namespace === namespace && m?.key === key);
+    if (field?.reference?.image?.url) {
+      return field.reference.image.url;
+    }
+    return field?.value;
+  };
 
   return {
     hero: {
-      title: findMetafield('hero', 'title') || "Legacy 1",
-      subtitle: findMetafield('hero', 'subtitle') || "The first earphones with a replaceable battery.",
-      buttonText: findMetafield('hero', 'button_text') || "Learn more",
-      image: findMetafield('hero', 'image')
+      title: findMetafield('hero', 'title') || 'Legacy 1',
+      subtitle: findMetafield('hero', 'subtitle') || 'The first earphones with a replaceable battery.',
+      buttonText: findMetafield('hero', 'button_text') || 'Learn more',
+      image: findMetafield('hero', 'image') || null
     },
     features: {
       title: findMetafield('features', 'title') || "Your best audio companion",
