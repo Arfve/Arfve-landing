@@ -17,7 +17,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header menuItems={menuItems} />
+      {/* <Header menuItems={menuItems} /> */}
       <Hero {...pageData.hero} />
       <Features {...pageData.features} />
       <AppSection image={pageData.app?.image} />
@@ -25,7 +25,7 @@ export default async function Home() {
       <Statement {...pageData.statement} />
       <Testimonials {...pageData.testimonials} />
       <Newsletter />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }
