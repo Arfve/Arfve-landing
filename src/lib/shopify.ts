@@ -1,4 +1,4 @@
-import {createStorefrontApiClient} from '@shopify/storefront-api-client'
+import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
@@ -9,6 +9,9 @@ const shopifyConfig = {
 }
 
 export const shopifyClient = createStorefrontApiClient(shopifyConfig)
+
+
+
 
 export async function testConnection() {
   try {
