@@ -12,21 +12,27 @@ import { getHeaderData } from '@/lib/getHeaderData'
 import { getPageData } from '@/lib/getPageData'
 import { getFooterData } from '@/lib/getFooterData'
 import { getTestimonialsData } from '@/lib/getTestimonialsData'
+import { getHeroData } from '@/lib/getHeroData'
+import { getStatementData } from '@/lib/getStatementData'
+import { getFeaturesData } from '@/lib/getFeaturesData'
 
 export default async function Home() {
   const { menuItems } = await getHeaderData()
   const pageData = await getPageData()
+  const featuresData = await getFeaturesData()
+  const heroData = await getHeroData()
+  const statementData = await getStatementData()
   const testimonialsData = await getTestimonialsData()
   const footerData = await getFooterData()
 
   return (
     <div className="flex flex-col min-h-screen">
       <Header menuItems={menuItems} />
-      <Hero {...pageData.hero} />
-      <Features {...pageData.features} />
+      <Hero {...heroData} />
+      <Features {...featuresData} />
       <AppSection image={pageData.app?.image} />
       <ProductShowcase {...pageData.crowdfunding} />
-      <Statement {...pageData.statement} />
+      <Statement {...statementData} />
       <Testimonials {...testimonialsData} />
       <Newsletter />
       <Footer {...footerData} />

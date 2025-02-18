@@ -1,17 +1,19 @@
-import { shopifyFetch } from './shopify';
-import { TestimonialsData } from '@/types/shopify';
+import { shopifyFetch } from './shopify'
+import { Metafield } from '@/types/shopify'
 
-export async function getTestimonialsData(): Promise<TestimonialsData> {
+export async function getHeroData() {
   const { body } = await shopifyFetch({
     query: `
-      query GetTestimonials {
+      query GetHeroSection {
         page(handle: "homepage") {
           metafields(identifiers: [
-            {namespace: "testimonials_section", key: "reference"}
+            {namespace: "hero_section", key: "reference"}
           ]) {
             value
             reference {
               ... on Metaobject {
+                handle
+                type
                 fields {
                   key
                   value
@@ -29,7 +31,7 @@ export async function getTestimonialsData(): Promise<TestimonialsData> {
         }
       }
     `
-  });
+  })
 
   const fields = body?.data?.page?.metafields?.[0]?.reference?.fields || [];
   
@@ -42,7 +44,9 @@ export async function getTestimonialsData(): Promise<TestimonialsData> {
   };
 
   return {
-    title: findField('title') || 'What our customers say',
-    list: JSON.parse(findField('list') || '[]')
-  };
-}
+    title: findField('title') || 'Legacy 1',
+    subtitle: findField('subtitle') || 'The first earphones with a replaceable battery.',
+    buttonText: findField('button_text') || 'Learn more',
+    image: findField('image') || null
+  }
+} 
