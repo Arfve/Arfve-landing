@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+// import { useState } from 'react'
 import { ShopifyMenuItem } from '@/types/shopify'
 
 interface HeaderProps {
@@ -10,7 +10,7 @@ interface HeaderProps {
 }
 
 export default function Header({ menuItems }: HeaderProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  // const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
     <header className="flex flex-row justify-between items-center px-[124px] py-16 w-[1440px] h-[133px] bg-white">
