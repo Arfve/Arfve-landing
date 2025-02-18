@@ -15,7 +15,7 @@ const index = ({ children, answer }: FAQProps) => {
     <>
       <div className="relative">
         {/* Question */}
-        <div className="flex items-center text-black w-[900px] justify-between py-4 font-semibold relative">
+        <div className="flex items-center text-black w-[900px] justify-between py-4 font-semibold relative cursor-pointer" onClick={() => setIsAnwerOpen(!isAnswerOpen)}>
           {children}
           <div
             className={`cursor-pointer transform transition-transform duration-00 ${
