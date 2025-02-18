@@ -1,0 +1,21 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "quote": {
+        "type": "string"
+      },
+      "author": {
+        "type": "string"
+      },
+      "role": {
+        "type": "string"
+      },
+      "imageUrl": {
+        "type": "string"
+      }
+    },
+    "required": ["quote", "author", "role"]
+  }
+} 
