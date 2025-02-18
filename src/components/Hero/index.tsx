@@ -10,19 +10,19 @@ interface HeroProps {
 }
 
 export default function Hero({ title, subtitle, buttonText, image }: HeroProps) {
-  const fallbackImage = "/product-hero.svg";
-
   return (
     <section className="relative min-h-[500px] md:h-[675px] bg-[#dedede] px-6 py-12 md:p-0">
-      <div className='h-[675px] flex items-center gap-20'>
-        <Image 
-          src={image || fallbackImage}
-          alt={title}
-          width={400}
-          height={400}
-          className="object-contain"
-          unoptimized
-        />
+      <div className="max-w-[1440px] h-[675px] mx-auto flex items-center justify-center gap-20">
+        {image && (
+          <div className="relative w-[400px] h-[400px]">
+            <Image 
+              src={image}
+              alt={title || "Arfve Headphones"}
+              fill
+              className="object-contain"
+            />
+          </div>
+        )}
 
         <div className='flex flex-col items-start justify-center'>
           <strong className='text-6xl mb-4 text-black'>{title}</strong>
