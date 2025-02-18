@@ -33,34 +33,13 @@ export async function testConnection() {
 export async function shopifyFetch({ query, variables = {} }: { query: string, variables?: Record<string, any> }) {
   try {
     if (!process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN && isDevelopment) {
-      console.warn('Shopify credentials not set up. Using default data.')
-      return {
-        status: 200,
-        body: { data: null }
-      }
+      return { status: 200, body: {} }
     }
 
-    const result = await shopifyClient.request(query, {
-      variables
-    })
-
-    return {
-      status: 200,
-      body: result
-    }
+    const result = await shopifyClient.request(query, { variables })
+    return { status: 200, body: result }
   } catch (error) {
-    if (isDevelopment) {
-      console.warn('Shopify API error:', error)
-      return {
-        status: 200,
-        body: { data: null }
-      }
-    }
-    
     console.error('Shopify Client Error:', error)
-    return {
-      status: 500,
-      error: 'Error receiving data'
-    }
+    return { status: 500, error: 'Error receiving data' }
   }
-} 
+}

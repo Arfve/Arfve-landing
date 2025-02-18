@@ -1,10 +1,5 @@
 import { shopifyFetch } from './shopify'
-
-interface Metafield {
-  namespace: string
-  key: string
-  value: string
-}
+import { Metafield } from '@/types/shopify'
 
 export async function getPageData() {
   const { body } = await shopifyFetch({
@@ -23,8 +18,6 @@ export async function getPageData() {
             {namespace: "features", key: "image"},
             {namespace: "statement", key: "title"},
             {namespace: "statement", key: "content"},
-            {namespace: "testimonials", key: "title"},
-            {namespace: "testimonials", key: "testimonials_list"},
             {namespace: "app", key: "image"},
             {namespace: "crowdfunding", key: "title"},
             {namespace: "crowdfunding", key: "subtitle"},
@@ -34,54 +27,55 @@ export async function getPageData() {
             key
             namespace
             value
+            reference {
+              ... on MediaImage {
+                id
+                image {
+                  url
+                }
+              }
+            }
           }
         }
       }
     `
   })
 
-  // console.log('body: ', body);
-  
+  const metafields: Metafield[] = body?.data?.page?.metafields || [];
 
-  const metafields = body?.data?.page?.metafields || []
+  const findMetafield = (namespace: string, key: string) => {
+    const field = metafields.find(m => m?.namespace === namespace && m?.key === key);
+    if (field?.reference?.image?.url) {
+      return field.reference.image.url;
+    }
+    return field?.value;
+  };
 
-  // Ny kod - hanterar om metafield inte finns (null)
-
-  const findMetafield = (namespace: string, key: string) => metafields?.find((m: Metafield | null) => m && m.namespace === namespace && m.key === key) 
-
-
-  // 
-
-  
   return {
     hero: {
-      title: findMetafield('hero', 'title')?.value || "Legacy 1",
-      subtitle: findMetafield('hero', 'subtitle')?.value || "The first earphones with a replaceable battery.",
-      buttonText: findMetafield('hero', 'button_text')?.value || "Learn more",
-      image: findMetafield('hero', 'image')?.value
+      title: findMetafield('hero', 'title') || 'Legacy 1',
+      subtitle: findMetafield('hero', 'subtitle') || 'The first earphones with a replaceable battery.',
+      buttonText: findMetafield('hero', 'button_text') || 'Learn more',
+      image: findMetafield('hero', 'image') || null
     },
     features: {
-      title: findMetafield('features', 'title')?.value || "Your best audio companion",
-      subtitle: findMetafield('features', 'subtitle')?.value || "But for life",
-      featureList: JSON.parse(findMetafield('features', 'feature_list')?.value || '[]'),
-      image: findMetafield('features', 'image')?.value
+      title: findMetafield('features', 'title') || "Your best audio companion",
+      subtitle: findMetafield('features', 'subtitle') || "But for life",
+      featureList: JSON.parse(findMetafield('features', 'feature_list') || '[]'),
+      image: findMetafield('features', 'image')
     },
     statement: {
-      title: findMetafield('statement', 'title')?.value || "Our statement",
-      content: findMetafield('statement', 'content')?.value || "Default statement content"
-    },
-    testimonials: {
-      title: findMetafield('testimonials', 'title')?.value || "What our customers say",
-      list: JSON.parse(findMetafield('testimonials', 'testimonials_list')?.value || '[]')
+      title: findMetafield('statement', 'title') || "Our statement",
+      content: findMetafield('statement', 'content') || "Default statement content"
     },
     app: {
-      image: findMetafield('app', 'image')?.value
+      image: findMetafield('app', 'image')
     },
     crowdfunding: {
-      title: findMetafield('crowdfunding', 'title')?.value,
-      subtitle: findMetafield('crowdfunding', 'subtitle')?.value,
-      buttonText: findMetafield('crowdfunding', 'button_text')?.value,
-      features: JSON.parse(findMetafield('crowdfunding', 'features')?.value || '[]')
+      title: findMetafield('crowdfunding', 'title'),
+      subtitle: findMetafield('crowdfunding', 'subtitle'),
+      buttonText: findMetafield('crowdfunding', 'button_text'),
+      features: JSON.parse(findMetafield('crowdfunding', 'features') || '[]')
     }
   }
-} 
+}
