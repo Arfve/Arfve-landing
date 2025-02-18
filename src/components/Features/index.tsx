@@ -31,8 +31,7 @@ export default function Features({ title, subtitle, featureList, image }: Featur
           <Image
             src={image || "/logo.svg"}
             alt="Features illustration"
-            width={79}
-            height={79}
+            fill
             className="object-contain"
             priority
           />
