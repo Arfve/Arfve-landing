@@ -1,12 +1,12 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
-import { ShopifyMenuItem } from '@/types/shopify'
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { ShopifyMenuItem } from "@/types/shopify";
 
 interface HeaderProps {
-  menuItems: ShopifyMenuItem[]
+  menuItems: ShopifyMenuItem[];
 }
 
 export default function Header({ menuItems }: HeaderProps) {
@@ -16,9 +16,9 @@ export default function Header({ menuItems }: HeaderProps) {
         <div className="max-w-[1192px] mx-auto flex flex-col lg:flex-row items-center gap-8 lg:gap-[41px] w-full">
           {/* Logo */}
           <Link href="/" className="shrink-0">
-            <Image 
-              src="/logo.svg" 
-              alt="Arfve Logo" 
+            <Image
+              src="/logo.svg"
+              alt="Arfve Logo"
               width={113}
               height={41}
               className="w-[113px] h-[41px]"
@@ -29,11 +29,10 @@ export default function Header({ menuItems }: HeaderProps) {
           {/* Navigation Links */}
           <nav className="flex flex-1 justify-center items-center gap-[41px] min-w-0">
             {menuItems.map((item) => (
-              <Link 
+              <Link
                 key={item.id}
-                href={item.url} 
-                className="font-inter text-base text-black hover:opacity-70"
-              >
+                href={item.url}
+                className="font-inter text-base text-black hover:opacity-70">
                 {item.title}
               </Link>
             ))}
@@ -46,5 +45,5 @@ export default function Header({ menuItems }: HeaderProps) {
         </div>
       </div>
     </header>
-  )
-} 
+  );
+}
