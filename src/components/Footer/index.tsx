@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="flex flex-col items-center w-full bg-white">
       <div className="flex flex-col items-center w-full max-w-[1440px] px-6 md:px-[124px] py-8">
         {/* Frame 67 - Top section with exact width and height */}
-        <div className="w-[1192px] h-[41.12px] flex flex-row justify-between items-center">
+        <div className="w-[1192px] h-[3.81vh] flex flex-row justify-between items-center">
           {/* Left side with logo and navigation */}
           <div className="flex items-center gap-[41px]">
             {/* Logo with exact dimensions */}
