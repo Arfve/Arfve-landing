@@ -30,9 +30,7 @@ export async function getFeaturesData() {
     `
   })
 
-  console.log('Features API response:', body)
   const fields = body?.data?.page?.metafields?.[0]?.reference?.fields || [];
-  console.log('Features fields:', fields)
   
   const findField = (key: string) => {
     const field = fields.find((f: { key: string }) => f.key === key);
@@ -48,6 +46,5 @@ export async function getFeaturesData() {
     featureList: JSON.parse(findField('feature_list') || '[]'),
     image: findField('image') || ''
   }
-  console.log('Features final data:', data)
   return data
 } 
