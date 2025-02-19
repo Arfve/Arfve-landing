@@ -35,6 +35,6 @@ export async function getNewsletterData() {
     title: findField('title') || 'Subscribe to our newsletter',
     subtitle: findField('subtitle') || 'Subscribe to our newsletter',
     buttonText: findField('button_text') || 'Subscribe',
-    placeholder: findField('placeholder') || 'Enter your email'
+    placeholder: findField('placeholder') || 'email'
   }
 } 
