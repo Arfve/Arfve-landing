@@ -6,18 +6,18 @@ import ProductShowcase from '@/components/ProductShowcase'
 import Statement from '@/components/Statement'
 import Testimonials from '@/components/Testimonials'
 import Newsletter from '@/components/Newsletter'
-import Footer from '@/components/Footer'
+
 
 import { getHeaderData } from '@/lib/getHeaderData'
 import { getPageData } from '@/lib/getPageData'
-import { getFooterData } from '@/lib/getFooterData'
+
 import { getTestimonialsData } from '@/lib/getTestimonialsData'
 
 export default async function Home() {
   const { menuItems } = await getHeaderData()
   const pageData = await getPageData()
   const testimonialsData = await getTestimonialsData()
-  const footerData = await getFooterData()
+
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -29,7 +29,7 @@ export default async function Home() {
       <Statement {...pageData.statement} />
       <Testimonials {...testimonialsData} />
       <Newsletter />
-      <Footer {...footerData} />
+
     </div>
   )
 }
