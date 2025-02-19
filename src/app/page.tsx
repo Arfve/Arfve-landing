@@ -8,17 +8,17 @@ import Testimonials from '@/components/Testimonials'
 import Newsletter from '@/components/Newsletter'
 
 
-import { getHeaderData } from '@/lib/getHeaderData'
+
 import { getHeroData } from '@/lib/getHeroData'
 import { getFeaturesData } from '@/lib/getFeaturesData'
 import { getAppSectionData } from '@/lib/getAppSectionData'
 import { getProductShowcaseData } from '@/lib/getProductShowcaseData'
 import { getStatementData } from '@/lib/getStatementData'
 import { getTestimonialsData } from '@/lib/getTestimonialsData'
-import { getFooterData } from '@/lib/getFooterData'
+
 
 export default async function Home() {
-  const headerData = await getHeaderData()
+
   const heroData = await getHeroData()
   const featuresData = await getFeaturesData()
   const appSectionData = await getAppSectionData()
@@ -29,7 +29,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header menuItems={headerData.menuItems} />
+
       <Hero {...heroData} />
       <Features {...featuresData} />
       <AppSection {...appSectionData} />
