@@ -6,52 +6,49 @@ interface FeaturesProps {
   featureList: Array<{
     title: string;
     description: string;
-    image?: string;
   }>;
   image?: string;
 }
 
 export default function Features({ title, subtitle, featureList, image }: FeaturesProps) {
   return (
-    <section className="w-full min-h-[500px] md:h-[675px] bg-[#EAEAEA] px-6 md:px-32 py-16 md:py-32">
-      <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-16">
-        <div className="flex flex-col gap-8 max-w-[509px]">
-          <div className="text-center md:text-left">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">{title}</h2>
-            <p className="text-base md:text-lg font-bold leading-[22px]">{subtitle}</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-[94px]">
-            {featureList.map((feature, index) => (
-              <div key={index} className="flex flex-col gap-2.5 w-full md:w-[161px]">
-                {feature.image && (
-                  <div className="relative w-[40px] h-[40px]">
-                    <Image
-                      src={feature.image}
-                      alt={feature.title}
-                      fill
-                      style={{ objectFit: 'contain' }}
-                    />
-                  </div>
-                )}
-                <h3 className="text-lg font-medium">{feature.title}</h3>
-                <p className="text-base">{feature.description}</p>
-              </div>
-            ))}
+    <section className="w-full bg-[#EAEAEA]">
+      <div className="w-[1440px] h-[675px] mx-auto relative">
+        {/* Left Content */}
+        <div className="absolute left-[140px] top-[142px] flex flex-col gap-6">
+          <div className="flex flex-col gap-3 w-[509px]">
+            <h2 className="font-inter font-bold text-[40px] leading-[48px] text-black">
+              {title}
+            </h2>
+            <p className="font-inter font-bold text-[18px] leading-[22px] text-black">
+              {subtitle}
+            </p>
           </div>
         </div>
 
-        <div className="flex justify-center items-center md:items-start">
-          {image && (
-            <div className="relative w-[200px] md:w-[300px] h-[300px]">
-              <Image
-                src={image}
-                alt="Product Features"
-                fill
-                style={{ objectFit: 'contain' }}
-              />
+        {/* Image on Right */}
+        <div className="absolute w-[79px] h-[79px] left-[1026px] top-[250px]">
+          <Image
+            src={image || "/logo.svg"}
+            alt="Features illustration"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
+
+        {/* Feature List at Bottom */}
+        <div className="absolute left-[140px] top-[512px] flex gap-[94px]">
+          {featureList.map((feature, index) => (
+            <div key={index} className="flex flex-col gap-[10px] w-[161px]">
+              <h3 className="font-inter font-medium text-[18px] leading-[22px] text-black">
+                {feature.title}
+              </h3>
+              <p className="font-inter font-normal text-[16px] leading-[19px] text-black">
+                {feature.description}
+              </p>
             </div>
-          )}
+          ))}
         </div>
       </div>
     </section>

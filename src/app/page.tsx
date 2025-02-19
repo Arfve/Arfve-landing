@@ -9,24 +9,32 @@ import Newsletter from '@/components/Newsletter'
 
 
 import { getHeaderData } from '@/lib/getHeaderData'
-import { getPageData } from '@/lib/getPageData'
-
+import { getHeroData } from '@/lib/getHeroData'
+import { getFeaturesData } from '@/lib/getFeaturesData'
+import { getAppSectionData } from '@/lib/getAppSectionData'
+import { getProductShowcaseData } from '@/lib/getProductShowcaseData'
+import { getStatementData } from '@/lib/getStatementData'
 import { getTestimonialsData } from '@/lib/getTestimonialsData'
+import { getFooterData } from '@/lib/getFooterData'
 
 export default async function Home() {
-  const { menuItems } = await getHeaderData()
-  const pageData = await getPageData()
+  const headerData = await getHeaderData()
+  const heroData = await getHeroData()
+  const featuresData = await getFeaturesData()
+  const appSectionData = await getAppSectionData()
+  const productShowcaseData = await getProductShowcaseData()
+  const statementData = await getStatementData()
   const testimonialsData = await getTestimonialsData()
 
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* <Header menuItems={menuItems} /> */}
-      <Hero {...pageData.hero} />
-      <Features {...pageData.features} />
-      <AppSection image={pageData.app?.image} />
-      <ProductShowcase {...pageData.crowdfunding} />
-      <Statement {...pageData.statement} />
+      <Header menuItems={headerData.menuItems} />
+      <Hero {...heroData} />
+      <Features {...featuresData} />
+      <AppSection {...appSectionData} />
+      <ProductShowcase {...productShowcaseData} />
+      <Statement {...statementData} />
       <Testimonials {...testimonialsData} />
       <Newsletter />
 

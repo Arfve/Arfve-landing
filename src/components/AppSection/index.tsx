@@ -1,47 +1,71 @@
 import Image from 'next/image'
 
-interface AppSectionProps {
-  image?: string;
+interface Feature {
+  title: string;
+  description: string;
 }
 
-export default function AppSection({ image }: AppSectionProps) {
-  const features = [
-    {
-      title: "Customize everthing",
-      description: "Lörem ipsum lose nyska rektiga nyfriskjobb eftersom berenar. Dor tira att spediskap depude. Os od tidaning plus petening och dasade."
-    },
-    {
-      title: "A shortcut to your best AI assistant",
-      description: "Lörem ipsum lose nyska rektiga nyfriskjobb eftersom berenar. Dor tira att spediskap depude. Os od tidaning plus petening och dasade."
-    }
-  ]
+interface AppSectionProps {
+  title: string;
+  features: Feature[];
+  image: string;
+}
 
+export default function AppSection({ title, features, image }: AppSectionProps) {
   return (
-    <section className="w-full h-[675px]  bg-[#DEDEDE] relative text-black">
-      <div className="absolute left-[114px] top-[65px] flex flex-col gap-[42px] max-w-[606px] py-16">
-        <h2 className="text-4xl font-bold">Arfve app</h2>
+    <section className="w-full min-h-[500px] md:h-[675px] bg-[#DEDEDE] relative px-6 py-12 md:p-0">
+      <div className="max-w-[1440px] h-full mx-auto relative">
+        {/* Main Content Container */}
+        <div className="flex flex-col md:absolute md:left-[114px] md:top-[65px] gap-[42px] p-[32px_0px] md:p-[64px_0px] w-full md:w-[606px] md:h-[528px]">
+          {/* Title */}
+          <h2 className="font-inter font-bold text-[32px] md:text-[40px] leading-[40px] md:leading-[48px] text-black w-full md:w-[606px] md:h-[48px]">
+            {title}
+          </h2>
 
-        {features.map((feature, index) => (
-          <div key={index} className="flex flex-col gap-3">
-            <h3 className="text-[25px] font-semibold leading-[34px]">
-              {feature.title}
-            </h3>
-            <p className="text-[18px] font-medium leading-[22px]">
-              {feature.description}
-            </p>
+          {/* Features Container */}
+          <div className="flex flex-col gap-[32px] md:gap-[42px] w-full md:w-[606px]">
+            {features.map((feature, index) => (
+              <div key={index} className="flex flex-col gap-3 w-full md:w-[606px] md:h-[134px]">
+                <h3 className="font-inter font-semibold text-[24px] md:text-[28px] leading-[30px] md:leading-[34px] text-black w-full md:w-[606px] md:h-[34px]">
+                  {feature.title}
+                </h3>
+                <p className="font-inter font-medium text-[16px] md:text-[18px] leading-[20px] md:leading-[22px] text-black w-full md:w-[606px] md:h-[88px]">
+                  {feature.description}
+                </p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
 
-      <div className="absolute right-[140px] top-[309px]">
-        <div className="relative w-[300px] h-[300px]">
+        {/* Image */}
+        <div className="hidden md:flex md:absolute md:right-[120px] md:top-[73.5px] md:w-[450px] md:h-[500px] items-center justify-center">
           {image && (
-            <Image
-              src={image}
-              alt="App Preview"
-              fill
-              style={{ objectFit: 'contain' }}
-            />
+            <div className="relative w-full h-full">
+              <Image
+                src={image}
+                alt="App Preview"
+                fill
+                sizes="(max-width: 768px) 100vw, 450px"
+                className="object-contain"
+                priority
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Mobile Image */}
+        <div className="flex md:hidden w-full h-[300px] mt-8 items-center justify-center">
+          {image && (
+            <div className="relative w-[300px] h-[300px]">
+              <Image
+                src={image}
+                alt="App Preview"
+                fill
+                sizes="300px"
+                className="object-contain"
+                priority
+              />
+            </div>
           )}
         </div>
       </div>
