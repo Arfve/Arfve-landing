@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getHeaderData } from '@/lib/getHeaderData'
+import { getFooterData } from '@/lib/getFooterData'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,6 +20,7 @@ const geistMono = Geist_Mono({
 const inter = Inter({ subsets: ['latin'] })
 
   const { menuItems } = await getHeaderData()
+  const footerData = await getFooterData()
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -35,7 +37,7 @@ export default function RootLayout({
       <body>
         <Header {...{menuItems}} />
         {children}
-        <Footer />
+        <Footer {...footerData} />
       </body>
     </html>
   );
