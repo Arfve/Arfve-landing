@@ -5,12 +5,13 @@ export async function getHeaderData(): Promise<HeaderData> {
   try {
     const { body } = await shopifyFetch({
       query: `
-        query GetHeaderData {
-          menu(handle: "main-menu") {
+        query Navigation {
+          menu(handle: "main-menu-1") {
             items {
               id
               title
               url
+              type
             }
           }
         }
