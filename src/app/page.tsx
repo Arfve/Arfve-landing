@@ -15,6 +15,7 @@ import { getAppSectionData } from '@/lib/getAppSectionData'
 import { getProductShowcaseData } from '@/lib/getProductShowcaseData'
 import { getStatementData } from '@/lib/getStatementData'
 import { getTestimonialsData } from '@/lib/getTestimonialsData'
+import { getNewsletterData } from '@/lib/getNewsletterData'
 
 
 export default async function Home() {
@@ -25,6 +26,7 @@ export default async function Home() {
   const productShowcaseData = await getProductShowcaseData()
   const statementData = await getStatementData()
   const testimonialsData = await getTestimonialsData()
+  const newsletterData = await getNewsletterData()
 
 
   return (
@@ -36,7 +38,7 @@ export default async function Home() {
       <ProductShowcase {...productShowcaseData} />
       <Statement {...statementData} />
       <Testimonials {...testimonialsData} />
-      <Newsletter />
+      <Newsletter {...newsletterData} />
 
     </div>
   )
