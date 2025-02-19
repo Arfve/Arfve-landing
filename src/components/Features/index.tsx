@@ -12,8 +12,8 @@ interface FeaturesProps {
 
 export default function Features({ title, subtitle, featureList, image }: FeaturesProps) {
   return (
-    <section className="w-full h-[675px] bg-[#EAEAEA] relative">
-      <div className="max-w-[1440px] h-full mx-auto relative">
+    <section className="w-full bg-[#EAEAEA]">
+      <div className="w-[1440px] h-[675px] mx-auto relative">
         {/* Left Content */}
         <div className="absolute left-[140px] top-[142px] flex flex-col gap-6">
           <div className="flex flex-col gap-3 w-[509px]">

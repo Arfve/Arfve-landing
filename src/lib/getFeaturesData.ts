@@ -1,5 +1,4 @@
 import { shopifyFetch } from './shopify'
-import { Metafield } from '@/types/shopify'
 
 export async function getFeaturesData() {
   const { body } = await shopifyFetch({
@@ -7,19 +6,21 @@ export async function getFeaturesData() {
       query GetFeatures {
         page(handle: "homepage") {
           metafields(identifiers: [
-            {namespace: "features", key: "title"},
-            {namespace: "features", key: "subtitle"},
-            {namespace: "features", key: "feature_list"},
-            {namespace: "features", key: "image"}
+            {namespace: "homepage_feature_section", key: "reference"}
           ]) {
-            key
-            namespace
             value
             reference {
-              ... on MediaImage {
-                id
-                image {
-                  url
+              ... on Metaobject {
+                fields {
+                  key
+                  value
+                  reference {
+                    ... on MediaImage {
+                      image {
+                        url
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -29,37 +30,24 @@ export async function getFeaturesData() {
     `
   })
 
-  const metafields = body?.data?.page?.metafields || [];
+  console.log('Features API response:', body)
+  const fields = body?.data?.page?.metafields?.[0]?.reference?.fields || [];
+  console.log('Features fields:', fields)
   
-  const findMetafield = (key: string) => {
-    const field = metafields.find((m: Metafield) => m?.key === key);
+  const findField = (key: string) => {
+    const field = fields.find((f: { key: string }) => f.key === key);
     if (field?.reference?.image?.url) {
       return field.reference.image.url;
     }
     return field?.value;
   };
 
-  return {
-    title: findMetafield('title') || 'Your best audio companion. But for life',
-    subtitle: findMetafield('subtitle') || 'Lörem ipsum lose nyska rektiga nyfriskjobb eftersom berenar...',
-    featureList: JSON.parse(findMetafield('feature_list') || JSON.stringify([
-      {
-        title: "Reduce your pollution",
-        description: "for an exceptional sound"
-      },
-      {
-        title: "Good autonomy",
-        description: "for an exceptional sound"
-      },
-      {
-        title: "Good audio",
-        description: "for an exceptional sound"
-      },
-      {
-        title: "11mm speakers",
-        description: "for an exceptional sound"
-      }
-    ])),
-    image: findMetafield('image')
+  const data = {
+    title: findField('titel') || '',
+    subtitle: findField('subtitle') || '',
+    featureList: JSON.parse(findField('feature_list') || '[]'),
+    image: findField('image') || ''
   }
+  console.log('Features final data:', data)
+  return data
 } 
