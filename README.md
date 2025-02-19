@@ -1,3 +1,97 @@
+# Arfve Landing Page
+
+A Next.js landing page integrated with Shopify Storefront API and CMS.
+
+## Setup
+
+### Prerequisites
+- Node.js 18+
+- npm/yarn
+- Shopify store with Storefront API access
+
+### Environment Variables
+```bash
+NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your-token
+```
+
+### Installation & Development
+```bash
+npm install
+npm run dev
+```
+
+ARFVE-LANDING/
+├── src/
+│ ├── app/
+│ │ ├── faq/
+│ │ │ └── page.tsx # FAQ page with expandable Q&A
+│ │ ├── globals.css # Theme colors & responsive styles
+│ │ ├── layout.tsx # Root layout with fonts & header/footer
+│ │ └── page.tsx # Landing page with all sections
+│ ├── components/
+│ │ ├── FAQ/ # Expandable FAQ with animations
+│ │ ├── Features/ # Product features with image & text
+│ │ ├── Header/ # Navigation with Shopify menu items
+│ │ ├── Hero/ # Main banner with CMS content
+│ │ ├── AppSection/ # App features with responsive images
+│ │ ├── Footer/ # Footer with nav, social & cookie settings
+│ │ ├── Newsletter/ # Email signup with dark theme
+│ │ ├── ProductShowcase/ # Scrollable product cards grid
+│ │ ├── Statement/ # Dark themed brand statement
+│ │ └── Testimonials/ # Scrollable testimonial cards
+│ ├── lib/
+│ │ ├── shopify.ts # Shopify API client & connection
+│ │ ├── getFaqPageData.ts # Fetch FAQ from Shopify metafields
+│ │ ├── getHeroData.ts # Fetch hero section content
+│ │ ├── getFeaturesData.ts # Fetch features section content
+│ │ ├── getAppSectionData.ts # Fetch app section content
+│ │ ├── getProductShowcaseData.ts # Fetch product showcase content
+│ │ ├── getStatementData.ts # Fetch statement section content
+│ │ └── getTestimonialsData.ts # Fetch testimonials section content
+│ ├── schemas/
+│ │ └── testimonials/
+│ │ └── section.json # JSON schema for testimonial validation (quote, author, role)
+│ └── types/
+│ └── shopify.ts # TypeScript interfaces for Shopify data
+├── public/
+│ └── logo.svg
+├── .env.local
+├── next.config.ts
+├── package.json
+├── postcss.config.mjs # PostCSS with Tailwind plugin
+├── tailwind.config.ts
+├── tsconfig.json
+└── tsconfig.scripts.json # TypeScript config for build scripts
+
+## Shopify CMS Setup
+
+1. Create pages in Shopify:
+   - Homepage with metafields for sections
+   - FAQ page with Q&A metafields
+
+2. Setup Navigation:
+   - Create menu with handle "main-menu-1"
+   - Add links to pages
+
+3. Configure Metafields:
+   - FAQ: question_1, answer_1, etc.
+   - Hero: title, subtitle, image
+   - Features: title, subtitle, featureList
+
+## Key Features
+- Responsive design with Tailwind
+- Dark/Light theme support
+- Dynamic content from Shopify CMS
+- Type-safe data fetching
+
+## Tech Stack
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS
+- Shopify Storefront API
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -35,54 +129,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-
-
-
-
-
-
-
-
-
-
-
-arfve-landing/
-├── src/
-│   ├── app/
-│   │   ├── globals.css
-│   │   ├── layout.tsx        # Root layout with font configurations
-│   │   └── page.tsx          # Homepage component
-│   ├── components/
-│   │   ├── AboutHero1/
-│   │   ├── AboutHero2/
-│   │   ├── AboutHero3/
-│   │   ├── AboutHero4/
-│   │   ├── AppSection/       # App showcase component
-│   │   ├── Features/         # Product features section
-│   │   ├── Footer/           # Site footer with navigation and social links
-│   │   ├── Header/           # Site header with navigation
-│   │   ├── Hero/            # Main hero section
-│   │   ├── Newsletter/       # Newsletter subscription component
-│   │   ├── ProductShowcase/  # Product features grid
-│   │   ├── Statement/        # Company statement section
-│   │   └── Testimonials/     # Customer testimonials section
-│   ├── lib/
-│   │   ├── getAboutPageData.ts
-│   │   ├── getFooterData.ts  # Footer data fetching
-│   │   ├── getHeaderData.ts  # Header data fetching
-│   │   ├── getPageData.ts    # Main page data fetching
-│   │   ├── getTestimonialsData.ts
-│   │   └── shopify.ts        # Shopify client configuration
-│   ├── scripts/
-│   │   └── test-shopify-connection.ts
-│   └── types/
-│       └── shopify.ts        # TypeScript interfaces for Shopify data
-├── public/
-│   └── logo.svg
-├── next.config.ts
-├── package.json
-├── tailwind.config.ts
-└── tsconfig.json
 
 
 
