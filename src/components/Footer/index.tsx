@@ -25,11 +25,11 @@ const SOCIAL_ICONS = {
 export default function Footer({ copyright, cookieSettingsText, socialLinks, menuItems }: FooterProps) {
   return (
     <footer className="w-full bg-[#FFFFFF]">
-      <div className="max-w-[1440px] mx-auto px-[124px] py-[32px]">
+      <div className="max-w-[1440px] mx-auto px-8 md:px-32 py-8 md:py-[32px]">
         {/* Main Content Container */}
         <div className="flex flex-col gap-[32px]">
           {/* Top Row */}
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-[32px]">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-[32px]">
             {/* Logo */}
             <Link href="/" className="shrink-0">
               <Image
@@ -37,7 +37,7 @@ export default function Footer({ copyright, cookieSettingsText, socialLinks, men
                 alt="Arfve"
                 width={113}
                 height={41}
-                className="w-[113px] h-[41px]" // Corrected logo orientation
+                className="w-[113px] h-[41px]"
                 priority
               />
             </Link>
@@ -61,7 +61,7 @@ export default function Footer({ copyright, cookieSettingsText, socialLinks, men
                 .map(([platform, { Icon, color }]) => (
                   <Link
                     key={platform}
-                    href={socialLinks[platform] || '#'}
+                    href={socialLinks?.[platform] || '#'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-[30px] h-[30px] hover:opacity-70 transition-opacity"
@@ -73,7 +73,7 @@ export default function Footer({ copyright, cookieSettingsText, socialLinks, men
           </div>
 
           {/* Bottom Row */}
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-[12px] text-center">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-[12px] text-center">
             <button className="font-inter text-base text-black hover:opacity-70 transition-opacity">
               Privacy policy
             </button>

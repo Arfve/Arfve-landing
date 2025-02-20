@@ -9,7 +9,10 @@ export async function getAboutPageData() {
           metafields(identifiers: [
             {namespace: "about", key: "be_more_human_description"},
              {namespace: "about", key: "section3JSON"}
-              {namespace: "about", key: "section4"}
+              {namespace: "about", key: "section4"},
+              {namespace: "about", key: "section5"}
+
+         
           ]) {
             key
             namespace
@@ -28,12 +31,13 @@ export async function getAboutPageData() {
     );
     return field?.value;
   };
-
+  //Ändra about3 till about så det blir mer korrekt!
   return {
     about3: {
       title: findMetafield("about", "be_more_human_description"),
       json: JSON.parse(findMetafield("about", "section3JSON") || "[]"),
       json4: JSON.parse(findMetafield("about", "section4") || "[]"),
+      json5: JSON.parse(findMetafield("about", "section5") || "[]"),
     },
   };
 }
