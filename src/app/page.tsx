@@ -26,7 +26,7 @@ export default async function Home() {
         <Hero
           title={heroSection.title}
           subtitle={heroSection.subtitle}
-          buttonText={heroSection.button_text}
+          buttonText={heroSection.buttonText}
           image={heroSection.image}
         />
       )}
