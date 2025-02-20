@@ -1,9 +1,10 @@
 import { shopifyFetch } from "./shopify";
 
+// Define what a field from Shopify looks like
 interface ShopifyField {
-  key: string;
-  value: string;
-  reference?: {
+  key: string;      // The name of the field
+  value: string;    // The value stored in the field
+  reference?: {     // Optional: Used for images and other referenced content
     image?: {
       url: string;
     };
@@ -12,6 +13,8 @@ interface ShopifyField {
 }
 
 export async function getHomePageData() {
+  // Fetch data from Shopify using GraphQL
+  // We're getting all sections from a single "Homepage Sections" metaobject
   const { body } = await shopifyFetch({
     query: `
       query GetHomePageSections {
@@ -46,60 +49,79 @@ export async function getHomePageData() {
     `,
   });
 
+  // Get all the sections from the response, or empty array if nothing found
   const homepageSections = body?.data?.page?.metafields?.[0]?.reference?.fields || [];
 
+  // Helper function to find and parse a specific section (like hero, features, etc)
   const parseSection = (key: string) => {
+    // Find the section we want by its key (e.g., "hero_section")
     const section = homepageSections.find((field: ShopifyField) => field.key === key);
     if (!section) return null;
 
     if (section.reference) {
       const fields = section.reference.fields || [];
-      const result = fields.reduce((acc: Record<string, any>, field: ShopifyField) => {
+      // Convert the fields into an object our components can use
+      return fields.reduce((acc: Record<string, any>, field: ShopifyField) => {
+        // Handle different types of fields:
+        
+        // 1. Images
         if (field.reference?.image?.url) {
           acc[field.key] = field.reference.image.url;
-        } else if (field.key === 'feature_list') {
+        } 
+        // 2. Feature lists (used in Features component)
+        else if (field.key === 'feature_list') {
           try {
             acc['featureList'] = JSON.parse(field.value || '[]');
           } catch {
             acc['featureList'] = [];
           }
-        } else if (field.key === 'features') {
+        }
+        // 3. Features (used in Product Showcase)
+        else if (field.key === 'features') {
           try {
             acc['features'] = JSON.parse(field.value || '[]');
           } catch {
             acc['features'] = [];
           }
-        } else if (field.key === 'list') {
+        }
+        // 4. Testimonials list
+        else if (field.key === 'list') {
           try {
             acc['list'] = JSON.parse(field.value || '[]');
           } catch {
             acc['list'] = [];
           }
-        } else if (field.key.startsWith('feature_') && field.key.endsWith('_title')) {
+        }
+        // 5. App section features (special handling for numbered features)
+        else if (field.key.startsWith('feature_') && field.key.endsWith('_title')) {
           if (!acc.features) acc.features = [];
           const index = parseInt(field.key.split('_')[1]) - 1;
           if (!acc.features[index]) acc.features[index] = {};
           acc.features[index].title = field.value;
-        } else if (field.key.startsWith('feature_') && field.key.endsWith('_description')) {
+        }
+        else if (field.key.startsWith('feature_') && field.key.endsWith('_description')) {
           if (!acc.features) acc.features = [];
           const index = parseInt(field.key.split('_')[1]) - 1;
           if (!acc.features[index]) acc.features[index] = {};
           acc.features[index].description = field.value;
-        } else if (field.key === 'button_text') {
+        }
+        // 6. Button text (convert to camelCase for React)
+        else if (field.key === 'button_text') {
           acc['buttonText'] = field.value;
-        } else {
+        }
+        // 7. All other fields
+        else {
           acc[field.key] = field.value;
         }
         return acc;
       }, {});
-
-      console.log(`Parsed ${key}:`, result);
-      return result;
     }
 
     return section.value;
   };
 
+  // Return all sections needed for the homepage
+  // Each section is parsed from the Homepage Sections metaobject
   return {
     heroSection: parseSection("hero_section"),
     featuresSection: parseSection("features_section"),
