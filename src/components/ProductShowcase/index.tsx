@@ -33,10 +33,10 @@ interface Feature {
 }
 
 interface ProductShowcaseProps {
-  features: Feature[];
   title: string;
   subtitle: string;
   buttonText: string;
+  image: string;
 }
 
 export default function ProductShowcase({ features, title, subtitle, buttonText }: ProductShowcaseProps) {
