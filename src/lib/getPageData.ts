@@ -8,16 +8,6 @@ export async function getPageData() {
         page(handle: "homepage") {
           title
           metafields(identifiers: [
-            {namespace: "hero", key: "title"},
-            {namespace: "hero", key: "subtitle"},
-            {namespace: "hero", key: "button_text"},
-            {namespace: "hero", key: "image"},
-            {namespace: "features", key: "title"},
-            {namespace: "features", key: "subtitle"},
-            {namespace: "features", key: "feature_list"},
-            {namespace: "features", key: "image"},
-            {namespace: "statement", key: "title"},
-            {namespace: "statement", key: "content"},
             {namespace: "app", key: "image"},
             {namespace: "crowdfunding", key: "title"},
             {namespace: "crowdfunding", key: "subtitle"},
@@ -58,27 +48,6 @@ export async function getPageData() {
   console.log("About3 Title:", findMetafield("about3", "title"));
 
   return {
-    hero: {
-      title: findMetafield("hero", "title") || "Legacy 1",
-      subtitle:
-        findMetafield("hero", "subtitle") ||
-        "The first earphones with a replaceable battery.",
-      buttonText: findMetafield("hero", "button_text") || "Learn more",
-      image: findMetafield("hero", "image") || null,
-    },
-    features: {
-      title: findMetafield("features", "title") || "Your best audio companion",
-      subtitle: findMetafield("features", "subtitle") || "But for life",
-      featureList: JSON.parse(
-        findMetafield("features", "feature_list") || "[]"
-      ),
-      image: findMetafield("features", "image"),
-    },
-    statement: {
-      title: findMetafield("statement", "title") || "Our statement",
-      content:
-        findMetafield("statement", "content") || "Default statement content",
-    },
     app: {
       image: findMetafield("app", "image"),
     },

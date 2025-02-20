@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { getHeaderData } from "@/lib/getHeaderData";
+import { getFooterData } from "@/lib/getFooterData";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,7 +17,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
+
+const { menuItems } = await getHeaderData();
+const headerData = await getHeaderData();
+const footerData = await getFooterData();
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,8 +34,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased ${inter.className}`}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} antialiased ${inter.className}`}
+    >
+      <body>
+        <Header menuItems={headerData.menuItems} />
+        {children}
+        <Footer {...footerData} />
+      </body>
     </html>
   );
 }

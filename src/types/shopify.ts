@@ -32,6 +32,11 @@ export interface Metafield {
   key: string
   value: string
   namespace: string
+  reference?: {
+    image?: {
+      url: string
+    }
+  }
 }
 
 export interface HeaderData {
