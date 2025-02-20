@@ -6,31 +6,42 @@ import ProductShowcase from '@/components/ProductShowcase'
 import Statement from '@/components/Statement'
 import Testimonials from '@/components/Testimonials'
 import Newsletter from '@/components/Newsletter'
-import Footer from '@/components/Footer'
 
-import { getHeaderData } from '@/lib/getHeaderData'
-import { getPageData } from '@/lib/getPageData'
-import { getFooterData } from '@/lib/getFooterData'
-import { getTestimonialsData } from '@/lib/getTestimonialsData'
+import { getHomePageData } from '@/lib/getHomePageData'
 
 export default async function Home() {
-  const { menuItems } = await getHeaderData()
-  const pageData = await getPageData()
-  const { title, list: testimonials } = await getTestimonialsData()
-  const testimonialsData = { title, testimonials }
-  const footerData = await getFooterData()
+  const { 
+    heroSection, 
+    featuresSection, 
+    appSection,
+    statementSection,
+    newsletterSection,
+    testimonialsSection,
+    productShowcaseSection 
+  } = await getHomePageData()
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header menuItems={menuItems} />
-      <Hero {...pageData.hero} />
-      <Features {...pageData.features} />
-      <AppSection image={pageData.app?.image} />
-      <ProductShowcase {...pageData.crowdfunding} />
-      <Statement {...pageData.statement} />
-      <Testimonials {...testimonialsData} />
-      <Newsletter />
-      <Footer {...footerData} />
+      {heroSection && (
+        <Hero
+          title={heroSection.title}
+          subtitle={heroSection.subtitle}
+          buttonText={heroSection.buttonText}
+          image={heroSection.image}
+        />
+      )}
+      {featuresSection && <Features {...featuresSection} />}
+      {appSection && <AppSection {...appSection} features={appSection.features || []} />}
+      
+      {productShowcaseSection && (
+        <ProductShowcase 
+          {...productShowcaseSection} 
+          features={productShowcaseSection.features || []} 
+        />
+      )}
+      {statementSection && <Statement {...statementSection} />}
+      {testimonialsSection && <Testimonials {...testimonialsSection} />}
+      {newsletterSection && <Newsletter {...newsletterSection} />}
     </div>
-  )
+  );
 }

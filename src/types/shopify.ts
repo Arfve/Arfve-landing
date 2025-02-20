@@ -194,69 +194,9 @@ export interface ShopifyCart {
 }
 
 export interface Metafield {
-  key: string;
-  value: string;
-  namespace: string;
-  reference: {
-    image: {
-      url: string;
-    };
-  };
-}
-
-export interface HeroData {
-  title: string;
-  subtitle: string;
-  buttonText: string;
-  image: string;
-}
-
-export interface Feature {
-  title: string;
-  subtitle: string;
-  description: string;
-  featureList: string[];
-  image: string;
-}
-
-export interface FeaturesData {
-  title: string;
-  subtitle: string;
-  list: Feature[];
-}
-
-export interface StatementData {
-  title: string;
-  content: string;
-}
-
-export interface AppData {
-  image: string;
-}
-
-export interface CrowdfundingData {
-  title: string;
-  subtitle: string;
-  buttonText: string;
-  features: string[];
-}
-
-export interface AboutData {
-  upgradeTitle?: string;
-  upgradeSubtitle?: string;
-  beMoreHuman?: string;
-  whyChooseArfve?: string;
-  bragi?: string;
-}
-
-export interface Testimonial {
-  quote: string;
-  author?: string;
-  role?: string;
-  imageUrl?: string;
-  name: string;
-  review: string;
-  rating: number;
+  key: string
+  value: string
+  namespace: string
 }
 
 export interface HeaderData {

@@ -1,5 +1,5 @@
 import { shopifyFetch } from './shopify'
-import { HeaderData } from '@/types/shopify'
+import { HeaderData, ShopifyMenuItem } from '@/types/shopify'
 
 export async function getHeaderData(): Promise<HeaderData> {
   try {
@@ -49,11 +49,18 @@ export async function getHeaderData(): Promise<HeaderData> {
       }
     }
 
+    const menuItems = body.data.menu.items.map((item: ShopifyMenuItem) => ({
+      ...item,
+      url: item.url.replace('https://arfve.myshopify.com', '')
+                   .replace('https://arfve.com', '')
+                   .replace(/^\/?/, '/')
+    }))
+
     return {
-      menuItems: body.data.menu.items
+      menuItems
     }
   } catch (error) {
     console.error('Error fetching navigation:', error)
     return { menuItems: [] }
   }
-} 
+}

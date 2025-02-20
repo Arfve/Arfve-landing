@@ -1,14 +1,17 @@
-import {createStorefrontApiClient} from '@shopify/storefront-api-client'
+import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 
-const isDevelopment = process.env.NODE_ENV === 'development'
+const isDevelopment = process.env.NODE_ENV === "development";
 
 const shopifyConfig = {
   storeDomain: `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}`,
-  apiVersion: '2024-04',
+  apiVersion: "2024-04",
   publicAccessToken: process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN!,
-}
+};
 
-export const shopifyClient = createStorefrontApiClient(shopifyConfig)
+export const shopifyClient = createStorefrontApiClient(shopifyConfig);
+
+
+
 
 export async function testConnection() {
   try {
@@ -18,16 +21,22 @@ export async function testConnection() {
           name
         }
       }
-    `)
-    console.log('Successfully connected to Shopify:', result)
-    return true
+    `);
+    console.log("Successfully connected to Shopify:", result);
+    return true;
   } catch (error) {
-    console.error('Failed to connect to Shopify:', error)
-    return false
+    console.error("Failed to connect to Shopify:", error);
+    return false;
   }
 }
 
-export async function shopifyFetch({ query, variables = {} }: { query: string, variables?: Record<string, any> }) {
+export async function shopifyFetch({
+  query,
+  variables = {},
+}: {
+  query: string;
+  variables?: Record<string, any>;
+}) {
   try {
     if (!process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN && isDevelopment) {
       return { status: 200, body: {} }
