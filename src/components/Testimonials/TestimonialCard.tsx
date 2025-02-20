@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Testimonial } from '@/types/shopify';
 
-export default function TestimonialCard({ quote, author, role, imageUrl }: Testimonial) {
+export default function TestimonialCard({ quote, author = '', role, imageUrl }: Testimonial) {
   // Only attempt URL transformation if we have a valid Shopify URL
   const shouldShowImage = imageUrl && imageUrl.startsWith('shopify://');
   const publicImageUrl = shouldShowImage 

@@ -16,7 +16,8 @@ import { getTestimonialsData } from '@/lib/getTestimonialsData'
 export default async function Home() {
   const { menuItems } = await getHeaderData()
   const pageData = await getPageData()
-  const testimonialsData = await getTestimonialsData()
+  const { title, list: testimonials } = await getTestimonialsData()
+  const testimonialsData = { title, testimonials }
   const footerData = await getFooterData()
 
   return (
