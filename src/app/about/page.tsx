@@ -1,13 +1,23 @@
-import React from 'react';
-import { getPageData } from '@/lib/getPageData';
-import AboutHero3 from '@/components/aboutHero3';
+import React from "react";
+import AboutHero3 from "@/components/aboutHero3";
+import { AboutHero4 } from "@/components/aboutHero4";
+import { getAboutPageData } from "@/lib/getAboutData";
+
 const Page = async () => {
-  const pageData = await getPageData();
+  const pageData = await getAboutPageData();
+  console.log("Page Data:", pageData);
+  const { json, json4 } = pageData.about3;
+
+  console.log("-----------------");
+
+  console.log("json:", json);
+  console.log("json4:", json4);
+  console.log("-----------------");
+
   return (
     <div>
-      <h1>Hello, World!</h1>
-      <p>This is a simple React component written in TypeScript.</p>
-      <AboutHero3 {...pageData.about3}/>
+      <AboutHero3 json={json} />
+      <AboutHero4 json4={json4} />
     </div>
   );
 };
