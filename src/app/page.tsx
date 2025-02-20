@@ -41,5 +41,5 @@ export default async function Home() {
       <Newsletter {...newsletterData} />
 
     </div>
-  )
+  );
 }
