@@ -1,63 +1,70 @@
 import { shopifyFetch } from "./shopify";
 
-interface Metafield {
-  namespace: string;
-  key: string;
-  value: string;
-}
-
-console.log("shopifyFetch is being called...");
 export async function getFaqPageData() {
   try {
     const { body } = await shopifyFetch({
       query: `
-                query GetFaqPage {
-                    page(handle: "faq") {
-                        metafields(identifiers: [
-                            { namespace: "faq", key: "question_1" },
-                            { namespace: "faq", key: "answer_1" },
-                            { namespace: "faq", key: "question_2" },
-                            { namespace: "faq", key: "answer_2" },
-                            { namespace: "faq", key: "question_3" },
-                            { namespace: "faq", key: "answer_3" },
-                        ]) {
-                            key
-                            namespace
-                            value    
+        query GetFaqPage {
+          page(handle: "faq") {
+            title
+            metafields(identifiers: [{namespace: "faq_sections", key: "reference"}]) {
+              reference {
+                ... on Metaobject {
+                  fields {
+                    key
+                    value
+                    reference {
+                      ... on Metaobject {
+                        fields {
+                          key
+                          value
                         }
+                      }
                     }
+                  }
                 }
-            `,
+              }
+            }
+          }
+        }
+      `,
     });
 
-    const metafields = body?.data?.page?.metafields || [];
+    // Get the FAQ sections from the response
+    const faqSections = body?.data?.page?.metafields?.[0]?.reference?.fields || [];
 
-    const findMetafield = (namespace: string, key: string) =>
-      metafields?.find(
-        (m: Metafield | null) => m && m.namespace === namespace && m.key === key
-      );
-
-      return [
-      {
-        question: findMetafield("faq", "question_1")?.value || "Question 1",
-        answer: findMetafield("faq", "answer_1")?.value || "Answer 1",
-      }, 
-      {
-        question: findMetafield("faq", "question_2")?.value || "Question 2",
-        answer: findMetafield("faq", "answer_2")?.value || "Answer 2",
-      }, 
-      {
-        question: findMetafield("faq", "question_3")?.value || "Question 3",
-        answer: findMetafield("faq", "answer_3")?.value || "Answer 3",
-      }, 
-      
-      
-    ]
-
-
+    // Find the FAQ list field
+    const faqListField = faqSections.find((field: any) => field.key === 'faq_list');
     
+    if (!faqListField) {
+      console.log("No FAQ list field found");
+      return {
+        title: "FAQ",
+        faqs: []
+      };
+    }
+
+    try {
+      // Parse the FAQ list JSON
+      const faqList = JSON.parse(faqListField.value || '[]');
+      console.log("Parsed FAQ data:", faqList);
+
+      return {
+        title: body?.data?.page?.title || "FAQ",
+        faqs: faqList
+      };
+    } catch (e) {
+      console.error("Error parsing FAQ list JSON:", e);
+      return {
+        title: "FAQ",
+        faqs: []
+      };
+    }
   } catch (error) {
     console.error("Failed to get FAQ page data:", error);
-    return []
+    return {
+      title: "FAQ",
+      faqs: []
+    };
   }
 }
