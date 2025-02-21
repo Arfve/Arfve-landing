@@ -18,7 +18,7 @@ export default function Testimonials({ title, list = [] }: TestimonialsData) {
           {/* Cards Container */}
           <div className="overflow-hidden w-full">
             {/* Duplicate the testimonial cards for a seamless loop */}
-            <div className="flex items-center  animate-scrollRight gap-[40px] w-[fit-content]">
+            <div className="flex items-center  animate-scrollRight gap-[40px] w-[fit-content]  ">
               {list.map((testimonial, index) => (
                 <TestimonialCard
                   key={`first-${index}`}

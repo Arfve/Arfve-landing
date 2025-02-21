@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from "next/image";
 
 interface Feature {
   title: string;
@@ -11,10 +11,14 @@ interface AppSectionProps {
   image: string;
 }
 
-export default function AppSection({ title, features, image }: AppSectionProps) {
+export default function AppSection({
+  title,
+  features,
+  image,
+}: AppSectionProps) {
   return (
     <section className="w-full min-h-[500px] md:h-[675px] bg-[#DEDEDE] relative px-6 py-12 md:p-0">
-      <div className="max-w-[1440px] h-full mx-auto relative">
+      <div className="w-full h-full  relative flex justify-around">
         {/* Main Content Container */}
         <div className="flex flex-col md:absolute md:left-[114px] md:top-[65px] gap-[42px] p-[32px_0px] md:p-[64px_0px] w-full md:w-[606px] md:h-[528px]">
           {/* Title */}
@@ -25,7 +29,9 @@ export default function AppSection({ title, features, image }: AppSectionProps) 
           {/* Features Container */}
           <div className="flex flex-col gap-[32px] md:gap-[42px] w-full md:w-[606px]">
             {features.map((feature, index) => (
-              <div key={index} className="flex flex-col gap-3 w-full md:w-[606px] md:h-[134px]">
+              <div
+                key={index}
+                className="flex flex-col gap-3 w-full md:w-[606px] md:h-[134px]">
                 <h3 className="font-inter font-semibold text-[24px] md:text-[28px] leading-[30px] md:leading-[34px] text-black w-full md:w-[606px] md:h-[34px]">
                   {feature.title}
                 </h3>
@@ -38,7 +44,7 @@ export default function AppSection({ title, features, image }: AppSectionProps) 
         </div>
 
         {/* Image */}
-        <div className="hidden md:flex md:absolute md:right-[120px] md:top-[73.5px] md:w-[450px] md:h-[500px] items-center justify-center">
+        <div className="hidden md:flex md:absolute md:right-[320px] md:top-[73.5px]  md:w-[450px] md:h-[500px] items-center justify-center ">
           {image && (
             <div className="relative w-full h-full">
               <Image
@@ -70,5 +76,5 @@ export default function AppSection({ title, features, image }: AppSectionProps) 
         </div>
       </div>
     </section>
-  )
-} 
+  );
+}
