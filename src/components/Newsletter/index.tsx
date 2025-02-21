@@ -5,27 +5,34 @@ interface NewsletterProps {
   placeholder: string;
 }
 
-export default function Newsletter({ 
-  title, 
-  subtitle, 
-  buttonText, 
-  placeholder 
+export default function Newsletter({
+  title,
+  subtitle,
+  buttonText,
+  placeholder,
 }: NewsletterProps) {
   return (
     <section className="bg-black text-white flex flex-col md:flex-row justify-center items-center p-5 h-[202px] gap-10">
       <h2 className="text-3xl font-bold mb-6 md:mb-0 md:mr-6">{title}</h2>
-      <div>
-        <p>{subtitle}</p>
-        <form className="md:w-1/2 flex md:items-center md:gap-x-4">
-          <input
-            type="email"
-            required
-            className="w-full md:w-auto bg-black text-white rounded-md px-3.5 py-2.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 border-b border-white"
-            placeholder={placeholder}
-          />
+      <div className="w-[362px] h-[74px] flex flex-col gap-[9px]">
+        {/* Subtitle / Header */}
+        <p className="w-full h-[22px] font-inter font-medium text-[18px] leading-[22px] text-white">
+          {subtitle}
+        </p>
+        <form className="w-full flex items-center gap-[12px]">
+          {/* Input Container matching Frame 68 */}
+          <div className="w-[242px] h-[39px] flex items-end p-[10px] gap-[10px] border-b border-white box-border">
+            <input
+              type="email"
+              required
+              className="w-full bg-black text-white text-[16px] leading-[19px] placeholder-gray-400 focus:outline-none"
+              placeholder={placeholder}
+            />
+          </div>
+          {/* Button styled as per your Figma Button */}
           <button
             type="submit"
-            className="flex-none rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm border border-white">
+            className="flex-none w-[108px] h-[43px] flex justify-center items-center px-[16px] py-[12px] gap-[8px] border border-white rounded-[8px] bg-black text-[16px] leading-[19px] font-normal text-white">
             {buttonText}
           </button>
         </form>
