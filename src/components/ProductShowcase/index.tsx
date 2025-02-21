@@ -1,6 +1,7 @@
 "use client";
 import "@/styles/globals.css";
 import Image from "next/image";
+import Link from "next/link";
 interface FeatureCardProps {
   title: string;
   description?: string;
@@ -170,7 +171,9 @@ export default function ProductShowcase({
               </p>
               <button className="flex justify-center items-center px-4 py-3 w-[156px] h-[43px] bg-[#1F1F1F] rounded-lg">
                 <span className="font-inter font-normal text-[16px] leading-[19px] text-white">
-                  {buttonText}
+                  <Link href="/crowdfounding">
+                    {buttonText}
+                  </Link>
                 </span>
               </button>
             </div>
