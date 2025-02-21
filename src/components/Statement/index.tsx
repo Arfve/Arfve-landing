@@ -9,8 +9,8 @@ interface StatementProps {
 
 export default function Statement({ title, content }: StatementProps) {
   return (
-    <section className="bg-[#090909] py-16 px-8 md:px-32">
-      <div className="max-w-[1440px] mx-auto">
+    <section className="bg-[#000000] py-16 px-8 md:px-32 ">
+      <div className=" mx-auto">
         <div className="relative w-[163px] h-[59.32px]">
           <Image 
             src="/logo.svg"
