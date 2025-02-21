@@ -11,10 +11,10 @@ interface HeroProps {
 
 export default function Hero({ title, subtitle, buttonText, image }: HeroProps) {
   return (
-    <section className="relative min-h-[500px] md:h-[675px] bg-[#dedede] px-6 py-12 md:p-0">
-      <div className="max-w-[1440px] h-[675px] mx-auto flex items-center justify-center">
+    <section className="relative w-full max-w-[1440px] min-h-[500px] md:h-[675px] bg-[#dedede] mx-auto px-6 py-12">
+      <div className="flex flex-col-reverse md:flex-row items-center justify-between w-full h-full px-6">
         {image && (
-          <div className="relative w-1/2 flex justify-center">
+          <div className="relative w-full md:w-1/2 flex justify-center">
             <Image 
               src={image}
               alt={title || "Arfve Headphones"}
@@ -26,7 +26,7 @@ export default function Hero({ title, subtitle, buttonText, image }: HeroProps) 
           </div>
         )}
 
-        <div className='flex flex-col items-center justify-center w-1/2 px-8'>
+        <div className='flex flex-col items-center md:items-start justify-center w-full md:w-1/2 px-6 text-center md:text-left'>
           <strong className='text-6xl mb-4 text-black text-center'>{title}</strong>
           <p className='text-xl my-4 text-black text-center'>{subtitle}</p>
           <button className='flex-none rounded-md bg-[#1f1f1f] px-3.5 py-2.5 text-sm text-white shadow-sm hover:bg-gray-800'>
