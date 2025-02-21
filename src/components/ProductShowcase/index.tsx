@@ -16,7 +16,7 @@ function FeatureCard({
   reverseImage = false,
 }: FeatureCardProps) {
   return (
-    <div className="flex flex-col justify-center items-center p-5 gap-[10px] bg-white shadow-[0px_0px_16.6px_rgba(0,0,0,0.1)] rounded-[20px]">
+    <div className="flex flex-col justify-center items-center p-5 gap-[10px] bg-white shadow-[0px_0px_16.6px_rgba(0,0,0,0.1)] rounded-[20px] my-3">
       {/* Image Position */}
       {reverseImage ? (
         <>
@@ -121,10 +121,10 @@ export default function ProductShowcase({
           <div className="flex flex-col sm:flex-row gap-[80px] w-full max-w-[1192px] ">
             {/* Features Container */}
             <div className="flex gap-10 w-full sm:w-[631px] h-[400px] sm:h-[878px] relative">
-              <div className="h-[20%] w-full z-1 absolute bg-gradient-to-b from-white to-[rgba(255,255,255,0)]"></div>
+              <div className="h-[20%] w-full z-[1] absolute top-0 bg-gradient-to-t from-transparent to-white"></div>
 
               {/* Left Column */}
-              <div className="flex flex-col w-full sm:w-[295px] h-[400px] sm:h-[878px] infinite-scroll-wrapper">
+              <div className="flex flex-col w-full sm:w-[295px] h-[400px] sm:h-[58px] infinite-scroll-wrapper">
                 <div className="w-[fit-content] reverse gap-[40px] animate-scrollDown">
                   {leftFeatures.map((feature, index) => (
                     <FeatureCard
