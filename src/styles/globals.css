@@ -15,22 +15,22 @@
     transform: translateY(-50%);
   }
   100% {
-    transform: translateY(0);
+    transform: translateY(-5px);
   }
 }
 @keyframes scrollUp {
   0% {
-    transform: translateY(0);
+    transform: translateY(-5px);
   }
   100% {
     transform: translateY(-50%);
   }
 }
 .animate-scrollUp {
-  animation: scrollUp 45s linear infinite;
+  animation: scrollUp 90s linear infinite;
 }
 .animate-scrollDown {
-  animation: scrollDown 45s linear infinite;
+  animation: scrollDown 90s linear infinite;
 }
 
 
@@ -53,5 +53,6 @@
 }
 
 .animate-scrollRight {
+  
   animation: scrollRight 45s linear infinite;
 }
