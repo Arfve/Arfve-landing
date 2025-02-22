@@ -1,14 +1,10 @@
 "use client"
+
 interface AboutHero3Props {
   json: {
     title: string;
     subtitle: string;
-    items_part1: {
-      title: string;
-      subtitle: string;
-      image: string;
-    }[];
-    items_part2: {
+    items: {
       title: string;
       subtitle: string;
       image: string;
@@ -17,7 +13,9 @@ interface AboutHero3Props {
 }
 
 export default function AboutHero3({ json }: AboutHero3Props) {
-  console.log(json);
+  if (!json) {
+    return null;
+  }
 
   return (
     <div className="flex flex-row items-center justify-center w-full max-w-screen-xl mx-auto py-16">
@@ -60,16 +58,16 @@ export default function AboutHero3({ json }: AboutHero3Props) {
             height: "268px",
           }}>
           <h2 className="text-xl font-semibold mt-4">
-            {json.items_part1[0].title}
+            {json.items[0].title}
           </h2>
           <p className="text-sm text-gray-600 mt-2">
-            {json.items_part1[0].subtitle}
+            {json.items[0].subtitle}
           </p>
           <div className="w-full h-24 bg-gray-300 rounded-lg flex items-center justify-center mt-4">
-            {json.items_part1[0].image ? (
+            {json.items[0].image ? (
               <img
-                src={json.items_part1[0].image}
-                alt={json.items_part1[0].title}
+                src={json.items[0].image}
+                alt={json.items[0].title}
                 className="w-full h-full object-cover rounded-lg"
               />
             ) : (
@@ -88,10 +86,10 @@ export default function AboutHero3({ json }: AboutHero3Props) {
             height: "268px",
           }}>
           <div className="w-full h-24 bg-gray-300 rounded-lg flex items-center justify-center">
-            {json.items_part1[1].image ? (
+            {json.items[1].image ? (
               <img
-                src={json.items_part1[1].image}
-                alt={json.items_part1[1].title}
+                src={json.items[1].image}
+                alt={json.items[1].title}
                 className="w-full h-full object-cover rounded-lg"
               />
             ) : (
@@ -99,10 +97,10 @@ export default function AboutHero3({ json }: AboutHero3Props) {
             )}
           </div>
           <h2 className="text-xl font-semibold mt-4">
-            {json.items_part1[1].title}
+            {json.items[1].title}
           </h2>
           <p className="text-sm text-gray-600 mt-2">
-            {json.items_part1[1].subtitle}
+            {json.items[1].subtitle}
           </p>
         </div>
 
@@ -117,10 +115,10 @@ export default function AboutHero3({ json }: AboutHero3Props) {
             height: "268px",
           }}>
           <div className="w-full h-24 bg-gray-300 rounded-lg flex items-center justify-center">
-            {json.items_part2[0].image ? (
+            {json.items[2].image ? (
               <img
-                src={json.items_part2[0].image}
-                alt={json.items_part2[0].title}
+                src={json.items[2].image}
+                alt={json.items[2].title}
                 className="w-full h-full object-cover rounded-lg"
               />
             ) : (
@@ -128,10 +126,10 @@ export default function AboutHero3({ json }: AboutHero3Props) {
             )}
           </div>
           <h2 className="text-xl font-semibold mt-4">
-            {json.items_part2[0].title}
+            {json.items[2].title}
           </h2>
           <p className="text-sm text-gray-600 mt-2">
-            {json.items_part2[0].subtitle}
+            {json.items[2].subtitle}
           </p>
         </div>
 
@@ -145,10 +143,10 @@ export default function AboutHero3({ json }: AboutHero3Props) {
             height: "268px",
           }}>
           <div className="w-full h-24 bg-gray-300 rounded-lg flex items-center justify-center">
-            {json.items_part2[1].image ? (
+            {json.items[3].image ? (
               <img
-                src={json.items_part2[1].image}
-                alt={json.items_part2[1].title}
+                src={json.items[3].image}
+                alt={json.items[3].title}
                 className="w-full h-full object-cover rounded-lg"
               />
             ) : (
@@ -156,10 +154,10 @@ export default function AboutHero3({ json }: AboutHero3Props) {
             )}
           </div>
           <h2 className="text-xl font-semibold mt-4">
-            {json.items_part2[1].title}
+            {json.items[3].title}
           </h2>
           <p className="text-sm text-gray-600 mt-2">
-            {json.items_part2[1].subtitle}
+            {json.items[3].subtitle}
           </p>
         </div>
       </div>
