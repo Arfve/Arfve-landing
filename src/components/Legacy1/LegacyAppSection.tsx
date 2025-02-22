@@ -16,19 +16,20 @@ interface LegacyAppSectionProps {
 
 export default function LegacyAppSection({ title, features }: LegacyAppSectionProps) {
   return (
-    <section className="w-full bg-[#F7F7F7]">
-      <div className="max-w-[1000px] h-[610px] mx-auto">
-        <div className="pt-[36px] pb-[24px]">
-          <h2 className="text-3xl font-bold text-center mb-12 text-black">{title}</h2>
-          <div className="flex gap-[64px] justify-center">
+    <section className="w-full bg-[#F7F7F7] relative overflow-hidden group">
+      <div className="max-w-[1000px] min-h-[610px] mx-auto px-4 sm:px-6">
+        <div className="pt-8 sm:pt-[36px] pb-8 sm:pb-[24px]">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-black animate-fade-in">{title}</h2>
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-[64px] justify-center">
             {/* Features List Container */}
-            <div className="w-[827px] h-[387px]">
-              {/* Features List */}
-              <div className="flex flex-col gap-[48px]">
+            <div className="w-full lg:w-[827px] h-auto lg:h-[387px]">
+              <div className="flex flex-col gap-6 sm:gap-[48px]">
                 {features?.map((feature: LegacyAppFeature, index: number) => (
-                  <div key={index} className="flex items-start gap-4">
+                  <div key={index} 
+                       className="flex items-start gap-4 animate-fade-in-up"
+                       style={{ animationDelay: `${index * 200}ms` }}>
                     {/* Icon */}
-                    <div className="w-6 h-6 mt-1">
+                    <div className="w-6 h-6 mt-1 transform hover:scale-110 transition-transform duration-300">
                       {index === 0 && (
                         <svg viewBox="0 0 24 24" className="w-full h-full">
                           <path d="M12 3V13.55C11.41 13.21 10.73 13 10 13C7.79 13 6 14.79 6 17S7.79 21 10 21 14 19.21 14 17V7H18V3H12Z" fill="black"/>
@@ -46,10 +47,10 @@ export default function LegacyAppSection({ title, features }: LegacyAppSectionPr
                       )}
                     </div>
                     {/* Feature Text */}
-                    <div>
-                      <h3 className="font-semibold text-lg mb-2 text-black">{feature.title}</h3>
-                      <p className="text-gray-600 mb-1">{feature.description}</p>
-                      <p className="text-gray-600">{feature.subtext}</p>
+                    <div className="group">
+                      <h3 className="font-semibold text-lg mb-2 text-black group-hover:translate-x-1 transition-transform duration-300">{feature.title}</h3>
+                      <p className="text-gray-600 mb-1 group-hover:text-gray-800 transition-colors duration-300">{feature.description}</p>
+                      <p className="text-gray-600 group-hover:text-gray-800 transition-colors duration-300">{feature.subtext}</p>
                     </div>
                   </div>
                 ))}
@@ -57,15 +58,21 @@ export default function LegacyAppSection({ title, features }: LegacyAppSectionPr
             </div>
             
             {/* Images */}
-            <div className="flex gap-2">
+            <div className="flex flex-row gap-2 justify-center">
               {[1, 2].map((_, index) => (
-                <div key={index} className="relative w-[300px] h-[387px] bg-gray-100 rounded-2xl">
+                <div key={index} 
+                     className="relative w-[140px] sm:w-[300px] h-[200px] sm:h-[387px] bg-white rounded-[20px] overflow-hidden
+                              shadow-[0px_0px_16.6px_rgba(0,0,0,0.1)]
+                              hover:shadow-[0px_10px_40px_rgba(0,0,0,0.12)]
+                              transform hover:scale-[1.02] transition-all duration-500
+                              animate-float-in"
+                     style={{ animationDelay: `${(index + 3) * 200}ms` }}>
                   {features?.[0]?.image && (
                     <Image
                       src={features[0].image}
                       alt="App feature"
                       fill
-                      className="object-cover rounded-2xl"
+                      className="object-cover hover:scale-105 transition-transform duration-700"
                     />
                   )}
                 </div>
@@ -74,6 +81,8 @@ export default function LegacyAppSection({ title, features }: LegacyAppSectionPr
           </div>
         </div>
       </div>
+      <div className="absolute inset-0 bg-gradient-radial from-blue-500/5 to-transparent opacity-0 
+                    group-hover:opacity-100 transition-opacity duration-1000" />
     </section>
   )
 } 
