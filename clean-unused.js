@@ -30,14 +30,14 @@ try {
 
 // Step 2: Check unused exports
 console.log('Checking for unused exports...');
-let unusedOutput;
+let unusedOutput = '';
 try {
   unusedOutput = execSync('npx ts-unused-exports tsconfig.json', { encoding: 'utf-8' });
   console.log('ts-unused-exports output:', unusedOutput || 'No unused exports found.');
 } catch (error) {
-  console.error('ts-unused-exports failed:', error.message);
-  console.error('Command output:', error.stdout || 'No output');
-  process.exit(1);
+  console.log('ts-unused-exports reported unused exports (non-zero exit); processing output...');
+  unusedOutput = error.stdout || '';
+  console.log('ts-unused-exports output:', unusedOutput || 'No unused exports found.');
 }
 
 // Parse unused exports
@@ -55,7 +55,7 @@ for (const line of unusedLines) {
   }
 
   const fileName = path.basename(filePath, path.extname(filePath));
-  const dynamicImportCheck = execSync(`grep -r "dynamic(() => import.*${fileName}" src/ || true`, { encoding: 'utf-8' });
+  const dynamicImportCheck = execSync(`findstr /R "dynamic(() => import.*${fileName}" src\\* || exit 0`, { encoding: 'utf-8' });
   if (dynamicImportCheck) {
     console.log(`Skipping ${filePath} - potentially used in dynamic import: ${dynamicImportCheck.trim()}`);
     continue;
