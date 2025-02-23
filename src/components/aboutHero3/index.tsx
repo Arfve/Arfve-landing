@@ -20,14 +20,16 @@ export default function AboutHero3({ json }: AboutHero3Props) {
     return null;
   }
 
-  // Function to get local image or fallback
+  // At the top of the component
+  const isFirstImage = (idx: number) => idx === 0;
+
+  // Then in the image components, replace priority={index === 0} with:
   const getImagePath = (imagePath: string) => {
-    // If it's already a local path, use it
-    if (imagePath.startsWith('/')) {
-      return imagePath;
+    if (!imagePath || !imagePath.startsWith('/')) {
+      console.warn('Missing or invalid image path:', imagePath);
+      return null;  // Return null instead of a fallback
     }
-    // Otherwise use a default image from public folder
-    return '/window.svg'; // or any other default image you have
+    return imagePath;
   };
 
   return (
@@ -95,12 +97,20 @@ export default function AboutHero3({ json }: AboutHero3Props) {
                 {/* Image below */}
                 <div className="flex justify-center items-center rounded-[20px] overflow-hidden" style={{ width: "296px", height: "144px", background: "#DEDEDE" }}>
                   <div className="relative w-full h-full">
-                    <Image
-                      src={getImagePath(item.image)}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                    />
+                    {getImagePath(item.image) ? (
+                      <Image
+                        src={getImagePath(item.image)!}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
+                        priority={isFirstImage(index)}
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">No image</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -130,12 +140,20 @@ export default function AboutHero3({ json }: AboutHero3Props) {
                     background: "#DEDEDE",
                   }}>
                   <div className="relative w-full h-full">
-                    <Image
-                      src={getImagePath(item.image)}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                    />
+                    {getImagePath(item.image) ? (
+                      <Image
+                        src={getImagePath(item.image)!}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
+                        priority={isFirstImage(index)}
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">No image</span>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -187,12 +205,20 @@ export default function AboutHero3({ json }: AboutHero3Props) {
                 {/* Image first */}
                 <div className="flex justify-center items-center rounded-[20px] overflow-hidden" style={{ width: "296px", height: "148px", background: "#DEDEDE" }}>
                   <div className="relative w-full h-full">
-                    <Image
-                      src={getImagePath(item.image)}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                    />
+                    {getImagePath(item.image) ? (
+                      <Image
+                        src={getImagePath(item.image)!}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
+                        priority={isFirstImage(index)}
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">No image</span>
+                      </div>
+                    )}
                   </div>
                 </div>
                 {/* Text below */}
@@ -247,12 +273,20 @@ export default function AboutHero3({ json }: AboutHero3Props) {
                     background: "#DEDEDE",
                   }}>
                   <div className="relative w-full h-full">
-                    <Image
-                      src={getImagePath(item.image)}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                    />
+                    {getImagePath(item.image) ? (
+                      <Image
+                        src={getImagePath(item.image)!}
+                        alt={item.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover"
+                        priority={isFirstImage(index)}
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">No image</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -275,12 +309,20 @@ export default function AboutHero3({ json }: AboutHero3Props) {
               {/* Default layout */}
               <div className="flex justify-center items-center rounded-[20px] overflow-hidden" style={{ width: "296px", height: "148px", background: "#DEDEDE" }}>
                 <div className="relative w-full h-full">
-                  <Image
-                    src={getImagePath(item.image)}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                  />
+                  {getImagePath(item.image) ? (
+                    <Image
+                      src={getImagePath(item.image)!}
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
+                      priority={isFirstImage(index)}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                      <span className="text-gray-400">No image</span>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex flex-col items-start p-0 gap-[10px]" style={{ width: "161px", height: "70px" }}>

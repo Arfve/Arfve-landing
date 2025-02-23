@@ -38,7 +38,7 @@ export default function Footer({ copyright, cookieSettingsText, socialLinks, men
                 width={113}
                 height={41}
                 className="w-[113px] h-[41px]"
-                priority
+                sizes="113px"
               />
             </Link>
 

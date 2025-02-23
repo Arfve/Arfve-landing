@@ -26,6 +26,7 @@ export const AboutHero4: React.FC<AboutHero4Props> = ({ json4 }) => {
             src={imageUrl || '/rfv.png'}
             alt={`Logo ${index + 1}`}
             fill
+            sizes="(max-width: 768px) 33vw, 126px"
             className="object-contain"
           />
         </div>
