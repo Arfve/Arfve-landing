@@ -40,6 +40,11 @@ export async function getAboutPageData() {
                           }
                         }
                       }
+                      ... on MediaImage {
+                        image {
+                          url
+                        }
+                      }
                     }
                   }
                 }
@@ -63,7 +68,9 @@ export async function getAboutPageData() {
       const result = fields.reduce((acc: Record<string, any>, field: any) => {
         // Handle image fields
         if (field.reference?.image?.url) {
-          acc[field.key] = field.reference.image.url;
+          // Remove 'about_innovation_section.' prefix from the key if it exists
+          const cleanKey = field.key.replace('about_innovation_section.', '');
+          acc[cleanKey] = field.reference.image.url;
         }
         // Handle JSON fields (items and reviews)
         else if (['items', 'reviews'].includes(field.key)) {

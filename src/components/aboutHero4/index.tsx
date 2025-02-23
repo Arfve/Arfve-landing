@@ -1,41 +1,38 @@
 "use client";
 import Image from "next/image";
 
-interface Json4Item {
-  image: string;
-  text: string;
-}
-
 interface AboutHero4Props {
   json4: {
-    title: string;
-    items: Json4Item[];
-  };
+    image_1: string;
+    image_2: string;
+    image_3: string;
+  }
 }
 
-export function AboutHero4({ json4 }: AboutHero4Props) {
-  if (!json4 || !json4.items) {
-    return null;
-  }
+export const AboutHero4: React.FC<AboutHero4Props> = ({ json4 }) => {
+  if (!json4) return null;
+
+  const images = [json4.image_1, json4.image_2, json4.image_3];
 
   return (
-    <div className="flex flex-col items-center py-16">
-      {json4.title && (
-        <h2 className="text-2xl font-semibold mb-8">{json4.title}</h2>
-      )}
-      <div className="flex justify-center gap-48">
-        {json4.items.map((item, index) => (
-          <div key={index} className="flex items-center gap-2">
-            <Image
-              src={item.image || "/window.svg"}
-              alt={`Bragi ${index + 1}`}
-              width={50}
-              height={50}
-            />
-            <span>{item.text}</span>
-          </div>
-        ))}
+    <section className="w-full py-16 px-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          {images.map((imageUrl, index) => (
+            <div key={index} className="w-full md:w-1/3">
+              <div className="relative aspect-[1438/177] w-full">
+                <Image
+                  src={imageUrl || '/placeholder.png'}
+                  alt={`Bragi image ${index + 1}`}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
