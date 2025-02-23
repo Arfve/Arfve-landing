@@ -8,7 +8,7 @@ interface FAQProps {
   answer: string;
 }
 
-const index = ({ children, answer }: FAQProps) => {
+export default function FAQ({ children, answer }: FAQProps) {
   const [isAnswerOpen, setIsAnwerOpen] = useState(false);
 
   return (
@@ -37,6 +37,4 @@ const index = ({ children, answer }: FAQProps) => {
       </div>
     </>
   );
-};
-
-export default index;
+}

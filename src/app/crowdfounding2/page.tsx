@@ -1,5 +1,5 @@
+"use client";
 import Image from "next/image";
-import { useState } from "react";
 export default function page() {
   const data = {
     page: {

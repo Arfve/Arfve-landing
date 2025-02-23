@@ -1,4 +1,4 @@
-import Header from '@/components/Header/index'
+// import Header from '@/components/Header/index'
 import Hero from '@/components/Hero'
 import Features from '@/components/Features'
 import AppSection from '@/components/AppSection'
