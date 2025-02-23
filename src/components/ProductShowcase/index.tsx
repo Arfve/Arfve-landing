@@ -21,14 +21,14 @@ function FeatureCard({
       {/* Image Position */}
       {reverseImage ? (
         <>
-          <div className="flex justify-center items-center p-[10px] w-[255px] h-[202px] bg-[#DEDEDE] rounded-[20px]">
+          <div className="flex justify-center items-center w-[255px] h-[202px] bg-[#DEDEDE] rounded-[20px] overflow-hidden">
             {imageUrl && (
-              <div className="relative w-[79px] h-[79px]">
+              <div className="relative w-full h-full">
                 <Image
                   src={imageUrl}
                   alt={title}
                   fill
-                  className="object-contain"
+                  className="object-cover"
                 />
               </div>
             )}
@@ -56,14 +56,14 @@ function FeatureCard({
               </p>
             )}
           </div>
-          <div className="flex justify-center items-center p-[10px] w-[255px] h-[202px] bg-[#DEDEDE] rounded-[20px]">
+          <div className="flex justify-center items-center w-[255px] h-[202px] bg-[#DEDEDE] rounded-[20px] overflow-hidden">
             {imageUrl && (
-              <div className="relative w-[79px] h-[79px]">
+              <div className="relative w-full h-full">
                 <Image
                   src={imageUrl}
                   alt={title}
                   fill
-                  className="object-contain"
+                  className="object-cover"
                 />
               </div>
             )}

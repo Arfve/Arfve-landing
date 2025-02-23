@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import Image from "next/image";
 
 interface Review {
   text: string;
@@ -15,7 +16,6 @@ interface AboutHero5Props {
 }
 
 export default function AboutHero5({ json5 }: AboutHero5Props) {
-  console.log('AboutHero5 data:', json5);
   const [currentReview, setCurrentReview] = useState(0);
 
   if (!json5?.reviews) return null;
