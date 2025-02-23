@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "clean-unused": "node clean-unused.js",
     "test:shopify": "tsx --env-file=.env.local src/scripts/test-shopify-connection.ts"
   },
   "dependencies": {
