@@ -2,70 +2,133 @@
 import { useState } from "react";
 
 interface Review {
-  title: string;
-  subtitle: string;
-  rate: number;
-  name: string;
+  text: string;
+  author: string;
+  rating: number;
 }
 
 interface AboutHero5Props {
   json5: {
     title: string;
     reviews: Review[];
-  };
+  }
 }
 
-const AboutHero5 = ({ json5 }: AboutHero5Props) => {
-  if (!json5 || !json5.reviews || json5.reviews.length === 0) {
-    return null;
-  }
-    
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const reviews = json5.reviews;
+export default function AboutHero5({ json5 }: AboutHero5Props) {
+  console.log('AboutHero5 data:', json5);
+  const [currentReview, setCurrentReview] = useState(0);
+
+  if (!json5?.reviews) return null;
 
   const nextReview = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % reviews.length);
+    setCurrentReview((prev) => (prev + 1) % json5.reviews.length);
   };
 
   const prevReview = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + reviews.length) % reviews.length
+    setCurrentReview((prev) => 
+      prev === 0 ? json5.reviews.length - 1 : prev - 1
     );
   };
 
   return (
-    <div className="flex flex-col items-center py-16 bg-gray-800 text-white">
-      <h2 className="text-2xl font-semibold mb-8">{json5.title}</h2>
-      
-      <div className="flex items-center justify-center relative">
-        <button
-          className="absolute left-0 px-4 py-2 text-lg font-semibold bg-transparent border-2 rounded-full cursor-pointer"
+    <section className="relative w-full bg-[#686868] py-24 px-52 flex flex-col items-center justify-center gap-9">
+      {/* Stars */}
+      <div className="relative w-[116px] h-5 flex gap-6">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-5 h-5"
+            style={{ left: `${i * 24}px` }}
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="#FFEE00"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
+              />
+            </svg>
+          </div>
+        ))}
+      </div>
+
+      {/* Content Container */}
+      <div className="flex flex-row items-center justify-center gap-52 w-[1026px]">
+        {/* Previous Button */}
+        <button 
           onClick={prevReview}
+          className="w-[12.5px] h-[25px] flex items-center justify-center"
         >
-          &#8249; Prev
+          <svg
+            width="13"
+            height="25"
+            viewBox="0 0 13 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="transform rotate-180"
+          >
+            <path
+              d="M1 1L11 12.5L1 24"
+              stroke="#E2E2E2"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
         </button>
 
-        <div className="flex flex-col items-center justify-center max-w-sm p-6">
-          <div className="flex mb-4">
-            {[...Array(reviews[currentIndex].rate)].map((_, i) => (
-              <span key={i} className="text-yellow-400">★</span>
-            ))}
+        {/* Review Content */}
+        <div className="flex flex-col items-center gap-16 w-[730px]">
+          <div className="flex flex-col items-center gap-16 w-full">
+            <h1 className="text-4xl font-bold text-white text-center">
+              {json5.title}
+            </h1>
+            
+            <p className="text-lg font-medium text-white text-center leading-[22px]">
+              {json5.reviews[currentReview].text}
+            </p>
+
+            <p className="text-base font-semibold text-white text-center">
+              {json5.reviews[currentReview].author}
+            </p>
           </div>
 
-          <h3 className="text-xl font-semibold">{reviews[currentIndex].title}</h3>
-          <p className="text-center">{reviews[currentIndex].subtitle}</p>
-          <p className="italic mt-4">- {reviews[currentIndex].name}</p>
+          {/* Dots */}
+          <div className="flex gap-3">
+            {json5.reviews.map((_, index) => (
+              <div
+                key={index}
+                className={`w-[9px] h-[9px] rounded-full ${
+                  index === currentReview ? 'bg-[#989696]' : 'bg-[#BBB8B8]'
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
-        <button
-          className="absolute right-0 px-4 py-2 text-lg font-semibold bg-transparent border-2 rounded-full cursor-pointer"
+        {/* Next Button */}
+        <button 
           onClick={nextReview}
+          className="w-[12.5px] h-[25px] flex items-center justify-center"
         >
-          Next &#8250;
+          <svg
+            width="13"
+            height="25"
+            viewBox="0 0 13 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1 1L11 12.5L1 24"
+              stroke="#E2E2E2"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
         </button>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default AboutHero5;
+}

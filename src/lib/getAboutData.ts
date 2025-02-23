@@ -68,12 +68,21 @@ export async function getAboutPageData() {
       const result = fields.reduce((acc: Record<string, any>, field: any) => {
         // Handle image fields
         if (field.reference?.image?.url) {
-          // Remove 'about_innovation_section.' prefix from the key if it exists
-          const cleanKey = field.key.replace('about_innovation_section.', '');
-          acc[cleanKey] = field.reference.image.url;
+          acc[field.key] = field.reference.image.url;
         }
-        // Handle JSON fields (items and reviews)
-        else if (['items', 'reviews'].includes(field.key)) {
+        // Handle reviews section specifically
+        else if (field.key === 'about_reviews_section') {
+          try {
+            const reviewsData = JSON.parse(field.value);
+            acc.title = "Don't take our word for it. Take theirs.";
+            acc.reviews = reviewsData.reviews;
+          } catch {
+            acc.title = '';
+            acc.reviews = [];
+          }
+        }
+        // Handle JSON fields (for AboutHero3's items)
+        else if (field.key === 'items') {
           try {
             acc[field.key] = JSON.parse(field.value || '[]');
           } catch {
@@ -95,7 +104,7 @@ export async function getAboutPageData() {
       visionHeroSection: parseSection("about_vision_hero"),
       visionSection: parseSection("about_vision_section"),
       innovationSection: parseSection("about_innovation_section"),
-      whyChooseSection: parseSection("about_why_choose_section")
+      reviewsSection: parseSection("about_reviews_section")
     };
 
     return result;

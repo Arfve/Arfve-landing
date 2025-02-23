@@ -14,11 +14,11 @@ const Page = async () => {
   }
 
   const { 
-    heroSection,
-    visionHeroSection,
-    visionSection,
-    innovationSection,
-    whyChooseSection
+    heroSection,          // About Main hero
+    visionHeroSection,    // About Vision hero
+    visionSection,        // Why choose arfve/about vision section
+    innovationSection,    // About Innovation section
+    reviewsSection        // Reviews section (AboutHero5)
   } = pageData;
 
   return (
@@ -28,7 +28,7 @@ const Page = async () => {
         {visionHeroSection && <AboutHero2 json={visionHeroSection} />}
         {visionSection && <AboutHero3 json={visionSection} />}
         {innovationSection && <AboutHero4 json4={innovationSection} />}
-        {whyChooseSection && <AboutHero5 json5={whyChooseSection} />}
+        {reviewsSection && <AboutHero5 json5={reviewsSection} />}
       </div>
     </main>
   );

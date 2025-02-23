@@ -1,14 +1,17 @@
 "use client"
+import Image from "next/image";
+
+interface Item {
+  title: string;
+  subtitle: string;
+  image: string;
+}
 
 interface AboutHero3Props {
   json: {
     title: string;
     subtitle: string;
-    items: {
-      title: string;
-      subtitle: string;
-      image: string;
-    }[];
+    items: Item[];
   };
 }
 
@@ -16,6 +19,16 @@ export default function AboutHero3({ json }: AboutHero3Props) {
   if (!json) {
     return null;
   }
+
+  // Function to get local image or fallback
+  const getImagePath = (imagePath: string) => {
+    // If it's already a local path, use it
+    if (imagePath.startsWith('/')) {
+      return imagePath;
+    }
+    // Otherwise use a default image from public folder
+    return '/window.svg'; // or any other default image you have
+  };
 
   return (
     <div className="flex flex-row items-center justify-center w-full max-w-screen-xl mx-auto py-16">
@@ -45,121 +58,33 @@ export default function AboutHero3({ json }: AboutHero3Props) {
         </div>
       </div>
 
-      {/* Right Section - Cards */}
+      {/* Right Section - Cards Grid */}
       <div className="grid grid-cols-2 gap-6 w-1/2">
-        {/* First part of items */}
-        <div
-          className="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center text-center"
-          style={{
-            background: "#FFFFFF",
-            boxShadow: "0px 0px 16.6px rgba(0, 0, 0, 0.1)",
-            borderRadius: "20px",
-            width: "336px",
-            height: "268px",
-          }}>
-          <h2 className="text-xl font-semibold mt-4">
-            {json.items[0].title}
-          </h2>
-          <p className="text-sm text-gray-600 mt-2">
-            {json.items[0].subtitle}
-          </p>
-          <div className="w-full h-24 bg-gray-300 rounded-lg flex items-center justify-center mt-4">
-            {json.items[0].image ? (
-              <img
-                src={json.items[0].image}
-                alt={json.items[0].title}
-                className="w-full h-full object-cover rounded-lg"
+        {json.items.map((item, index) => (
+          <div
+            key={index}
+            className="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center text-center"
+            style={{
+              background: "#FFFFFF",
+              boxShadow: "0px 0px 16.6px rgba(0, 0, 0, 0.1)",
+              borderRadius: "20px",
+              width: "336px",
+              height: "268px",
+            }}>
+            <div className="w-full h-24 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+              <Image
+                src={getImagePath(item.image)}
+                alt={item.title}
+                width={100}
+                height={100}
+                className="object-contain"
+                priority
               />
-            ) : (
-              <span className="text-gray-500">Image</span>
-            )}
+            </div>
+            <h2 className="text-xl font-semibold mt-4">{item.title}</h2>
+            <p className="text-sm text-gray-600 mt-2">{item.subtitle}</p>
           </div>
-        </div>
-
-        <div
-          className="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center text-center mt-4"
-          style={{
-            background: "#FFFFFF",
-            boxShadow: "0px 0px 16.6px rgba(0, 0, 0, 0.1)",
-            borderRadius: "20px",
-            width: "336px",
-            height: "268px",
-          }}>
-          <div className="w-full h-24 bg-gray-300 rounded-lg flex items-center justify-center">
-            {json.items[1].image ? (
-              <img
-                src={json.items[1].image}
-                alt={json.items[1].title}
-                className="w-full h-full object-cover rounded-lg"
-              />
-            ) : (
-              <span className="text-gray-500">Image</span>
-            )}
-          </div>
-          <h2 className="text-xl font-semibold mt-4">
-            {json.items[1].title}
-          </h2>
-          <p className="text-sm text-gray-600 mt-2">
-            {json.items[1].subtitle}
-          </p>
-        </div>
-
-        {/* Second part of items */}
-        <div
-          className="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center text-center"
-          style={{
-            background: "#FFFFFF",
-            boxShadow: "0px 0px 16.6px rgba(0, 0, 0, 0.1)",
-            borderRadius: "20px",
-            width: "336px",
-            height: "268px",
-          }}>
-          <div className="w-full h-24 bg-gray-300 rounded-lg flex items-center justify-center">
-            {json.items[2].image ? (
-              <img
-                src={json.items[2].image}
-                alt={json.items[2].title}
-                className="w-full h-full object-cover rounded-lg"
-              />
-            ) : (
-              <span className="text-gray-500">Image</span>
-            )}
-          </div>
-          <h2 className="text-xl font-semibold mt-4">
-            {json.items[2].title}
-          </h2>
-          <p className="text-sm text-gray-600 mt-2">
-            {json.items[2].subtitle}
-          </p>
-        </div>
-
-        <div
-          className="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center text-center mt-4"
-          style={{
-            background: "#FFFFFF",
-            boxShadow: "0px 0px 16.6px rgba(0, 0, 0, 0.1)",
-            borderRadius: "20px",
-            width: "336px",
-            height: "268px",
-          }}>
-          <div className="w-full h-24 bg-gray-300 rounded-lg flex items-center justify-center">
-            {json.items[3].image ? (
-              <img
-                src={json.items[3].image}
-                alt={json.items[3].title}
-                className="w-full h-full object-cover rounded-lg"
-              />
-            ) : (
-              <span className="text-gray-500">Image</span>
-            )}
-          </div>
-          <h2 className="text-xl font-semibold mt-4">
-            {json.items[3].title}
-          </h2>
-          <p className="text-sm text-gray-600 mt-2">
-            {json.items[3].subtitle}
-          </p>
-        </div>
+        ))}
       </div>
     </div>
   );
