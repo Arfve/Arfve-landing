@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function page() {
   const data = {
     page: {
-      image: "/Earphones-img.jpg",
+      image: "/file.svg",
       title: "Reserve Your Legacy 1",
       subtitle: "Earbuds for Just $1-Get 45% Off at Launch!",
       description:
@@ -42,7 +42,7 @@ export default function page() {
           <div className="flex  md:flex-row  justify-between gap-x-20  w-[90%]">
             <div className="  text-center md:text-right relative overflow-hidden ">
               <Image
-                src={image}
+                src={image || "/file.svg" }
                 alt={title}
                 width={500}
                 height={500}
