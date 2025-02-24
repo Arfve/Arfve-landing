@@ -47,7 +47,7 @@ export async function getFaqPageData() {
     try {
       // Parse the FAQ list JSON
       const faqList = JSON.parse(faqListField.value || '[]');
-      console.log("Parsed FAQ data:", faqList);
+      // console.log("Parsed FAQ data:", faqList);
 
       return {
         title: body?.data?.page?.title || "FAQ",
