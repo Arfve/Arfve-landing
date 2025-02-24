@@ -5,7 +5,7 @@ import Link from "next/link";
 export default async function page() {
   const sections = [
     {
-      image: "window.svg",
+      image: "/window.svg",
       title: "First Selection Title ",
       subtitle:
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos, beatae culpa sequi fuga minus expedita tempore exercitationem hic placeat odio architecto voluptas maiores aliquid consequatur ipsa alias facere nam ducimus!",
