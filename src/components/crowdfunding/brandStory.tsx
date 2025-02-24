@@ -1,12 +1,35 @@
-import React from 'react';
+"use client";
+import React from "react";
+import Image from "next/image";
 
-const BrandStory: React.FC = (brandStory) => {
-    return (
-        <div>
-            <h1>Our Brand Story</h1>
-            <p>Welcome to our brand! We are dedicated to providing the best products and services to our customers.</p>
+interface BrandStoryProps {
+  hero_img: string;
+  hero_subtitle: string;
+  hero_title: string;
+}
+
+const BrandStory: React.FC<BrandStoryProps> = ({ hero_img, hero_subtitle, hero_title }) => {
+
+
+  return (
+    <section className=" flex justify-center  ">
+      <div className="w-[60%] flex justify-between  items-center ">
+        <div className="flex flex-col  text-left gap-3 w-[450px]">
+          <h1 className="text-3xl font-bold">{hero_title}</h1>
+          <p className="text-gray-600">{hero_subtitle}</p>
         </div>
-    );
+        <div className=" ">
+          <Image
+            src={hero_img || "/globe.svg"}
+            alt={ "Default alt text"}
+            width={450}
+            height={450}
+            className="max-w-full h-auto" // Ensures responsiveness
+          />
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default BrandStory;
