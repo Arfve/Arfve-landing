@@ -4,7 +4,7 @@ import AppSection from '@/components/Homepage/AppSection';
 import ProductShowcase from '@/components/Homepage/ProductShowcase';
 import Statement from '@/components/Homepage/Statement';
 import Testimonials from '@/components/Homepage/Testimonials';
-import Newsletter from '@/components/Newsletter';
+import Newsletter from '@/components/Homepage/Newsletter';
 import { getHomePageData } from '@/lib/getHomePageData';
 
 export default async function Home() {
