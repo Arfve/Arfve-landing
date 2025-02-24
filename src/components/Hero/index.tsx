@@ -11,16 +11,16 @@ interface HeroProps {
 
 export default function Hero({ title, subtitle, buttonText, image }: HeroProps) {
   return (
-    <section className="relative min-h-[500px] md:h-[675px] bg-[#dedede] px-6 py-12 md:p-0">
+    <section className="relative min-h-[500px] md:h-[675px] bg-[#dedede] px-6 py-12 md:p-0 ">
       <div className="max-w-[1440px] h-[675px] mx-auto flex items-center justify-center">
         {image && (
-          <div className="relative w-1/2 flex justify-center">
+          <div className="relative w-1/2 aspect-[5/4]">
             <Image 
               src={image}
               alt={title || "Arfve Headphones"}
-              width={500} 
-              height={400} 
-              className="object-contain rounded-2xl shadow-lg" 
+              fill
+              className="object-contain" 
+              sizes="(max-width: 768px) 100vw, 50vw"
               priority
             />
           </div>

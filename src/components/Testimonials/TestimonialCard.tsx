@@ -2,23 +2,27 @@ import Image from 'next/image';
 import { Testimonial } from '@/types/shopify';
 
 export default function TestimonialCard({ quote, author, role, imageUrl }: Testimonial) {
-  // Only attempt URL transformation if we have a valid Shopify URL
-  const shouldShowImage = imageUrl && imageUrl.startsWith('shopify://');
-  const publicImageUrl = shouldShowImage 
+  // Check if it's a Shopify URL or local image
+  const shouldShowImage = imageUrl && (
+    imageUrl.startsWith('shopify://') || 
+    imageUrl.startsWith('/')
+  );
+  
+  const publicImageUrl = imageUrl?.startsWith('shopify://') 
     ? imageUrl.replace('shopify://shop_images/', '/images/')
-    : null;
+    : imageUrl;
 
   return (
     <div className="flex flex-col items-center gap-3 w-[200px] h-[310px]">
       {/* Image Container */}
-      <div className="flex justify-center items-center w-[200px] h-[200px] bg-[#DEDEDE] rounded-[20px] p-[10px]">
+      <div className="flex justify-center items-center w-[200px] h-[200px] bg-[#DEDEDE] rounded-[20px] overflow-hidden">
         {shouldShowImage ? (
-          <div className="relative w-[79px] h-[79px]">
+          <div className="relative w-full h-full">
             <Image
               src={publicImageUrl!}
               alt={`${author}'s testimonial`}
               fill
-              style={{ objectFit: 'contain' }}
+              className="object-cover"
             />
           </div>
         ) : (

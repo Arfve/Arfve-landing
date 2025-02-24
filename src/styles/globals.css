@@ -1,0 +1,58 @@
+
+
+/* Keyframes for infinite vertical scroll */
+@keyframes infinite-scroll {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes scrollDown {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+@keyframes scrollUp {
+  0% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+.animate-scrollUp {
+  animation: scrollUp 90s linear infinite;
+}
+.animate-scrollDown {
+  animation: scrollDown 90s linear infinite;
+}
+
+
+/* Container for infinite scroll (hides the overflow) */
+.infinite-scroll-wrapper {
+  overflow: hidden;
+  height: 100%;
+}
+
+
+
+
+
+@keyframes scrollRight {
+  /* Start with the duplicated list shifted to the left */
+  to {
+    transform: translate(calc(-50% - 20px));
+  }
+  /* Move it to its natural position so the duplicate becomes visible */
+}
+
+.animate-scrollRight {
+  
+  animation: scrollRight 45s linear infinite;
+}
