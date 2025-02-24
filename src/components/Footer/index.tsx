@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ShopifyMenuItem } from '@/types/shopify';
 import { FaYoutube, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { IconType } from 'react-icons';
 
 interface FooterProps {
   menuItems: ShopifyMenuItem[];
@@ -57,7 +58,7 @@ export default function Footer({ copyright, cookieSettingsText, socialLinks, men
 
             {/* Social Icons */}
             <div className="flex items-center gap-[20px] shrink-0">
-              {(Object.entries(SOCIAL_ICONS) as [keyof typeof SOCIAL_ICONS, { Icon: any; color: string }][])
+              {(Object.entries(SOCIAL_ICONS) as [keyof typeof SOCIAL_ICONS, { Icon: IconType; color: string }][])
                 .map(([platform, { Icon, color }]) => (
                   <Link
                     key={platform}
