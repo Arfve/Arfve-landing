@@ -1,7 +1,10 @@
 import Image from "next/image";
 
-
+import { getCrowdfoundingPage } from "@/lib/getCrowdfoundingData";
 export default async function page() {
+  const rawData = await getCrowdfoundingPage()
+  console.log(rawData.brandStory);
+  
   const sections = [
     {
       image: "/window.svg",
