@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:shopify": "tsx --env-file=.env.local src/scripts/test-shopify-connection.ts"
+    "test:shopify": "tsx --env-file=.env.local src/scripts/test-shopify-connection.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@shopify/storefront-api-client": "^1.0.4",
