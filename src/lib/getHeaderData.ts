@@ -44,7 +44,13 @@ export async function getHeaderData(): Promise<HeaderData> {
             title: 'FAQ',
             url: '/faq',
             type: 'PAGE'
-          }
+          },
+          {
+            id: '5',
+            title: 'crowdfunding',
+            url: '/crowdfounding',
+            type: 'PAGE'
+          },
         ]
       }
     }

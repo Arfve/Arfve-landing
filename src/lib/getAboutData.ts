@@ -1,43 +1,116 @@
 import { shopifyFetch } from "./shopify";
-import { Metafield } from "@/types/shopify";
+
+interface ShopifyField {
+  key: string;
+  value: string;
+  reference?: {
+    image?: {
+      url: string;
+    };
+    fields?: ShopifyField[];
+  };
+}
 
 export async function getAboutPageData() {
-  const { body } = await shopifyFetch({
-    query: `
-      query GetAboutPage {
-        page(handle: "about") {
-          metafields(identifiers: [
-            {namespace: "about", key: "be_more_human_description"},
-             {namespace: "about", key: "section3JSON"}
-              {namespace: "about", key: "section4"},
-              {namespace: "about", key: "section5"}
-
-         
-          ]) {
-            key
-            namespace
-            value
+  try {
+    const { body } = await shopifyFetch({
+      query: `
+        query GetAboutPage {
+          page(handle: "about") {
+            title
+            metafields(identifiers: [{namespace: "about_page_sections", key: "reference"}]) {
+              reference {
+                ... on Metaobject {
+                  handle
+                  id
+                  fields {
+                    key
+                    value
+                    reference {
+                      ... on Metaobject {
+                        fields {
+                          key
+                          value
+                          reference {
+                            ... on MediaImage {
+                              image {
+                                url
+                              }
+                            }
+                          }
+                        }
+                      }
+                      ... on MediaImage {
+                        image {
+                          url
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
+      `,
+    });
+
+    const aboutSections = body?.data?.page?.metafields?.[0]?.reference?.fields || [];
+
+    const parseSection = (key: string) => {
+      const section = aboutSections.find((field: any) => field.key === key);
+
+      if (!section?.reference?.fields) {
+        return null;
       }
-    `,
-  });
 
-  const metafields: Metafield[] = body?.data?.page?.metafields || [];
+      const fields = section.reference.fields;
+      const result = fields.reduce((acc: Record<string, any>, field: any) => {
+        // Handle image fields
+        if (field.reference?.image?.url) {
+          acc[field.key] = field.reference.image.url;
+        }
+        // Handle reviews section specifically
+        else if (field.key === 'about_reviews_section') {
+          try {
+            const reviewsData = JSON.parse(field.value);
+            acc.title = "Don't take our word for it. Take theirs.";
+            acc.reviews = reviewsData.reviews;
+          } catch {
+            acc.title = '';
+            acc.reviews = [];
+          }
+        }
+        // Handle JSON fields (for AboutHero3's items)
+        else if (field.key === 'items') {
+          try {
+            acc[field.key] = JSON.parse(field.value || '[]');
+          } catch {
+            acc[field.key] = [];
+          }
+        }
+        // Handle regular text fields
+        else {
+          acc[field.key] = field.value;
+        }
+        return acc;
+      }, {});
 
-  const findMetafield = (namespace: string, key: string) => {
-    const field = metafields.find(
-      (m) => m?.namespace === namespace && m?.key === key
-    );
-    return field?.value;
-  };
-  //Ändra about3 till about så det blir mer korrekt!
-  return {
-    about3: {
-      title: findMetafield("about", "be_more_human_description"),
-      json: JSON.parse(findMetafield("about", "section3JSON") || "[]"),
-      json4: JSON.parse(findMetafield("about", "section4") || "[]"),
-      json5: JSON.parse(findMetafield("about", "section5") || "[]"),
-    },
-  };
+      return result;
+    };
+
+    const result = {
+      heroSection: parseSection("about_main_hero"),
+      visionHeroSection: parseSection("about_vision_hero"),
+      visionSection: parseSection("about_vision_section"),
+      innovationSection: parseSection("about_innovation_section"),
+      reviewsSection: parseSection("about_reviews_section")
+    };
+
+    return result;
+
+  } catch (error) {
+    console.error("Failed to get about page data:", error);
+    return null;
+  }
 }

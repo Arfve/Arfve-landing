@@ -1,29 +1,36 @@
-"use client ";
+"use client";
 import Image from "next/image";
 
-interface Json4Item {
-  image: string;
-  text: string;
-}
-
 interface AboutHero4Props {
-  json4: Json4Item[];
+  json4: {
+    image_1: string;
+    image_2: string;
+    image_3: string;
+  }
 }
 
-export function AboutHero4({ json4 }: AboutHero4Props) {
+export const AboutHero4: React.FC<AboutHero4Props> = ({ json4 }) => {
+  if (!json4) return null;
+
   return (
-    <div className="flex justify-center gap-48">
-      {json4.map((item, index) => (
-        <div key={index} className="flex items-center gap-2">
+    <section 
+      className="relative w-[1438px] h-[177px] mx-auto flex justify-center items-center px-[354px] py-16 bg-white"
+      style={{ gap: "184px" }}
+    >
+      {[json4.image_1, json4.image_2, json4.image_3].map((imageUrl, index) => (
+        <div 
+          key={index}
+          className="relative w-[126px] h-[49px] flex-none"
+        >
           <Image
-            src={"/window.svg"}
-            alt={`Bragi ${index + 1}`}
-            width={50}
-            height={50}
+            src={imageUrl || '/rfv.png'}
+            alt={`Logo ${index + 1}`}
+            fill
+            sizes="(max-width: 768px) 33vw, 126px"
+            className="object-contain"
           />
-          <span>{item.text}</span>
         </div>
       ))}
-    </div>
+    </section>
   );
-}
+};

@@ -23,6 +23,8 @@ export default function Header({ menuItems }: HeaderProps) {
               height={41}
               className="w-[113px] h-[41px]"
               priority
+              loading="eager"
+              sizes="113px"
             />
           </Link>
 

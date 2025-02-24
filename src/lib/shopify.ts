@@ -38,14 +38,35 @@ export async function shopifyFetch({
   variables?: Record<string, any>;
 }) {
   try {
-    if (!process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN && isDevelopment) {
-      return { status: 200, body: {} }
+    if (!process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN) {
+      console.warn('Missing Shopify domain configuration')
+      throw new Error('Missing Shopify configuration')
     }
 
     const result = await shopifyClient.request(query, { variables })
     return { status: 200, body: result }
   } catch (error) {
     console.error('Shopify Client Error:', error)
-    return { status: 500, error: 'Error receiving data' }
+    return { 
+      status: 500, 
+      body: { 
+        errors: error,
+        data: null 
+      } 
+    }
   }
+}
+
+export async function testShopifyConnection() {
+  const result = await shopifyFetch({
+    query: `
+      query {
+        shop {
+          name
+        }
+      }
+    `
+  })
+  console.log('Shopify connection test:', result)
+  return result
 }
