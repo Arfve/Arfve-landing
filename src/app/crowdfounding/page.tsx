@@ -7,14 +7,7 @@ export default async function page() {
 
     console.log(industryEndorsements);
 
-    function renderIndustryQuotes(){
 
-      return industryEndorsements.map((item: {}, i) => {
-        return (
-
-        )
-      })
-    }
     
 
   const sections = [
