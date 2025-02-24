@@ -12,14 +12,14 @@ export interface WithYouSection {
 export interface TechnologyFeature {
   title: string;
   description: string;
-  image: string;
+  image?: string;
 }
 
 export interface LegacyAppFeature {
   title: string;
   description: string;
-  subtext: string;
-  image: string;
+  subtext?: string;
+  image?: string;
 }
 
 export interface LegacyPageData {
@@ -33,4 +33,4 @@ export interface LegacyPageData {
     title: string;
     features: LegacyAppFeature[];
   };
-} 
+}
