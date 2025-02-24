@@ -5,7 +5,7 @@ import Link from "next/link";
 export default async function page() {
   const sections = [
     {
-      image: "window.svg",
+      image: "/window.svg",
       title: "First Selection Title ",
       subtitle:
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos, beatae culpa sequi fuga minus expedita tempore exercitationem hic placeat odio architecto voluptas maiores aliquid consequatur ipsa alias facere nam ducimus!",
@@ -53,13 +53,12 @@ export default async function page() {
                 placeholder={sections[1].placeholder}
                 className="w-[350px] border border-gray-300  px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <Link href="/crowdfounding2/">
               <button
                 className="w-[350px] bg-[#42b99f]
                  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 {sections[1].buttonText}
               </button>
-              </Link>
+    
               
             </div>
           </div>
