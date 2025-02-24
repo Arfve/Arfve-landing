@@ -1,8 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
 
-
+import { getCrowdfoundingPage } from "@/lib/getCrowdfoundingData";
 export default async function page() {
+  const rawData = await getCrowdfoundingPage()
+  console.log(rawData.brandStory);
+  
   const sections = [
     {
       image: "/window.svg",
@@ -14,7 +16,7 @@ export default async function page() {
       subtitle:
         " Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus non perferendis consequatur facere, sit maxime enim blanditiis delectus laboriosam dicta nesciunt omnis aperiam similique tenetur rerum sunt facilis debitis animi.",
       placeholder: "Enter your text here...",
-      buttonText: "Submit",
+      buttonText: "this don't work right now",
     },
   ];
 
@@ -31,7 +33,7 @@ export default async function page() {
             </div>
             <div className=" ">
               <Image
-                src={sections[0].image || "globe.svg"}
+                src={sections[0].image || "/globe.svg"}
                 alt={sections[0].title || "Default alt text"}
                 width={450}
                 height={450}
@@ -53,13 +55,13 @@ export default async function page() {
                 placeholder={sections[1].placeholder}
                 className="w-[350px] border border-gray-300  px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <Link href="/crowdfounding2/">
+           
               <button
                 className="w-[350px] bg-[#42b99f]
                  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 {sections[1].buttonText}
               </button>
-              </Link>
+
               
             </div>
           </div>
