@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { useState } from "react";
+
 export default function page() {
   const data = {
     page: {
-      image: "file.svg",
+      image: "/Earphones-img.jpg",
       title: "Reserve Your Legacy 1",
       subtitle: "Earbuds for Just $1-Get 45% Off at Launch!",
       description:
@@ -11,19 +11,19 @@ export default function page() {
       button_text: "Reserve Legacy 1 Now",
       gradients: [
         {
-          image: "file.svg",
+          image: "/file.svg",
           title: "100% Refund Guarantee",
           subtitle:
             "If you cancel your reservation, we guarantee you a full refund at any time before the project moves into production.",
         },
         {
-          image: "file.svg",
+          image: "/file.svg",
           title: "Transparency Guarantee",
           subtitle:
             "We will be transparent about the progress of our project throughout the entire campaign.",
         },
         {
-          image: "file.svg",
+          image: "/file.svg",
           title: "Secure Payment",
           subtitle:
             "All orders are processed through our secure network. Your credit card information is never stored in any way. We respect your privacy.",
@@ -41,10 +41,6 @@ export default function page() {
         <div className="flex mx-auto p-8  flex-col gap-14 justify-center w-[70%]">
           <div className="flex  md:flex-row  justify-between gap-x-20  w-[90%]">
             <div className="  text-center md:text-right relative overflow-hidden ">
-              <h4 className="text-8xl rotate-[-0.5rad] absolute top-[-5%] left-[20%] text-left  text-red-500 select-none">
-                HELP ME WITH THE IMAGE
-              </h4>
-
               <Image
                 src={image}
                 alt={title}
@@ -86,7 +82,6 @@ export default function page() {
               </div>
             ))}
           </div>
-          
         </div>
       </div>
     </div>
