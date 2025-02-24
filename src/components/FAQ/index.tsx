@@ -13,7 +13,7 @@ const index = ({ children, answer }: FAQProps) => {
 
   return (
     <>
-      <div className="relative">
+      <div className="relative ">
         {/* Question */}
         <div className="flex items-center text-black w-[900px] justify-between py-4 font-semibold relative cursor-pointer" onClick={() => setIsAnwerOpen(!isAnswerOpen)}>
           {children}
