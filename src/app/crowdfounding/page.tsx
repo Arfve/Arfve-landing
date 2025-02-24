@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Quotes from "@/components/crowdfounding1";
 import { getCrowdfoundingPage } from "@/lib/getCrowdfoundingData";
 export default async function page() {
   const { brandStory, industryEndorsements, signUpSection } =
