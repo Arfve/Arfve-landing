@@ -4,6 +4,7 @@ import { shopifyFetch } from './shopify';
 interface Metafield {
   key: string;
   value: string;
+  namespace: string;
   reference?: {
     fields?: Metafield[];
     image?: { url: string };
@@ -24,7 +25,13 @@ export async function getAboutPageData() {
         query GetAboutPage {
           page(handle: "about") {
             title
-            metafields(identifiers: [{namespace: "about_page_sections", key: "reference"}]) {
+            metafields(identifiers: [
+              {namespace: "about_page_sections", key: "reference"},
+              {namespace: "about3", key: "title"}
+            ]) {
+              key
+              namespace
+              value
               reference {
                 ... on Metaobject {
                   handle
@@ -111,6 +118,11 @@ export async function getAboutPageData() {
       visionSection: parseSection('about_vision_section'),
       innovationSection: parseSection('about_innovation_section'),
       reviewsSection: parseSection('about_reviews_section'),
+      about3: {
+        title: body?.data?.page?.metafields?.find(
+          (m: { namespace?: string; key?: string }) => m?.namespace === 'about3' && m?.key === 'title'
+        )?.value ?? ''
+      }
     };
 
     return result;
