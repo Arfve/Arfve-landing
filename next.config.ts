@@ -5,8 +5,13 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "**.shopifycdn.com", // Allow all subdomains
+        pathname: "/**", // Allow all paths
+      },
+      {
+        protocol: "https",
         hostname: "cdn.shopify.com",
-        pathname: "/**", // Allow all Shopify CDN paths
+        pathname: "/**",
       },
     ],
   },
