@@ -4,12 +4,10 @@ import TestimonialCard from "./TestimonialCard";
 import { TestimonialsData } from "@/types/shopify";
 
 export default function Testimonials({ title, list = [] }: TestimonialsData) {
-  console.log(list);
-
   return (
-    <section className="w-full bg-[#000000] py-16  md:pl-32">
-      <div className="max-w-full mx-auto">
-        <div className="flex flex-col gap-[42px] w-full max-w-full">
+    <section className="w-full bg-[#000000] flex justify-center">
+      <div className="w-[1440px] flex flex-col py-16 px-8 md:px-32">
+        <div className="flex flex-col gap-[42px] w-full max-w-[1192px]">
           {/* Title */}
           <h2 className="text-[40px] leading-[48px] font-bold font-inter text-white">
             {title} 
@@ -18,7 +16,7 @@ export default function Testimonials({ title, list = [] }: TestimonialsData) {
           {/* Cards Container */}
           <div className="overflow-hidden w-full">
             {/* Duplicate the testimonial cards for a seamless loop */}
-            <div className="flex items-center  animate-scrollRight gap-[40px] w-[fit-content]  ">
+            <div className="flex items-center animate-scrollRight gap-[40px] w-[fit-content]">
               {list.map((testimonial, index) => (
                 <TestimonialCard
                   key={`first-${index}`}

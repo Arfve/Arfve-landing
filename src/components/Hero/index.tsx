@@ -11,17 +11,20 @@ interface HeroProps {
 
 export default function Hero({ title, subtitle, buttonText, image }: HeroProps) {
   return (
-    <section className="flex justify-center items-center bg-[#dedede]">
-        <div className="max-w-[1440px] w-full h-[675px] flex">
-        <div className="relative w-1/2 h-full bg-white">
-          <Image
-            src={image || "/placeholder.svg"}
-            alt={title || "Arfve Headphones"}
-            fill
-            className="object-contain"
-            priority
-          />
-        </div>
+    <section className="relative min-h-[500px] md:h-[675px] bg-[#dedede] px-6 py-12 md:p-0 ">
+      <div className="max-w-[1440px] h-[675px] mx-auto flex items-center justify-center">
+        {image && (
+          <div className="relative w-1/2 aspect-[5/4]">
+            <Image 
+              src={image}
+              alt={title || "Arfve Headphones"}
+              fill
+              className="object-contain" 
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
+            />
+          </div>
+        )}
 
         <div className="flex flex-col items-center justify-center w-1/2 px-12">
           <h1 className="text-6xl mb-4 text-black text-center font-bold">{title}</h1>

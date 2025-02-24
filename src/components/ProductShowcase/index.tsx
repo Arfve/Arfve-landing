@@ -1,6 +1,7 @@
 "use client";
 import "@/styles/globals.css";
 import Image from "next/image";
+import Link from "next/link";
 interface FeatureCardProps {
   title: string;
   description?: string;
@@ -20,13 +21,14 @@ function FeatureCard({
       {/* Image Position */}
       {reverseImage ? (
         <>
-          <div className="flex justify-center items-center p-[10px] w-[255px] h-[202px] bg-[#DEDEDE] rounded-[20px]">
+          <div className="flex justify-center items-center w-[255px] h-[202px] bg-[#DEDEDE] rounded-[20px] overflow-hidden">
             {imageUrl && (
-              <div className="relative w-[79px] h-[79px]">
+              <div className="relative w-full h-full">
                 <Image
                   src={imageUrl}
                   alt={title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-contain"
                 />
               </div>
@@ -55,13 +57,14 @@ function FeatureCard({
               </p>
             )}
           </div>
-          <div className="flex justify-center items-center p-[10px] w-[255px] h-[202px] bg-[#DEDEDE] rounded-[20px]">
+          <div className="flex justify-center items-center w-[255px] h-[202px] bg-[#DEDEDE] rounded-[20px] overflow-hidden">
             {imageUrl && (
-              <div className="relative w-[79px] h-[79px]">
+              <div className="relative w-full h-full">
                 <Image
                   src={imageUrl}
                   alt={title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-contain"
                 />
               </div>
@@ -115,17 +118,17 @@ export default function ProductShowcase({
   const rightFeatures = displayFeatures.filter((_, i) => i % 2 === 1);
 
   return (
-    <section className="w-full bg-white">
-      <div className="max-w-[1440px] px-8 md:px-32">
-        <div className="flex flex-col justify-center py-16 ">
-          <div className="flex flex-col sm:flex-row gap-[80px] w-full max-w-[1192px] ">
-            {/* Features Container */}
-            <div className="flex gap-10 w-full sm:w-[631px] h-[400px] sm:h-[878px] relative">
-              <div className="h-[20%] w-full z-[1] absolute top-0 bg-gradient-to-t from-transparent to-white"></div>
+    <section className="w-full bg-white flex justify-center">
+      <div className="w-[1440px] h-[1008px] flex flex-col items-center justify-center p-16 relative">
+        <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
+          {/* Features Container */}
+          <div className="w-full lg:w-[631px] h-[878px] relative overflow-hidden">
+            <div className="h-[20%] w-full z-[1] absolute top-0 bg-gradient-to-t from-transparent to-white"></div>
 
+            <div className="flex gap-10 h-full">
               {/* Left Column */}
-              <div className="flex flex-col w-full sm:w-[295px] h-[400px] sm:h-[58px] infinite-scroll-wrapper">
-                <div className="w-[fit-content] reverse gap-[40px] animate-scrollDown">
+              <div className="w-[295px] h-full overflow-hidden">
+                <div className="w-[fit-content] gap-[40px] animate-scrollDown">
                   {leftFeatures.map((feature, index) => (
                     <FeatureCard
                       key={index * 2}
@@ -133,7 +136,6 @@ export default function ProductShowcase({
                       className="feature-card"
                     />
                   ))}
-                  {/* Duplicate the content for a seamless loop */}
                   {leftFeatures.map((feature, index) => (
                     <FeatureCard
                       key={`dup-${index * 2}`}
@@ -145,35 +147,38 @@ export default function ProductShowcase({
               </div>
 
               {/* Right Column */}
-              <div className="flex flex-col w-full sm:w-[336px] h-[400px] sm:h-[880px] infinite-scroll-wrapper ">
-                <div className="w-[fit-content]  gap-[40px] animate-scrollUp">
+              <div className="w-[336px] h-full overflow-hidden">
+                <div className="w-[fit-content] gap-[40px] animate-scrollUp">
                   {rightFeatures.map((feature, index) => (
                     <FeatureCard key={index} {...feature} />
                   ))}
-                  {/* Duplicate the content */}
                   {rightFeatures.map((feature, index) => (
                     <FeatureCard key={`dup-${index}`} {...feature} />
                   ))}
                 </div>
               </div>
-
-              <div className="h-[20%] w-full z-1 absolute bg-gradient-to-b from-[rgba(255,255,255,0)] to-white bottom-0"></div>
             </div>
 
-            {/* Text Content */}
-            <div className="flex flex-col items-start p-0 gap-3 w-full sm:w-[607px] sm:h-[185px] sm:ml-auto sm:my-auto">
-              <h2 className="w-full sm:w-[607px] font-inter font-bold text-[32px] sm:text-[40px] leading-[40px] sm:leading-[48px] text-black">
+            <div className="h-[20%] w-full z-1 absolute bg-gradient-to-b from-transparent to-white bottom-0"></div>
+          </div>
+
+          {/* Text Content */}
+          <div className="w-full lg:w-[607px] flex flex-col items-center lg:items-start gap-6">
+            <div className="space-y-4 text-center lg:text-left w-full">
+              <h2 className="font-inter font-bold text-2xl md:text-3xl lg:text-[40px] leading-tight text-black">
                 {title}
               </h2>
-              <p className="w-full sm:w-[607px] font-inter font-bold text-[16px] sm:text-[18px] leading-[20px] sm:leading-[22px] text-black">
+              <p className="font-inter font-bold text-base md:text-lg lg:text-[18px] leading-snug text-black">
                 {subtitle}
               </p>
-              <button className="flex justify-center items-center px-4 py-3 w-[156px] h-[43px] bg-[#1F1F1F] rounded-lg">
+            </div>
+            <button className="flex justify-center items-center px-4 py-3 w-[156px] h-[43px] bg-[#1F1F1F] rounded-lg hover:bg-black transition-colors">
+              <Link href="/crowdfounding">
                 <span className="font-inter font-normal text-[16px] leading-[19px] text-white">
                   {buttonText}
                 </span>
-              </button>
-            </div>
+              </Link>
+            </button>
           </div>
         </div>
       </div>
