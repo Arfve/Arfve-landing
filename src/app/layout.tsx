@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 
 const inter = Inter({ subsets: ["latin"] });
 
-const { menuItems } = await getHeaderData();
+
 const headerData = await getHeaderData();
 const footerData = await getFooterData();
 
