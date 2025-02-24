@@ -1,9 +1,9 @@
-import Hero from '@/components/Hero';
-import Features from '@/components/Features';
-import AppSection from '@/components/AppSection';
-import ProductShowcase from '@/components/ProductShowcase';
-import Statement from '@/components/Statement';
-import Testimonials from '@/components/Testimonials';
+import Hero from '@/components/Homepage/Hero';
+import Features from '@/components/Homepage/Features';
+import AppSection from '@/components/Homepage/AppSection';
+import ProductShowcase from '@/components/Homepage/ProductShowcase';
+import Statement from '@/components/Homepage/Statement';
+import Testimonials from '@/components/Homepage/Testimonials';
 import Newsletter from '@/components/Newsletter';
 import { getHomePageData } from '@/lib/getHomePageData';
 
