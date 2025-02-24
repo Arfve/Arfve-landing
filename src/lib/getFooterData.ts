@@ -1,16 +1,25 @@
-import { shopifyFetch } from './shopify'
+import { shopifyFetch } from './shopify';
 
-interface FooterMetafields {
-  social_links?: {
+// Type for Shopify metafield fields
+interface Metafield {
+  key: string;
+  namespace: string;
+  value: string;
+}
+
+// Type for footer data matching FooterProps in Footer/index.tsx
+interface FooterData {
+  menuItems: { id: string; title: string; url: string; type: string }[];
+  socialLinks: {
     youtube: string;
     instagram: string;
     linkedin: string;
   };
-  copyright?: string;
-  cookie_settings_text?: string;
+  copyright: string;
+  cookieSettingsText: string;
 }
 
-export async function getFooterData() {
+export async function getFooterData(): Promise<FooterData> {
   const { body } = await shopifyFetch({
     query: `
       query GetFooter {
@@ -34,20 +43,24 @@ export async function getFooterData() {
           }
         }
       }
-    `
-  })
+    `,
+  });
 
   return {
     menuItems: body?.data?.menu?.items || [],
     socialLinks: JSON.parse(
-      body?.data?.page?.metafields?.find((m: any) => m.key === 'social_links')?.value || 
+      body?.data?.page?.metafields?.find((m: Metafield) => m.key === 'social_links')?.value ||
       JSON.stringify({
         youtube: '#',
         instagram: '#',
-        linkedin: '#'
+        linkedin: '#',
       })
     ),
-    copyright: body?.data?.page?.metafields?.find((m: any) => m.key === 'copyright')?.value || '© 2025 Arfve',
-    cookieSettingsText: body?.data?.page?.metafields?.find((m: any) => m.key === 'cookie_settings_text')?.value || 'Cookie settings'
-  }
-} 
+    copyright:
+      body?.data?.page?.metafields?.find((m: Metafield) => m.key === 'copyright')?.value ||
+      '© 2025 Arfve',
+    cookieSettingsText:
+      body?.data?.page?.metafields?.find((m: Metafield) => m.key === 'cookie_settings_text')
+        ?.value || 'Cookie settings',
+  };
+}

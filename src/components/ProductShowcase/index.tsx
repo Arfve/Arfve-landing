@@ -76,12 +76,7 @@ function FeatureCard({
   );
 }
 
-interface Feature {
-  title: string;
-  description?: string;
-  image?: string;
-  className?: string;
-}
+
 
 interface ProductShowcaseProps {
   title: string;
