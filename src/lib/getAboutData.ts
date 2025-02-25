@@ -1,14 +1,21 @@
-import { shopifyFetch } from "./shopify";
+import { shopifyFetch } from './shopify';
 
-interface ShopifyField {
+// Type for metafield fields from Shopify response
+interface Metafield {
   key: string;
   value: string;
+  namespace: string;
   reference?: {
-    image?: {
-      url: string;
-    };
-    fields?: ShopifyField[];
+    fields?: Metafield[];
+    image?: { url: string };
   };
+}
+
+// Type for reviews in about_reviews_section
+interface Review {
+  // Adjust based on your JSON structure, e.g.:
+  text: string;
+  author: string;
 }
 
 export async function getAboutPageData() {
@@ -18,7 +25,13 @@ export async function getAboutPageData() {
         query GetAboutPage {
           page(handle: "about") {
             title
-            metafields(identifiers: [{namespace: "about_page_sections", key: "reference"}]) {
+            metafields(identifiers: [
+              {namespace: "about_page_sections", key: "reference"},
+              {namespace: "about3", key: "title"}
+            ]) {
+              key
+              namespace
+              value
               reference {
                 ... on Metaobject {
                   handle
@@ -58,14 +71,14 @@ export async function getAboutPageData() {
     const aboutSections = body?.data?.page?.metafields?.[0]?.reference?.fields || [];
 
     const parseSection = (key: string) => {
-      const section = aboutSections.find((field: any) => field.key === key);
+      const section = aboutSections.find((field: Metafield) => field.key === key);
 
       if (!section?.reference?.fields) {
         return null;
       }
 
       const fields = section.reference.fields;
-      const result = fields.reduce((acc: Record<string, any>, field: any) => {
+      const result = fields.reduce((acc: Record<string, string | Review[]>, field: Metafield) => {
         // Handle image fields
         if (field.reference?.image?.url) {
           acc[field.key] = field.reference.image.url;
@@ -75,7 +88,7 @@ export async function getAboutPageData() {
           try {
             const reviewsData = JSON.parse(field.value);
             acc.title = "Don't take our word for it. Take theirs.";
-            acc.reviews = reviewsData.reviews;
+            acc.reviews = reviewsData.reviews as Review[];
           } catch {
             acc.title = '';
             acc.reviews = [];
@@ -100,17 +113,21 @@ export async function getAboutPageData() {
     };
 
     const result = {
-      heroSection: parseSection("about_main_hero"),
-      visionHeroSection: parseSection("about_vision_hero"),
-      visionSection: parseSection("about_vision_section"),
-      innovationSection: parseSection("about_innovation_section"),
-      reviewsSection: parseSection("about_reviews_section")
+      heroSection: parseSection('about_main_hero'),
+      visionHeroSection: parseSection('about_vision_hero'),
+      visionSection: parseSection('about_vision_section'),
+      innovationSection: parseSection('about_innovation_section'),
+      reviewsSection: parseSection('about_reviews_section'),
+      about3: {
+        title: body?.data?.page?.metafields?.find(
+          (m: { namespace?: string; key?: string }) => m?.namespace === 'about3' && m?.key === 'title'
+        )?.value ?? ''
+      }
     };
 
     return result;
-
   } catch (error) {
-    console.error("Failed to get about page data:", error);
+    console.error('Failed to get about page data:', error);
     return null;
   }
 }
