@@ -1,24 +1,25 @@
-import Image from 'next/image'
+"use client"
+
+import Image from "next/image"
 
 interface FeaturesProps {
-  title: string;
-  subtitle: string;
-  description: string;
+  title: string
+  subtitle: string
+  description: string
   featureList: Array<{
-    title: string;
-    description: string;
-  }>;
-  image?: string;
+    title: string
+    description: string
+  }>
+  image?: string
 }
 
 export default function Features({ title, subtitle, description, featureList, image }: FeaturesProps) {
   return (
-    <section className="w-full bg-[#F2F4F3] py-12 md:py-16 lg:py-24 flex justify-center">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+<section className="w-full bg-[#F2F4F3] py-12 md:py-16 lg:py-24 flex justify-center overflow-hidden">      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         {/* Main Content */}
         <div className="w-full flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
           {/* Left Content */}
-          <div className="w-full lg:w-1/2 max-w-xl flex flex-col items-center lg:items-start">
+          <div className="w-full lg:w-1/2 max-w-xl flex flex-col lg:ml-24 items-center lg:items-start">
             <div className="space-y-4 text-center lg:text-left w-full">
               <h2 className="font-inter font-bold text-2xl md:text-3xl lg:text-[40px] leading-tight text-black">
                 {title}
