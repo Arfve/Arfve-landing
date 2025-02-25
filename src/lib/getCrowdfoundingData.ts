@@ -15,7 +15,7 @@ interface ShopifyField {
 export async function getCrowdfoundingPage() {
   const { body } = await shopifyFetch({
     query: `
-      query GetFaqPage {
+      query GetCrowdFundingPage {
         page(handle: "crowdfunding") {
           metafields(identifiers: [{namespace: "crowdfounding", key: "reference"}]) {
             reference {
@@ -91,5 +91,6 @@ export async function getCrowdfoundingPage() {
     brandStory: parseField("brand_story"),
     industryEndorsements: parseField("industry_endorsements"),
     signUpSection: parseField("sign_up_section"),
+
   };
 }
