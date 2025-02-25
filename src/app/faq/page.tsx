@@ -36,7 +36,7 @@ const page = async () => {
     return (
         <main className="m-0 flex items-center min-w-xs min-h-[72.5vh] bg-white overflow-hidden w-full">
             <div className="max-w-7xl mx-auto p-8 text-center">
-                <h1 className="text-2xl text-black font-semibold mb-6">{faqPageData.title}</h1>
+                <h1 className="text-2xl text-black font-semibold mb-6 text-left">{faqPageData.title}</h1>
                 {renderFaqContent()}
             </div>
         </main>
