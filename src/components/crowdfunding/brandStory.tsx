@@ -8,9 +8,11 @@ interface BrandStoryProps {
   hero_title: string;
 }
 
-const BrandStory: React.FC<BrandStoryProps> = ({ hero_img, hero_subtitle, hero_title }) => {
-
-
+const BrandStory: React.FC<BrandStoryProps> = ({
+  hero_img,
+  hero_subtitle,
+  hero_title,
+}) => {
   return (
     <section className=" flex justify-center  ">
       <div className="w-[70%] flex justify-between  items-center  m-14">
@@ -21,7 +23,7 @@ const BrandStory: React.FC<BrandStoryProps> = ({ hero_img, hero_subtitle, hero_t
         <div className=" ">
           <Image
             src={hero_img || "/globe.svg"}
-            alt={ "Default alt text"}
+            alt={"Default alt text"}
             width={500}
             height={450}
             className="max-w-full h-auto" // Ensures responsiveness
