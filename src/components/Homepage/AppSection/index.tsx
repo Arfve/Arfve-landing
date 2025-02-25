@@ -17,8 +17,7 @@ export default function AppSection({
   image,
 }: AppSectionProps) {
   return (
-    <section className="w-full bg-[#DEDEDE] py-12 md:py-16 lg:py-24 flex justify-center">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+<section className="w-full bg-[#DEDEDE] py-12 md:py-16 lg:py-24 flex justify-center overflow-hidden">      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         {/* Main Content */}
         <div className="w-full flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
           {/* Left Content */}
