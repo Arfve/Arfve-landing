@@ -1,9 +1,9 @@
 import React from "react";
-import AboutHero1 from "@/components/aboutHero1/index";
-import AboutHero2 from "@/components/aboutHero2/index";
-import AboutHero3 from "@/components//aboutHero3";
-import { AboutHero4 } from "@/components/aboutHero4";
-import AboutHero5 from "@/components/aboutHero5";
+import AboutHero1 from '@/components/About/aboutHero1';
+import AboutHero2 from '@/components/About/aboutHero2';
+import AboutHero3 from '@/components/About/aboutHero3';
+import { AboutHero4 } from '@/components/About/aboutHero4';
+import AboutHero5 from '@/components/About/aboutHero5';
 import { getAboutPageData } from "@/lib/getAboutData";
 
 const Page = async () => {

@@ -29,7 +29,7 @@ export default function Header({ menuItems }: HeaderProps) {
           </Link>
 
           {/* Navigation Links */}
-          <nav className="flex flex-1 justify-center items-center gap-[41px] min-w-0">
+          <nav className="flex flex-wrap justify-center items-center gap-4 lg:gap-8 w-full">
             {menuItems.map((item) => (
               <Link
                 key={item.id}
