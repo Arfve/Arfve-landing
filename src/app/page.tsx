@@ -1,24 +1,22 @@
-import Header from '@/components/Header/index'
-import Hero from '@/components/Hero'
-import Features from '@/components/Features'
-import AppSection from '@/components/AppSection'
-import ProductShowcase from '@/components/ProductShowcase'
-import Statement from '@/components/Statement'
-import Testimonials from '@/components/Testimonials'
-import Newsletter from '@/components/Newsletter'
-
-import { getHomePageData } from '@/lib/getHomePageData'
+import Hero from '@/components/Homepage/Hero';
+import Features from '@/components/Homepage/Features';
+import AppSection from '@/components/Homepage/AppSection';
+import ProductShowcase from '@/components/Homepage/ProductShowcase';
+import Statement from '@/components/Homepage/Statement';
+import Testimonials from '@/components/Homepage/Testimonials';
+import Newsletter from '@/components/Homepage/Newsletter';
+import { getHomePageData } from '@/lib/getHomePageData';
 
 export default async function Home() {
-  const { 
-    heroSection, 
-    featuresSection, 
+  const {
+    heroSection,
+    featuresSection,
     appSection,
     statementSection,
     newsletterSection,
     testimonialsSection,
-    productShowcaseSection 
-  } = await getHomePageData()
+    productShowcaseSection,
+  } = await getHomePageData();
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -32,11 +30,10 @@ export default async function Home() {
       )}
       {featuresSection && <Features {...featuresSection} />}
       {appSection && <AppSection {...appSection} features={appSection.features || []} />}
-      
       {productShowcaseSection && (
-        <ProductShowcase 
-          {...productShowcaseSection} 
-          features={productShowcaseSection.features || []} 
+        <ProductShowcase
+          {...productShowcaseSection}
+          features={productShowcaseSection.features || []}
         />
       )}
       {statementSection && <Statement {...statementSection} />}

@@ -6,12 +6,12 @@ export default async function page() {
   const {brandStory, industryEndorsements,signUpSection } = await getCrowdfoundingPage()
 
   return (
-    <div>
+    <main>
       <BrandStory {...brandStory} />
       <SignUpSection {...signUpSection} />
       <IndustryEndorsements {...industryEndorsements} />
      
-    </div>
+    </main>
   );
 }
 

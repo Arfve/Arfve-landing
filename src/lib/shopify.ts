@@ -1,6 +1,6 @@
 import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 
-const isDevelopment = process.env.NODE_ENV === "development";
+type ShopifyVariables = Record<string, string | number | boolean | null | undefined>;
 
 const shopifyConfig = {
   storeDomain: `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}`,
@@ -35,7 +35,7 @@ export async function shopifyFetch({
   variables = {},
 }: {
   query: string;
-  variables?: Record<string, any>;
+  variables?: ShopifyVariables;
 }) {
   try {
     if (!process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN) {
