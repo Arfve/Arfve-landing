@@ -18,7 +18,7 @@ export default function FAQSection({ title, faqs }: FAQSectionProps) {
       <div className="max-w-[1200px] mx-auto px-4">
         <div className="max-w-[900px] mx-auto">
           <h2 className="text-4xl font-bold mb-8">
-            FAQ
+            {title}
           </h2>
           {faqs.slice(0, 4).map((faq, index) => (
             <div key={index} className="relative border-b border-black">
