@@ -9,7 +9,6 @@ export default async function page() {
     <div>
       <BrandStory {...brandStory} />
       <SignUpSection {...signUpSection} />
-
       <IndustryEndorsements {...industryEndorsements} />
      
     </div>
