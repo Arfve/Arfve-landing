@@ -2,12 +2,13 @@
 import "@/styles/globals.css";
 import Image from "next/image";
 import Link from "next/link";
+
 interface FeatureCardProps {
   title: string;
   description?: string;
   imageUrl?: string;
   className?: string;
-  reverseImage?: boolean; // New prop to reverse the image
+  reverseImage?: boolean;
 }
 
 function FeatureCard({
@@ -17,24 +18,21 @@ function FeatureCard({
   reverseImage = false,
 }: FeatureCardProps) {
   return (
-    <div className="flex flex-col justify-center items-center p-5 gap-[10px] bg-white shadow-[0px_0px_16.6px_rgba(0,0,0,0.1)] rounded-[20px] my-3">
-      {/* Image Position */}
+    <div className="flex flex-col justify-center items-center p-5 gap-[10px] bg-white shadow-[0px_0px_16.6px_rgba(0,0,0,0.1)] rounded-[20px] my-3 w-full max-w-[336px]">
       {reverseImage ? (
         <>
-          <div className="flex justify-center items-center w-[255px] h-[202px] bg-[#DEDEDE] rounded-[20px] overflow-hidden">
+          <div className="w-full aspect-[255/202] relative bg-[#DEDEDE] rounded-[20px] overflow-hidden">
             {imageUrl && (
-              <div className="relative w-full h-full">
-                <Image
-                  src={imageUrl}
-                  alt={title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-contain"
-                />
-              </div>
+              <Image
+                src={imageUrl}
+                alt={title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-contain"
+              />
             )}
           </div>
-          <div className="flex flex-col gap-[10px] w-[161px]">
+          <div className="flex flex-col gap-[10px] w-full">
             <h3 className="font-inter font-medium text-[18px] leading-[22px] text-black">
               {title}
             </h3>
@@ -47,7 +45,7 @@ function FeatureCard({
         </>
       ) : (
         <>
-          <div className="flex flex-col gap-[10px] w-[161px]">
+          <div className="flex flex-col gap-[10px] w-full">
             <h3 className="font-inter font-medium text-[18px] leading-[22px] text-black">
               {title}
             </h3>
@@ -57,17 +55,15 @@ function FeatureCard({
               </p>
             )}
           </div>
-          <div className="flex justify-center items-center w-[255px] h-[202px] bg-[#DEDEDE] rounded-[20px] overflow-hidden">
+          <div className="w-full aspect-[255/202] relative bg-[#DEDEDE] rounded-[20px] overflow-hidden">
             {imageUrl && (
-              <div className="relative w-full h-full">
-                <Image
-                  src={imageUrl}
-                  alt={title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-contain"
-                />
-              </div>
+              <Image
+                src={imageUrl}
+                alt={title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-contain"
+              />
             )}
           </div>
         </>
@@ -94,41 +90,32 @@ interface ProductShowcaseProps {
     imageUrl?: string;
   }>;
 }
+
 export default function ProductShowcase({
   features,
   title,
   subtitle,
   buttonText,
 }: ProductShowcaseProps) {
-  const defaultSizes = [
-    "w-[295px] h-[322px]",
-    "w-[295px] h-[268px]",
-    "w-[295px] h-[268px]",
-    "w-[336px] h-[261px]",
-    "w-[336px] h-[268px]",
-    "w-[336px] h-[331px]",
-  ];
-
   const displayFeatures = features.map((f, i) => ({
     ...f,
-    className: defaultSizes[i % 6],
     reverseImage: i % 3 === 2, // Every third card has the image at the bottom
   }));
   const leftFeatures = displayFeatures.filter((_, i) => i % 2 === 0);
   const rightFeatures = displayFeatures.filter((_, i) => i % 2 === 1);
 
   return (
-    <section className="w-full bg-white flex justify-center">
-      <div className="w-[1440px] h-[1008px] flex flex-col items-center justify-center p-16 relative">
+<section className="w-full bg-white flex justify-center overflow-hidden">
+      <div className="max-w-[1440px] w-full flex flex-col items-center justify-center p-4 md:p-8 lg:p-16 relative">
         <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
           {/* Features Container */}
-          <div className="w-full lg:w-[631px] h-[878px] relative overflow-hidden">
+          <div className="w-full lg:w-1/2 h-[878px] relative overflow-hidden">
             <div className="h-[20%] w-full z-[1] absolute top-0 bg-gradient-to-t from-transparent to-white"></div>
 
-            <div className="flex gap-10 h-full">
+            <div className="flex gap-4 md:gap-10 h-full">
               {/* Left Column */}
-              <div className="w-[295px] h-full overflow-hidden">
-                <div className="w-[fit-content] gap-[40px] animate-scrollDown">
+              <div className="w-1/2 h-full overflow-hidden">
+                <div className="w-full gap-[40px] animate-scrollDown">
                   {leftFeatures.map((feature, index) => (
                     <FeatureCard
                       key={index * 2}
@@ -147,8 +134,8 @@ export default function ProductShowcase({
               </div>
 
               {/* Right Column */}
-              <div className="w-[336px] h-full overflow-hidden">
-                <div className="w-[fit-content] gap-[40px] animate-scrollUp">
+              <div className="w-1/2 h-full overflow-hidden">
+                <div className="w-full gap-[40px] animate-scrollUp">
                   {rightFeatures.map((feature, index) => (
                     <FeatureCard key={index} {...feature} />
                   ))}
@@ -163,7 +150,7 @@ export default function ProductShowcase({
           </div>
 
           {/* Text Content */}
-          <div className="w-full lg:w-[607px] flex flex-col items-center lg:items-start gap-6">
+          <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start gap-6">
             <div className="space-y-4 text-center lg:text-left w-full">
               <h2 className="font-inter font-bold text-2xl md:text-3xl lg:text-[40px] leading-tight text-black">
                 {title}
