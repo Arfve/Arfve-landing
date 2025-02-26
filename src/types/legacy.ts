@@ -1,6 +1,7 @@
 export interface LegacyHero {
   title: string;
   image: string;
+  subtitle?: string;
 }
 
 export interface WithYouSection {
@@ -22,6 +23,11 @@ export interface LegacyAppFeature {
   image?: string;
 }
 
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 export interface LegacyPageData {
   hero: LegacyHero;
   withYou: WithYouSection;
@@ -32,5 +38,9 @@ export interface LegacyPageData {
   legacyApp: {
     title: string;
     features: LegacyAppFeature[];
+  };
+  faq: {
+    title: string;
+    items: FAQItem[];
   };
 }
