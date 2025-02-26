@@ -14,8 +14,8 @@ const FAQ = ({ children, answer }: FAQProps) => {
     <div className="relative">
       {/* Question */}
       <div
-        className="flex items-center text-black w-[900px] justify-between py-4 font-semibold relative cursor-pointer"
-        onClick={() => setIsAnswerOpen(!isAnswerOpen)}
+  className="flex items-center text-black w-full max-w-[90%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[900px] mx-auto justify-between py-4 font-semibold relative cursor-pointer sm:gap-x-[30px] md:gap-x-[15px]" 
+  onClick={() => setIsAnswerOpen(!isAnswerOpen)}
       >
         {children}
         <div
