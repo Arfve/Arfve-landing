@@ -25,7 +25,6 @@ const BrandStory: React.FC<BrandStoryProps> = ({
         muted
         autoPlay
         loop
-        onPlay={() => console.log('Video is playing')}
       >
         Din webbläsare stödjer inte video-taggen.
       </video>

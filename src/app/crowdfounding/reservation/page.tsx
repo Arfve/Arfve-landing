@@ -1,5 +1,6 @@
 import { GetReservationPage } from "@/lib/getReservationData ";
 import Image from "next/image";
+import CheckoutButton from "@/components/crowdfunding/CheckoutButton";
 
 export default async function page() {
 
@@ -24,9 +25,7 @@ const  { buttonText , guarantees:guarantees, image, subtitle, title } = data
             <div className="w-[560px] md:text-left text-center ">
               <h1 className="text-4xl font-bold mb-4">{title}</h1>
               <h2 className="text-2xl font-bold mb-4">{subtitle}</h2>
-              <button className="bg-[rgb(37,211,156)] py-3 px-6 rounded-lg font-bold text-white w-full">
-                {buttonText}
-              </button>
+              <CheckoutButton buttonText={buttonText || "Reserve Legacy 1 Now"} />
             </div>
           </div>
 
@@ -34,8 +33,6 @@ const  { buttonText , guarantees:guarantees, image, subtitle, title } = data
           {guarantees && guarantees.length > 0 && (
             <div className="flex gap-5 justify-evenly ">
               {guarantees.map((guarantee, index) => {
-                console.log(guarantee);
-                
                 return (
                 <div
                   key={index}
