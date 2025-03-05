@@ -102,13 +102,10 @@ export async function getLegacyPageData(): Promise<LegacyPageData> {
 
   try {
     const response = await shopifyFetch({ query });
-    console.log('Raw FAQ Response:', response.body.data?.faqSection);
     
     const data = response.body.data as ShopifyResponse;
     const legacyPageData = data?.legacySection?.fields;
     const faqData = data?.faqSection?.fields;
-
-    console.log('FAQ Fields:', faqData);
 
     if (!legacyPageData) console.debug('No legacy data found');
     if (!faqData) console.debug('No FAQ data found');
@@ -129,7 +126,6 @@ export async function getLegacyPageData(): Promise<LegacyPageData> {
         items: (() => {
           try {
             const faqList = faqData?.find((f: MetaobjectField) => f.key === 'faq_list')?.value;
-            console.log('FAQ List Value:', faqList);
             return faqList ? JSON.parse(faqList) : defaultData.faq.items;
           } catch (e) {
             console.error('Error parsing FAQ list:', e);

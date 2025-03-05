@@ -14,8 +14,9 @@ export const metadata: Metadata = {
 export default async function Legacy1Page() {
   // Fetch data with error handling
   const [pageData] = await Promise.all([
-    getLegacyPageData().catch(error => {
-      console.error('Error fetching page data:', error)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    getLegacyPageData().catch(_ => {
+      // Silent error handling
       return null
     })
   ])
@@ -24,8 +25,6 @@ export default async function Legacy1Page() {
     // You might want to add an error boundary or fallback UI here
     return <div>Loading...</div>
   }
-
-  console.log('FAQ Data:', pageData.faq);
 
   return (
     <main className="w-full bg-white">

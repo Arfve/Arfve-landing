@@ -64,7 +64,6 @@ export async function getCrowdfoundingPage() {
   });
 
   const crowdfundingFields = body?.data?.page?.metafields?.[0]?.reference?.fields || [];
-console.log(crowdfundingFields[0].reference.fields);
 
   const parseField = (key: string) => {
     const field = crowdfundingFields.find((f: ShopifyField) => f.key === key);

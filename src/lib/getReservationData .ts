@@ -85,10 +85,7 @@ export async function GetReservationPage() {
   const subtitle = getFieldValue(metafields, "subtitle");
   
   const title = getFieldValue(metafields, "title");
-if(title !== null){
-  console.log(1);
-  
-}
+
   // Log the values (or handle them as needed)
   const data: reservation = {
     buttonText,
