@@ -1,36 +1,45 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 
 interface BrandStoryProps {
-  hero_img: string;
-  hero_subtitle: string;
+  hero_image: string; // Direkt video URL (t.ex. "https://cdn.shopify.com/.../video.mp4")
   hero_title: string;
+  hero_subtitle: string;
 }
 
 const BrandStory: React.FC<BrandStoryProps> = ({
-  hero_img,
-  hero_subtitle,
+  hero_image,
   hero_title,
+  hero_subtitle,
 }) => {
   return (
-    <section className=" flex justify-center  ">
-      <div className="w-[70%] flex justify-between  items-center  m-14">
-        <div className="flex flex-col  text-left gap-3 w-[450px]">
-          <h1 className="text-3xl font-bold">{hero_title}</h1>
-          <p className="text-gray-600">{hero_subtitle}</p>
-        </div>
-        <div className=" ">
-          <Image
-            src={hero_img || "/globe.svg"}
-            alt={"Default alt text"}
-            width={500}
-            height={450}
-            className="max-w-full h-auto" // Ensures responsiveness
-          />
-        </div>
+    <section className="flex justify-center">
+  <div className="w-full   ">
+    
+    {/* Videobild med text */}
+    <div className="relative  overflow-hidden  ">
+      <video
+        src={hero_image || "https://cdn.shopify.com/videos/c/o/v/9e0d372617804c88bf4419c760d89258.mp4"}
+        className="w-full h-auto"
+        preload="auto"
+        muted
+        autoPlay
+        loop
+        onPlay={() => console.log('Video is playing')}
+      >
+        Din webbläsare stödjer inte video-taggen.
+      </video>
+
+      {/* Textöverlagring */}
+      <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-gray p-4">
+        <h1 className="text-4xl font-bold">{hero_title}</h1>
+        <p className="text-xl  text-gray">{hero_subtitle}</p>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
+
   );
 };
 
