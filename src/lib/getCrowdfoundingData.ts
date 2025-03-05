@@ -64,11 +64,12 @@ export async function getCrowdfoundingPage() {
   });
 
   const crowdfundingFields = body?.data?.page?.metafields?.[0]?.reference?.fields || [];
+console.log(crowdfundingFields[0].reference.fields);
 
   const parseField = (key: string) => {
     const field = crowdfundingFields.find((f: ShopifyField) => f.key === key);
     if (!field) return null;
-
+    https://cdn.shopify.com/videos/c/o/v/9e0d372617804c88bf4419c760d89258.mp4
     if (field.reference) {
       const fields = field.reference.fields || [];
       return fields.reduce((acc: Record<string, FieldValue>, f: ShopifyField) => {
@@ -98,6 +99,7 @@ export async function getCrowdfoundingPage() {
     }
     return null;
   };
+
 
   return {
     brandStory: parseField("brand_story"),
