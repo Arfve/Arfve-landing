@@ -9,13 +9,15 @@ interface FeaturesProps {
   featureList: Array<{
     title: string
     description: string
+    imageUrl: string
   }>
   image?: string
 }
 
 export default function Features({ title, subtitle, description, featureList, image }: FeaturesProps) {
   return (
-<section className="w-full bg-[#F2F4F3] py-12 md:py-16 lg:py-24 flex justify-center overflow-hidden">      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+<section className="w-full bg-[#F2F4F3] py-12 md:py-16 lg:py-24 flex justify-center overflow-hidden">      
+<div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         {/* Main Content */}
         <div className="w-full flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
           {/* Left Content */}
@@ -24,7 +26,7 @@ export default function Features({ title, subtitle, description, featureList, im
               <h2 className="font-inter font-bold text-2xl md:text-3xl lg:text-[40px] leading-tight text-black">
                 {title}
               </h2>
-              <p className="font-inter text-base md:text-lg lg:text-[18px] text-black">
+              <p className="font-inter text-base md:text-lg lg:text-[18px] text-[#243555]">
                 {subtitle}
               </p>
               <p className="font-inter text-sm md:text-base lg:text-[16px] text-black">
@@ -62,12 +64,16 @@ export default function Features({ title, subtitle, description, featureList, im
           {featureList.map((feature, index) => (
             <div 
               key={index} 
-              className="flex flex-col items-center text-center space-y-2 p-4"
+              className="flex flex-col items-center text-left space-y-2 p-4"
             >
-              <h3 className="font-inter font-medium text-base lg:text-[16px] text-black">
-                {feature.title}
-              </h3>
-              <p className="font-inter text-sm lg:text-[14px] text-black max-w-[200px]">
+               <div className="flex items-center gap-2 mr-[50px]">
+                <Image src={feature.imageUrl} alt={feature.title} width={25} height={25} />
+
+                <h3 className="font-inter font-medium  lg:text-[16px] text-black">
+                  {feature.title}
+                </h3>
+              </div>
+              <p className="font-inter text-base text-[#243555] mr-[45px]">
                 {feature.description}
               </p>
             </div>

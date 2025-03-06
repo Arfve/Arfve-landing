@@ -11,7 +11,7 @@ interface HeroProps {
 
 export default function Hero({ title, subtitle, buttonText, image }: HeroProps) {
   return (
-<section className="relative min-h-[500px] md:h-[675px] bg-[#dedede] px-6 py-12 md:p-0 overflow-hidden">      <div className="max-w-[1440px] h-full mx-auto flex flex-col md:flex-row items-center justify-center text-center md:text-left"> {/* Changed flex settings */}
+<section className="relative min-h-[500px] md:h-[675px] bg-[#F3F3F3] px-6 py-12 md:p-0 overflow-hidden">      <div className="max-w-[1440px] h-full mx-auto flex flex-col md:flex-row items-center justify-center text-center md:text-left"> {/* Changed flex settings */}
         {image && (
           <div className="relative w-full md:w-1/2 aspect-[5/4] mb-8 md:mb-0"> {/* Adjusted width and margin */}
             <Image 
@@ -26,10 +26,11 @@ export default function Hero({ title, subtitle, buttonText, image }: HeroProps) 
         )}
 
         <div className="flex flex-col items-center justify-center w-full md:w-1/2 px-12"> {/* Adjusted width */}
-          <h1 className="text-4xl md:text-6xl mb-4 text-black font-bold">{title}</h1> {/* Adjusted font size */}
-          <p className="text-lg md:text-xl my-4 text-black">{subtitle}</p> {/* Adjusted font size */}
-          <button className="flex-none rounded-md bg-[#1f1f1f] px-3.5 py-2.5 text-sm text-white shadow-sm hover:bg-gray-800 transition-colors">
-            <span className="px-1">{buttonText}</span>
+          <h1 className="text-4xl md:text-6xl mb-4 text-[#243555] font-bold">{title}</h1> {/* Adjusted font size */}
+          <p className="text-lg md:text-xl my-4 text-[#243555]">{subtitle}</p> {/* Adjusted font size */}
+          <button className="flex items-center gap-2 rounded-[300px] bg-[#243555] px-4 py-2 text-sm text-white shadow-sm hover:bg-gray-800 transition-colors">
+          <Image src="/Icon.png" alt="Icon" width={20} height={20} className="w-5 h-5" />
+          <span>{buttonText}</span>
           </button>
         </div>
       </div>
