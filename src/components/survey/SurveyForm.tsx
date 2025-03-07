@@ -2,10 +2,10 @@
 interface Question {
     id: string;
     text: string;
-    type: "radio" | "checkbox" | "textarea" | "email"|string; // These are the core types
-    options?: string[]; // Optional options for radio/checkbox questions
-    otherOption?: boolean; // This is present in some questions (e.g., q3, q6)
-    likert?: boolean; // This is present in Likert scale questions (e.g., q11, q14)
+    type: "radio" | "checkbox" | "textarea" | "email"|string; 
+    options?: string[];
+    otherOption?: boolean;
+    likert?: boolean; 
    
   }
   
@@ -92,11 +92,12 @@ export function SurveyForm({
               <label className="inline-flex items-center mt-2">
                 <input
                   type="checkbox"
+                  
                   name={`anonymousThoughts_${question.id}`}
                   onChange={handleCheckboxChangeSQ}
                   className="form-checkbox text-indigo-600"
                 />
-                <span className="ml-2">Svara anonymt</span>
+                <span className="ml-2">skip</span>
               </label>
             </>
           )}
