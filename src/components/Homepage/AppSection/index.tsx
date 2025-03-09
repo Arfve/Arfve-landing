@@ -18,7 +18,7 @@ export default function AppSection({
 }: AppSectionProps) {
   return (
     <section className="w-full bg-[#FCFCFD] py-12 md:py-16 lg:py-24 flex justify-center overflow-hidden">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center -mr-[50px]">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center lg:ml-[60px] md:ml-[80px]">
         {/* Main Content */}
         <div className="w-full flex flex-col lg:flex-row gap-8 lg:gap-16 justify-between">
           {/* Left Content */}
@@ -35,7 +35,7 @@ export default function AppSection({
                     <h3 className="font-inter font-semibold text-[24px] md:text-[28px] leading-[30px] tracking-[-2%] md:leading-[34px] text-black">
                       {feature.title}
                     </h3>
-                    <p className="font-body text-[18px] font-normal leading-[28px] text-black">
+                    <p className="font-body text-[16px] md:text-[18px] leading-[20px] md:leading-[22px] text-black">
                       {feature.description}
                     </p>
                   </div>
@@ -43,6 +43,7 @@ export default function AppSection({
               </div>
             </div>
           </div>
+
 
           {/* Right Content - Image */}
           <div className="w-full lg:w-1/2 flex justify-center lg:justify-start overflow-hidden flex-shrink-0">
@@ -54,8 +55,8 @@ export default function AppSection({
                   width={1200}
                   height={900}
                   priority
-                  className="object-cover w-[1200px] h-[900px] -ml-[150px] -mt-[320px]" 
-                />
+                  className="object-cover md:w-[500px] md:h-[750px] lg:w-[1200px] lg:h-[900px] lg:-ml-[150px] lg:-mt-[320px]"
+                  />
               </div>
             )}
           </div>
