@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import Questions from "@/data/questions.json";
 import { SurveyForm } from "@/components/survey/SurveyForm";
-
+import EndSurvey from "@/components/survey/EndSurvey";
 interface SurveyData {
   [key: string]: string | string[] | undefined;
 }
@@ -16,7 +16,6 @@ interface QuestionRef {
   [key: string]: HTMLDivElement | null;
 }
 
-
 export default function Survey() {
   const questionRefs = useRef<QuestionRef>({});
 
@@ -24,13 +23,15 @@ export default function Survey() {
   const [responseMessage, setResponseMessage] = useState<string>("");
   const [isAnonymous, setIsAnonymous] = useState<boolean>(false);
   const [SQ, setSQ] = useState<boolean>(false);
+  
   const [errors, setErrors] = useState<Errors>({});
-
+  const [endSurvey, setEndSurvey] = useState<boolean>(false);
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value, type, checked } = e.target as HTMLInputElement;
     if (type === "checkbox") {
+      
       setSurveyData((prevData) => {
         const prevValue = prevData[name];
         const newValue = Array.isArray(prevValue)
@@ -49,6 +50,9 @@ export default function Survey() {
 
   const handleCheckboxChangeSQ = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSQ(e.target.checked);
+
+  
+  
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setIsAnonymous(e.target.checked);
 
@@ -57,7 +61,10 @@ export default function Survey() {
     const newErrors: Errors = {};
 
     Questions.forEach((q) => {
-      if (q.id === "q17" && !SQ && !surveyData[q.id]?.toString().trim()) {
+      console.log(q);
+        
+      if (q.id === "q17" && !SQ  && !surveyData[q.id]?.toString().trim()) {
+
         newErrors[q.id] = true;
       } else if (
         q.id === "q18" &&
@@ -66,11 +73,13 @@ export default function Survey() {
       ) {
         newErrors[q.id] = true;
       } else if (
-        !surveyData[q.id] ||
-        (q.type === "checkbox" && (surveyData[q.id] as string[]).length === 0)
+        q.id !== "q17" && q.id !== "q18" &&
+        (!surveyData[q.id] ||
+        (q.type === "checkbox" && (surveyData[q.id] as string[]).length === 0))
       ) {
         newErrors[q.id] = true;
       }
+      
     });
 
     if (Object.keys(newErrors).length > 0) {
@@ -99,6 +108,7 @@ export default function Survey() {
       });
 
       setResponseMessage("Tack för ditt svar!");
+      setEndSurvey(true);
     } catch (error) {
       console.error("Error:", error);
       setResponseMessage("Något gick fel, försök igen.");
@@ -106,16 +116,20 @@ export default function Survey() {
   };
 
   return (
-    <SurveyForm
-      questions={Questions}
-      surveyData={surveyData}
-      errors={errors}
-      questionRefs={questionRefs}
-      handleChange={handleChange}
-      handleCheckboxChangeSQ={handleCheckboxChangeSQ}
-      handleCheckboxChange={handleCheckboxChange}
-      handleSubmit={handleSubmit}
-      responseMessage={responseMessage}
-    />
+    <div className="container mx-auto px-4 py-8 relative">
+      <SurveyForm
+        questions={Questions}
+        surveyData={surveyData}
+        errors={errors}
+        questionRefs={questionRefs}
+        handleChange={handleChange}
+        handleCheckboxChangeSQ={handleCheckboxChangeSQ}
+        handleCheckboxChange={handleCheckboxChange}
+        handleSubmit={handleSubmit}
+        responseMessage={responseMessage}
+      />
+          {endSurvey && <EndSurvey />}
+  
+    </div>
   );
 }
