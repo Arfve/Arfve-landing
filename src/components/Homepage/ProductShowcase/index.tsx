@@ -17,7 +17,7 @@ function FeatureCard({
   className,
 }: FeatureCardProps) {
   return (
-    <div className="flex flex-col justify-start items-center p-5 gap-[10px] bg-[#F3F3F3] rounded-[20px] my-3 w-full max-w-[336px]">
+    <div className={`flex flex-col justify-start items-center p-5 gap-[10px] bg-[#F3F3F3] rounded-[20px] my-3 w-full max-w-[336px] ${className || ""}`}>
       <div className="w-full aspect-[255/202] relative bg-[#DEDEDE] rounded-[20px] overflow-hidden">
         {imageUrl && (
           <Image
@@ -102,12 +102,12 @@ export default function ProductShowcase({
                   {features
                     .filter((_, i) => i % 2 === 1)
                     .map((feature, index) => (
-                      <FeatureCard key={index} {...feature} />
+                      <FeatureCard key={index} {...feature} className="feature-card" />
                     ))}
                   {features
                     .filter((_, i) => i % 2 === 1)
                     .map((feature, index) => (
-                      <FeatureCard key={`dup-${index}`} {...feature} />
+                      <FeatureCard key={`dup-${index}`} {...feature} className="feature-card" />
                     ))}
                 </div>
               </div>
