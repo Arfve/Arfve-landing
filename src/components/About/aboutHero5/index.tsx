@@ -30,7 +30,7 @@ export default function AboutHero5({ json5 }: AboutHero5Props) {
   };
 
   return (
-    <section className="relative w-full bg-[#686868] py-24 px-6 lg:px-52 flex flex-col items-center justify-center gap-9">
+    <section className="relative w-full bg-[#243555] py-24 px-6 lg:px-52 flex flex-col items-center justify-center gap-9">
       {/* Stars */}
       <div className="relative w-[116px] h-5 flex gap-6 justify-center">
         {[...Array(5)].map((_, i) => (
