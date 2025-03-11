@@ -9,8 +9,6 @@ if (!ACCESS_TOKEN) {
 const url = `https://${SHOP}/admin/api/2023-10/customers.json`;
 
 try {
-  console.log("Welcome to our backend!");
-  
   const response = await fetch(url, {
     method: "GET",
     headers: {

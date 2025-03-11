@@ -1,7 +1,6 @@
 "use client"
 import { useState } from "react";
 
-
 interface Review {
   text: string;
   author: string;
@@ -31,14 +30,13 @@ export default function AboutHero5({ json5 }: AboutHero5Props) {
   };
 
   return (
-    <section className="relative w-full bg-[#686868] py-24 px-52 flex flex-col items-center justify-center gap-9">
+    <section className="relative w-full bg-[#243555] py-24 px-6 lg:px-52 flex flex-col items-center justify-center gap-9">
       {/* Stars */}
-      <div className="relative w-[116px] h-5 flex gap-6">
+      <div className="relative w-[116px] h-5 flex gap-6 justify-center">
         {[...Array(5)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-5 h-5"
-            style={{ left: `${i * 24}px` }}
+            className="w-5 h-5"
           >
             <svg
               width="20"
@@ -56,11 +54,11 @@ export default function AboutHero5({ json5 }: AboutHero5Props) {
       </div>
 
       {/* Content Container */}
-      <div className="flex flex-row items-center justify-center gap-52 w-[1026px]">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-52 w-full">
         {/* Previous Button */}
         <button 
           onClick={prevReview}
-          className="w-[12.5px] h-[25px] flex items-center justify-center"
+          className="w-[12.5px] h-[25px] flex items-center justify-center lg:ml-8"
         >
           <svg
             width="13"
@@ -80,13 +78,13 @@ export default function AboutHero5({ json5 }: AboutHero5Props) {
         </button>
 
         {/* Review Content */}
-        <div className="flex flex-col items-center gap-16 w-[730px]">
-          <div className="flex flex-col items-center gap-16 w-full">
-            <h1 className="text-4xl font-bold text-white text-center">
+        <div className="flex flex-col items-center gap-8 w-full lg:w-[730px]">
+          <div className="flex flex-col items-center gap-6 w-full">
+            <h1 className="text-2xl lg:text-4xl font-bold text-white text-center">
               {json5.title}
             </h1>
             
-            <p className="text-lg font-medium text-white text-center leading-[22px]">
+            <p className="text-base lg:text-lg font-medium text-white text-center leading-[22px]">
               {json5.reviews[currentReview].text}
             </p>
 
@@ -96,7 +94,7 @@ export default function AboutHero5({ json5 }: AboutHero5Props) {
           </div>
 
           {/* Dots */}
-          <div className="flex gap-3">
+          <div className="flex gap-3 justify-center">
             {json5.reviews.map((_, index) => (
               <div
                 key={index}
@@ -111,7 +109,7 @@ export default function AboutHero5({ json5 }: AboutHero5Props) {
         {/* Next Button */}
         <button 
           onClick={nextReview}
-          className="w-[12.5px] h-[25px] flex items-center justify-center"
+          className="w-[12.5px] h-[25px] flex items-center justify-center lg:mr-8"
         >
           <svg
             width="13"

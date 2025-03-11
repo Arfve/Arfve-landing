@@ -14,34 +14,34 @@ export default function AboutHero1({ json }: HeroSectionProps) {
   }
 
   return (
-    <section className="w-full bg-white flex justify-center">
-      <div className="w-[1440px] flex flex-col items-start p-[96px_124px] relative">
-        <div className="flex flex-row items-center justify-between w-full gap-[10px]">
-          {/* Left Content */}
-          <div className="w-1/2 pr-12">
-            <h1 className="w-[509px] font-inter font-bold text-[40px] leading-[48px] text-black">
-              {json.title}
-            </h1>
-            <p className="w-[509px] font-inter font-bold text-[18px] leading-[22px] text-black">
-              {json.subtitle}
-            </p>
-          </div>
-
-          {/* Right Image */}
-          <div className="flex justify-center items-center p-[10px] w-[593px] h-[284px] bg-[#DEDEDE] rounded-[20px] overflow-hidden">
-            {json.image && (
-              <div className="relative w-full h-full">
-                <Image
-                  src={json.image}
-                  alt="Hero"
-                  fill
-                  className="object-cover"
-                  sizes="593px"
-                />
-              </div>
-            )}
-          </div>
+    <section className="relative w-full max-w-[1440px] min-h-[500px] md:h-[675px] bg-white mx-auto px-6 py-12">
+      <div className="flex flex-col-reverse md:flex-row items-center justify-between w-full h-full px-6">
+        
+        {/* Left Content */}
+        <div className="flex flex-col items-center md:items-start justify-center w-full md:w-1/2 px-6 text-center md:text-left">
+          <h1 className="text-3xl md:text-5xl font-bold text-black mb-4">
+            {json.title}
+          </h1>
+          <p className="text-lg md:text-xl text-black mb-4">
+            {json.subtitle}
+          </p>
         </div>
+
+        {/* Right Image */}
+        {json.image && (
+          <div className="relative w-full md:w-1/2 flex justify-center">
+            <div className="w-[90%] max-w-[593px] h-[284px] md:h-[350px] bg-[#DEDEDE] rounded-[20px] overflow-hidden flex justify-center items-center">
+              <Image
+                src={json.image}
+                alt="Hero"
+                width={500}
+                height={350}
+                className="object-cover rounded-2xl shadow-lg"
+                priority
+              />
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -22,43 +22,43 @@ interface MetaobjectField {
 // Define a type for metaobject fields array
 type MetaobjectFields = MetaobjectField[];
 
+interface ShopifyResponse {
+  legacySection?: {
+    fields: MetaobjectField[];
+  };
+  faqSection?: {
+    fields: MetaobjectField[];
+  };
+}
+
 export async function getLegacyPageData(): Promise<LegacyPageData> {
   const defaultData: LegacyPageData = {
     hero: {
       title: 'Legacy 1',
-      image: '/images/placeholders/hero.jpg',
+      image: '/images/legacy1/hero.jpg',
     },
     withYou: {
       title: 'With you for a long time',
       description: 'Default description text',
-      image: '/images/placeholders/with-you.jpg',
+      image: '/images/legacy1/with-you.jpg',
     },
     technology: {
       title: 'Technology That Evolves With You',
-      features: [
-        {
-          title: '11mm speakers',
-          description: 'For an exceptional sound',
-          image: '/images/placeholders/tech-feature.jpg',
-        },
-      ],
+      features: [],
     },
     legacyApp: {
       title: 'Legacy App',
-      features: [
-        {
-          title: 'Personalized Sound',
-          description: 'Personalized Sound & Audio',
-          subtext: 'Dual connectivity',
-          image: '/images/placeholders/app-feature.jpg',
-        },
-      ],
+      features: [],
     },
+    faq: {
+      title: "Frequently Asked Questions",
+      items: []
+    }
   };
 
   const query = `
-    query GetLegacyPage {
-      metaobject(handle: {
+    query GetLegacyPageWithFAQ {
+      legacySection: metaobject(handle: {
         handle: "legacy-1-sections-9qrktril",
         type: "legacy_1_sections"
       }) {
@@ -76,6 +76,9 @@ export async function getLegacyPageData(): Promise<LegacyPageData> {
                   ... on MediaImage {
                     image {
                       url
+                      altText
+                      width
+                      height
                     }
                   }
                 }
@@ -84,43 +87,61 @@ export async function getLegacyPageData(): Promise<LegacyPageData> {
           }
         }
       }
+      faqSection: metaobject(handle: {
+        handle: "FAQ",
+        type: "faq_sections"
+      }) {
+        fields {
+          key
+          value
+          __typename
+        }
+      }
     }
   `;
 
   try {
     const response = await shopifyFetch({ query });
+    
+    const data = response.body.data as ShopifyResponse;
+    const legacyPageData = data?.legacySection?.fields;
+    const faqData = data?.faqSection?.fields;
 
-    if (!response?.body?.data?.metaobject) {
-      console.warn('No metaobject found, using default data');
-      return defaultData;
-    }
+    if (!legacyPageData) console.debug('No legacy data found');
+    if (!faqData) console.debug('No FAQ data found');
 
-    const legacyPageData = response.body.data.metaobject.fields as MetaobjectFields;
-
-    const data = {
+    return {
       hero: parseSection<LegacyHero>(legacyPageData, 'legacy_hero') || defaultData.hero,
-      withYou:
-        parseSection<WithYouSection>(legacyPageData, 'with_you') || defaultData.withYou,
-      technology:
-        parseSection<{ title: string; features: TechnologyFeature[] }>(
-          legacyPageData,
-          'technology'
-        ) || defaultData.technology,
-      legacyApp:
-        parseSection<{ title: string; features: LegacyAppFeature[] }>(
-          legacyPageData,
-          'legacy_app'
-        ) || defaultData.legacyApp,
+      withYou: parseSection<WithYouSection>(legacyPageData, 'with_you') || defaultData.withYou,
+      technology: parseSection<{ title: string; features: TechnologyFeature[] }>(
+        legacyPageData,
+        'technology'
+      ) || defaultData.technology,
+      legacyApp: parseSection<{ title: string; features: LegacyAppFeature[] }>(
+        legacyPageData,
+        'legacy_app'
+      ) || defaultData.legacyApp,
+      faq: {
+        title: faqData?.find((f: MetaobjectField) => f.key === 'title')?.value || defaultData.faq.title,
+        items: (() => {
+          try {
+            const faqList = faqData?.find((f: MetaobjectField) => f.key === 'faq_list')?.value;
+            return faqList ? JSON.parse(faqList) : defaultData.faq.items;
+          } catch (e) {
+            console.error('Error parsing FAQ list:', e);
+            return defaultData.faq.items;
+          }
+        })()
+      }
     };
-
-    return data;
   } catch (error) {
-    console.error('Error fetching legacy page data:', error);
-    throw error;
+    console.error('Error fetching page data:', error);
+    return defaultData;
   }
 }
 
-function parseSection<T>(fields: MetaobjectFields, key: string): T | null {
+function parseSection<T>(fields: MetaobjectFields | undefined, key: string): T | null {
+  if (!fields) return null;
   const field = fields.find((f) => f.key === key);
   if (!field?.reference?.fields) return null;
 

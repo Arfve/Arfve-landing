@@ -58,7 +58,7 @@ export async function getFaqPageData(): Promise<FaqPageData> {
     const faqListField = faqSections.find((field: Metafield) => field.key === 'faq_list');
 
     if (!faqListField) {
-      console.log('No FAQ list field found');
+      // No need to log this as it's not an error, just a data state
       return {
         title: 'FAQ',
         faqs: [],
@@ -68,13 +68,13 @@ export async function getFaqPageData(): Promise<FaqPageData> {
     try {
       // Parse the FAQ list JSON
       const faqList = JSON.parse(faqListField.value || '[]') as FaqItem[];
-      console.log('Parsed FAQ data:', faqList);
 
       return {
         title: body?.data?.page?.title || 'FAQ',
         faqs: faqList,
       };
     } catch (e) {
+      // Keep this error log as it's helpful for debugging JSON parsing issues
       console.error('Error parsing FAQ list JSON:', e);
       return {
         title: 'FAQ',
@@ -82,6 +82,7 @@ export async function getFaqPageData(): Promise<FaqPageData> {
       };
     }
   } catch (error) {
+    // Keep this error log as it's helpful for debugging API issues
     console.error('Failed to get FAQ page data:', error);
     return {
       title: 'FAQ',
