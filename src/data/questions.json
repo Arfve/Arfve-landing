@@ -1,0 +1,224 @@
+[
+  {
+    "id": "q1",
+    "text": "1. What is your age?",
+    "type": "radio",
+    "options": [
+      "Under 18",
+      "18-24",
+      "25-34",
+      "35-44",
+      "45-54",
+      "55+"
+    ],
+    "Choice": " (Single Choice)"
+  },
+  {
+    "id": "q2",
+    "text": "2. What is your gender?",
+    "type": "radio",
+    "options": [
+      "Male",
+      "Female",
+      "Non-Binary",
+      "Prefer not to say"
+    ],
+    "Choice": " (Single Choice)"
+  },
+  {
+    "id": "q3",
+    "text": "3. How did you first hear about Arfve and Legacy 1?",
+    "type": "radio",
+    "options": [
+      "TikTok",
+      "Instagram",
+      "YouTube",
+      "Facebook",
+      "Linkedin",
+      "X (Twitter)",
+      "Crowdfunding",
+      "Word of Mouth",
+      "Other"
+    ],
+    "otherOption": true,
+    "Choice": " (Single Choice)"
+  },
+  {
+    "id": "q4",
+    "text": "4. Which of these best describes you?",
+    "type": "radio",
+    "options": [
+      "Tech Innovator – I love cutting-edge products before anyone else.",
+      "Sound Lover – I want the best listening experience, no compromises.",
+      "On-the-go Professional – I need seamless, distraction-free audio.",
+      "Athlete/Lifestyle User – Comfort, stability & sweat-proof design matter most.",
+      "Eco-conscious Buyer – I invest in products built to last, not landfill waste."
+    ],
+    "Choice": " (Single Choice)"
+  },
+  {
+    "id": "q5",
+    "text": "5. What do you primarily use earbuds for?",
+    "type": "checkbox",
+    "options": [
+      "Music & Podcasts",
+      "Phone Calls & Work Meetings",
+      "Gaming & Entertainment",
+      "Fitness & Sports",
+      "Travel & Commuting"
+    ],
+    "Choice": " (Multiple Choice)"
+  },
+  {
+    "id": "q6",
+    "text": "6. Which brands have you used before?",
+    "type": "checkbox",
+    "options": [
+      "Apple AirPods",
+      "Sony WF-1000XM series",
+      "Bose QuietComfort Earbuds",
+      "Samsung Galaxy Buds",
+      "Jabra Elite series",
+      "Beats Studio (beats by Dre)",
+      "Other"
+    ],
+    "otherOption": true,
+    "Choice": " (Multiple Choice, open-ended option included)"
+  },
+  {
+    "id": "q7",
+    "text": "7. How important are the following features when buying earbuds?",
+    "type": "checkbox",
+    "options": [
+      "Battery Life",
+      "Noise Cancellation (ANC)",
+      "Comfort & Fit",
+      "Sound Quality",
+      "AI-Powered Customization (e.g., earbuds that adapt sound to your environment)",
+      "Sustainability & Longevity (e.g., modular design, replaceable parts)",
+      "Waterproof",
+      "Others"
+    ],
+    "Choice": " (Multiple Choice)"
+  },
+  {
+    "id": "q8",
+    "text": "8. How often do you replace your earbuds?",
+    "type": "radio",
+    "options": [
+      "Less than a year",
+      "Every 1-2 years",
+      "Every 3+ years",
+      "Only when they stop working"
+    ],
+    "Choice": " (Single Choice)"
+  },
+  {
+    "id": "q9",
+    "text": "9. What typically causes you to replace your earbuds?",
+    "type": "checkbox",
+    "options": [
+      "Battery life degrades",
+      "Sound quality deteriorates",
+      "Physical damage (wear & tear)",
+      "Lost earbuds",
+      "I like upgrading to new models",
+      "Others"
+    ],
+    "Choice": " (Multiple Choice)"
+  },
+  {
+    "id": "q10",
+    "text": "10. Would you consider paying slightly more for earbuds that last longer and have replaceable batteries?",
+    "type": "radio",
+    "options": [
+      "Yes, absolutely",
+      "Maybe, if the price difference is reasonable",
+      "No, I prefer upgrading frequently"
+    ],
+    "Choice": " (Single Choice)"
+  },
+  {
+    "id": "q11",
+    "text": "11. Are you concerned about the environmental impact of disposable tech (e.g., short battery lifespan, non-replaceable parts)?",
+    "type": "radio",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "likert": true,
+    "Choice": " (Likert Scale: 1 = Not Concerned, 5 = Extremely Concerned)"
+  },
+  {
+    "id": "q12",
+    "text": "12. Would you choose a product that can be upgraded in pieces instead of one that cannot, if both cost the same?",
+    "type": "radio",
+    "options": [
+      "Yes, I want a product that lasts longer",
+      "Maybe, if upgrading is easy",
+      "No, it doesn't matter to me"
+    ],
+    "Choice": " (Single Choice)"
+  },
+  {
+    "id": "q13",
+    "text": "13. Would you be interested in a battery replacement program for earbuds instead of buying new ones?",
+    "type": "radio",
+    "options": [
+      "Yes, I'd love that option",
+      "Maybe, depends on the cost",
+      "No, I prefer upgrading to newer models"
+    ],
+    "Choice": " (Single Choice)"
+  },
+  {
+    "id": "q14",
+    "text": "14. How important is it for you that a company designs products to last and reduces electronic waste?",
+    "type": "radio",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "likert": true,
+    "Choice": " (Likert Scale: 1 = Not Important, 5 = Extremely Important)"
+  },
+  {
+    "id": "q15",
+    "text": "15. Would you pay €1 to reserve early access & get a 45% discount at launch?",
+    "type": "radio",
+    "options": [
+      "Yes, absolutely",
+      "Maybe, if the deal is good",
+      "No, I'd rather wait for retail release"
+    ],
+    "Choice": " (Single Choice)"
+  },
+  {
+    "id": "q16",
+    "text": "16. How would you like to stay updated about Arfve?",
+    "type": "checkbox",
+    "options": [
+      "Email updates with exclusive content",
+      "Private backer group (Discord/Facebook)",
+      "Early access to prototypes & behind-the-scenes content",
+      "SMS updates for major milestones"
+    ],
+    "Choice": " (Multiple Choice)"
+  },
+  {
+    "id": "q17",
+    "text": "17. Any final thoughts or expectations you have for Arfve? ",
+    "type": "textarea"
+  },
+  {
+    "id": "q18",
+    "text": "18. What’s your email? (For early access to exclusive discounts, product updates, and a chance to win a pair of Legacy 1 Earbuds.) ",
+    "type": "email"
+  }
+]
