@@ -11,9 +11,9 @@ interface HeaderProps {
 
 export default function Header({ menuItems }: HeaderProps) {
   return (
-    <header className="w-full bg-white">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-[124px] py-8 lg:py-16">
-        <div className="max-w-[1192px] mx-auto flex flex-col lg:flex-row items-center gap-8 lg:gap-[41px] w-full">
+    <header className="w-full bg-white ">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-[124px] py-8 lg:py-16 ">
+        <div className="max-w-[1192px] mx-auto flex flex-col lg:flex-row items-center gap-8 lg:gap-[41px] w-full ">
           {/* Logo */}
           <Link href="/" className="shrink-0">
             <Image
