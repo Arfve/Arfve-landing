@@ -12,7 +12,7 @@ export default async function Page() {
   const { product, productTS } = data;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white text-black">
       <Item product={product} />
       <TechSpecs productTS={productTS} />
     </div>

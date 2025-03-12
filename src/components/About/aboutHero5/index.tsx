@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 
 interface Review {
@@ -11,7 +11,7 @@ interface AboutHero5Props {
   json5: {
     title: string;
     reviews: Review[];
-  }
+  };
 }
 
 export default function AboutHero5({ json5 }: AboutHero5Props) {
@@ -24,7 +24,7 @@ export default function AboutHero5({ json5 }: AboutHero5Props) {
   };
 
   const prevReview = () => {
-    setCurrentReview((prev) => 
+    setCurrentReview((prev) =>
       prev === 0 ? json5.reviews.length - 1 : prev - 1
     );
   };
@@ -34,10 +34,7 @@ export default function AboutHero5({ json5 }: AboutHero5Props) {
       {/* Stars */}
       <div className="relative w-[116px] h-5 flex gap-6 justify-center">
         {[...Array(5)].map((_, i) => (
-          <div
-            key={i}
-            className="w-5 h-5"
-          >
+          <div key={i} className="w-5 h-5">
             <svg
               width="20"
               height="20"
@@ -45,9 +42,7 @@ export default function AboutHero5({ json5 }: AboutHero5Props) {
               fill="#FFEE00"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z"
-              />
+              <path d="M10 0L12.2451 6.90983H19.5106L13.6327 11.1803L15.8779 18.0902L10 13.8197L4.12215 18.0902L6.36729 11.1803L0.489435 6.90983H7.75486L10 0Z" />
             </svg>
           </div>
         ))}
@@ -56,7 +51,8 @@ export default function AboutHero5({ json5 }: AboutHero5Props) {
       {/* Content Container */}
       <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-52 w-full">
         {/* Previous Button */}
-        <button 
+        <button
+          data-tracking-id="previous-review-button"
           onClick={prevReview}
           className="w-[12.5px] h-[25px] flex items-center justify-center lg:ml-8"
         >
@@ -83,7 +79,7 @@ export default function AboutHero5({ json5 }: AboutHero5Props) {
             <h1 className="text-2xl lg:text-4xl font-bold text-white text-center">
               {json5.title}
             </h1>
-            
+
             <p className="text-base lg:text-lg font-medium text-white text-center leading-[22px]">
               {json5.reviews[currentReview].text}
             </p>
@@ -99,7 +95,7 @@ export default function AboutHero5({ json5 }: AboutHero5Props) {
               <div
                 key={index}
                 className={`w-[9px] h-[9px] rounded-full ${
-                  index === currentReview ? 'bg-[#989696]' : 'bg-[#BBB8B8]'
+                  index === currentReview ? "bg-[#989696]" : "bg-[#BBB8B8]"
                 }`}
               />
             ))}
@@ -107,7 +103,8 @@ export default function AboutHero5({ json5 }: AboutHero5Props) {
         </div>
 
         {/* Next Button */}
-        <button 
+        <button
+          data-tracking-id="next-review-button"
           onClick={nextReview}
           className="w-[12.5px] h-[25px] flex items-center justify-center lg:mr-8"
         >

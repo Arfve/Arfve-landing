@@ -60,6 +60,7 @@ const SignUpSection: React.FC<SignUpSectionProps> = ({
           />
           <Link href="/crowdfounding/reservation">
             <button
+            data-tracking-id="signup-button"
               className="w-[350px] bg-[#42b99f]
                   hover:bg-[#308a76] text-white font-bold py-2 px-4 rounded">
               {button_text}

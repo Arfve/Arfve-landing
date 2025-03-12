@@ -75,10 +75,10 @@ export default function Footer({ copyright, cookieSettingsText, socialLinks, men
 
           {/* Bottom Row */}
           <div className="flex flex-col md:flex-row items-center justify-center gap-[12px] text-center">
-            <button className="font-inter text-base text-black hover:opacity-70 transition-opacity">
+            <button data-tracking-id="privacy-policy-button" className="font-inter text-base text-black hover:opacity-70 transition-opacity">
               Privacy policy
             </button>
-            <button className="font-inter text-base text-black hover:opacity-70 transition-opacity">
+            <button data-tracking-id="cookie-settings-button" className="font-inter text-base text-black hover:opacity-70 transition-opacity">
               {cookieSettingsText || 'Cookie settings'}
             </button>
             <span className="font-inter text-base text-black">{copyright || '© 2025 Arfve'}</span>

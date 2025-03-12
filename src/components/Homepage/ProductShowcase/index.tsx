@@ -126,7 +126,7 @@ export default function ProductShowcase({
                 {subtitle}
               </p>
             </div>
-            <button className="flex items-center justify-center gap-2 px-4 py-3 w-[156px] h-[43px] bg-[#243555] rounded-[300px] hover:bg-black transition-colors">
+            <button data-tracking-id="crowdfunding-button" className="flex items-center justify-center gap-2 px-4 py-3 w-[156px] h-[43px] bg-[#243555] rounded-[300px] hover:bg-black transition-colors">
               <Link
                 href="/crowdfounding"
                 className="flex items-center gap-2"

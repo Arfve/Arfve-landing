@@ -111,6 +111,10 @@ ARFVE-LANDING/
 └── eslint.config.mjs         # ESLint configuration
 ```
 
+## Button Tracking 
+Every button in this project has been assigned a unique data-tracking-id attribute.
+
+
 ## Data Flow
 
 ### Shopify Integration

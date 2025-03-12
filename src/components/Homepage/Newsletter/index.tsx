@@ -31,6 +31,7 @@ export default function Newsletter({
           </div>
           {/* Button styled as per your Figma Button */}
           <button
+            data-tracking-id="newsletter-button"
             type="submit"
             className="flex-none w-[108px] h-[43px] flex justify-center items-center px-[16px] py-[12px] gap-[8px] border border-white rounded-[8px] bg-black text-[16px] leading-[19px] font-normal text-white">
             {buttonText}

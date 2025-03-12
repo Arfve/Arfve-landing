@@ -30,7 +30,7 @@ const BrandStory: React.FC<BrandStoryProps> = ({
       </video>
 
       {/* Textöverlagring */}
-      <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-gray p-4">
+      <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-gray p-4 mix-blend-difference">
         <h1 className="text-4xl font-bold">{hero_title}</h1>
         <p className="text-xl  text-gray">{hero_subtitle}</p>
       </div>
