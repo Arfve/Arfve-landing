@@ -9,6 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "test:shopify": "tsx --env-file=.env.local src/scripts/test-shopify-connection.ts",
+    "test:db": "tsx --env-file=.env.local src/scripts/test-db-connection.ts",
+    "check:survey": "tsx --env-file=.env.local src/scripts/check-survey-data.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -36,5 +38,10 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
-  }
+  },
+  "description": "A Next.js landing page integrated with Shopify Storefront API for a headphone product showcase.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
