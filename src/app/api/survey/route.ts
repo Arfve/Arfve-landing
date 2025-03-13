@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server"; // Import NextRequest
-
+import db from "@/lib/db";
 
 export async function POST(request: NextRequest) { // Define the type of request
     try {
@@ -23,34 +23,34 @@ export async function POST(request: NextRequest) { // Define the type of request
 
         console.log("Survey data received:", surveyData);
 
-        // const arrayToCommaString = (array: string | string[]) => Array.isArray(array) ? array.join(", ") : array;
+        const arrayToCommaString = (array: string | string[]) => Array.isArray(array) ? array.join(", ") : array;
 
-        // await .query(
-        //     `INSERT INTO usersfromsurvey (
-        //         Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10, 
-        //         Q11, Q12, Q13, Q14, Q15, Q16, Q17, Q18
-        //     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        //     [
-        //         surveyData.q1,
-        //         surveyData.q2,
-        //         surveyData.q3,
-        //         surveyData.q4,
-        //         arrayToCommaString(surveyData.q5),
-        //         arrayToCommaString(surveyData.q6),
-        //         arrayToCommaString(surveyData.q7),
-        //         surveyData.q8,
-        //         arrayToCommaString(surveyData.q9),
-        //         surveyData.q10,
-        //         surveyData.q11,
-        //         surveyData.q12,
-        //         surveyData.q13,
-        //         surveyData.q14,
-        //         surveyData.q15,
-        //         arrayToCommaString(surveyData.q16),
-        //         surveyData.q17 || "Skipped", 
-        //         surveyData.q18,
-        //     ]
-        // );
+        await db.query(
+            `INSERT INTO usersfromsurvey (
+                Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10, 
+                Q11, Q12, Q13, Q14, Q15, Q16, Q17, Q18
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [
+                surveyData.q1,
+                surveyData.q2,
+                surveyData.q3,
+                surveyData.q4,
+                arrayToCommaString(surveyData.q5),
+                arrayToCommaString(surveyData.q6),
+                arrayToCommaString(surveyData.q7),
+                surveyData.q8,
+                arrayToCommaString(surveyData.q9),
+                surveyData.q10,
+                surveyData.q11,
+                surveyData.q12,
+                surveyData.q13,
+                surveyData.q14,
+                surveyData.q15,
+                arrayToCommaString(surveyData.q16),
+                surveyData.q17 || "Skipped", 
+                surveyData.q18,
+            ]
+        );
 
         return new Response(
             JSON.stringify({ message: "Survey submitted successfully!" }),
