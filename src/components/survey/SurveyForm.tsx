@@ -1,4 +1,5 @@
 "use client";
+
 interface Question {
   id: string;
   text: string;
@@ -6,7 +7,7 @@ interface Question {
   options?: string[];
   otherOption?: boolean;
   likert?: boolean;
-  Choice?: string
+  Choice?: string;
 }
 
 interface SurveyFormProps {
@@ -22,7 +23,6 @@ interface SurveyFormProps {
   handleCheckboxChangeSQ: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleCheckboxChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent) => void;
-  
   responseMessage: string;
 }
 
@@ -35,11 +35,12 @@ export function SurveyForm({
   handleCheckboxChange,
   handleSubmit,
 }: SurveyFormProps) {
+  const hasErrors = Object.values(errors).some((error) => error);
+
   return (
     <>
       <div>
         <h1>
-
           <strong>Welcome To the Arfve Survey</strong>
         </h1>
         <div>
@@ -47,7 +48,7 @@ export function SurveyForm({
           <p>Help Us Shape the Future of Earbuds – Your Voice Matters</p>
           <p>
             Thank you for taking the time to be part of{" "}
-            <strong>Arfve’s journey.</strong>You’re not just answering a
+            <strong>Arfve’s journey.</strong> You’re not just answering a
             survey—you’re helping us{" "}
             <strong>redefine the future of Earbuds</strong>.
           </p>
@@ -84,6 +85,7 @@ export function SurveyForm({
           <strong>– The Arfve Team</strong>
         </div>
       </div>
+
       {questions.map((question) => (
         <div
           key={question.id}
@@ -91,8 +93,9 @@ export function SurveyForm({
             questionRefs.current[question.id] = el;
           }}
           className={`mb-4 p-2 ${errors[question.id] ? "border border-red-500" : ""}`}>
-
-          <p className="text-sm  mb-2"><strong>{question.text}</strong> {question.Choice}</p>
+          <p className="text-sm mb-2">
+            <strong>{question.text}</strong> {question.Choice}
+          </p>
 
           {question.type === "radio" && question.options && (
             <div className="flex flex-col">
@@ -133,7 +136,7 @@ export function SurveyForm({
               <textarea
                 name={question.id}
                 onChange={handleChange}
-                placeholder="Write done your thoughts here..."
+                placeholder="Write down your thoughts here..."
                 className="shadow border rounded w-full py-2 px-3"
               />
               <label className="inline-flex items-center mt-2">
@@ -141,10 +144,9 @@ export function SurveyForm({
                   type="checkbox"
                   name={question.id}
                   onChange={handleCheckboxChangeSQ}
-                
                   className="form-checkbox text-indigo-600"
                 />
-                <span className="ml-2">skip</span>
+                <span className="ml-2">Skip</span>
               </label>
             </>
           )}
@@ -165,18 +167,24 @@ export function SurveyForm({
                   onChange={handleCheckboxChange}
                   className="form-checkbox text-indigo-600"
                 />
-                <span className="ml-2"> answer anonymously </span>
+                <span className="ml-2">Answer anonymously</span>
               </label>
             </>
           )}
         </div>
       ))}
 
-      <button
-        onClick={handleSubmit}
-        className="mt-4 bg-[#42b99f] text-white py-2 px-4 rounded">
-       Submit
-      </button>
+      <div className="mt-4 flex items-center gap-4">
+        <button
+          onClick={handleSubmit}
+          className="bg-[#42b99f] text-white py-2 px-4 rounded">
+          Submit
+        </button>
+
+        {hasErrors && (
+          <p className="text-red-500">Please fill in all required fields.</p>
+        )}
+      </div>
     </>
   );
 }

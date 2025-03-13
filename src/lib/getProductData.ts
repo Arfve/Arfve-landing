@@ -13,7 +13,6 @@ const getFieldValue = (fields: ShopifyField[], key: string): string | null => {
 
 export async function GetReservationPage() {
   try {
-
     const { body } = await shopifyFetch({
       query: `
         query GetProductPage {
@@ -33,10 +32,8 @@ export async function GetReservationPage() {
       `,
     });
 
-
     const metaobject = body.data.page.metafields[0].reference;
     const fields: ShopifyField[] = metaobject.fields;
-
 
     const productGID = getFieldValue(fields, "product_data");
 
@@ -57,34 +54,45 @@ export async function GetReservationPage() {
 
     const { body: productBody } = await shopifyFetch({
       query: `
-        query GetProductById($id: ID!) {
-          node(id: $id) {
-            ... on Product {
+          query GetProductById($id: ID!) {
+    node(id: $id) {
+      ... on Product {
+        id
+        title
+        descriptionHtml
+        onlineStoreUrl
+        images(first: 10) {
+          edges {
+            node {
+              url
+              altText
+            }
+              
+          }
+        }
+        variants(first: 5) {
+          edges {
+            node {
               id
               title
-              descriptionHtml
-              onlineStoreUrl
-              images(first: 5) {
-                edges {
-                  node {
-                    url
-                    altText
-                  }
-                }
+              selectedOptions {
+                name
+                value
               }
-              variants(first: 5) {
-                edges {
-                  node {
-                    priceV2 {
-                      amount
-                      currencyCode
-                    }
-                  }
-                }
+              priceV2 {
+                amount
+                currencyCode
               }
+                image{
+                url
+                }
             }
           }
         }
+      }
+    }
+  }
+
       `,
       variables: { id: productGID },
     });
@@ -92,7 +100,6 @@ export async function GetReservationPage() {
     const product = productBody.data.node;
 
 
-  
     return { product, productTS };
   } catch (error) {
     console.error("Error retrieving product data:", error);
