@@ -1,17 +1,28 @@
 import { createStorefrontApiClient } from '@shopify/storefront-api-client'
 
-const isDevelopment = process.env.NODE_ENV === "development";
+// Add debug logging
+console.log('Environment variables:', {
+  domain: process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN,
+  token: process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN?.slice(0, 5) + '...' // Log only first 5 chars for security
+});
+
+if (!process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN) {
+  throw new Error('NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN is not defined');
+}
+
+if (!process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
+  throw new Error('NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN is not defined');
+}
+
+type ShopifyVariables = Record<string, string | number | boolean | null | undefined>;
 
 const shopifyConfig = {
-  storeDomain: `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}`,
+  storeDomain: process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN!,  // Remove https:// prefix
   apiVersion: "2024-04",
   publicAccessToken: process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN!,
 };
 
 export const shopifyClient = createStorefrontApiClient(shopifyConfig);
-
-
-
 
 export async function testConnection() {
   try {
@@ -35,14 +46,9 @@ export async function shopifyFetch({
   variables = {},
 }: {
   query: string;
-  variables?: Record<string, any>;
+  variables?: ShopifyVariables;
 }) {
   try {
-    if (!process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN) {
-      console.warn('Missing Shopify domain configuration')
-      throw new Error('Missing Shopify configuration')
-    }
-
     const result = await shopifyClient.request(query, { variables })
     return { status: 200, body: result }
   } catch (error) {

@@ -1,62 +1,64 @@
-import { shopifyFetch } from './shopify'
-import { LegacyPageData } from '@/types/legacy'
+import { shopifyFetch } from './shopify';
+import { 
+  LegacyPageData, 
+  LegacyHero, 
+  WithYouSection,
+  LegacyAppFeature,
+  TechnologyFeature
+} from '@/types/legacy';
 
+// Define a type for metaobject fields
 interface MetaobjectField {
+  key: string; // Add 'key' to represent the field's key
   value: string;
   reference?: {
     image?: {
       url: string;
-    }
-  }
+    };
+    fields?: MetaobjectField[];
+  };
 }
 
-interface Metaobject {
-  fields: {
-    title: MetaobjectField;
-    description?: MetaobjectField;
-    image?: MetaobjectField;
-    features?: MetaobjectField;
-  }
+// Define a type for metaobject fields array
+type MetaobjectFields = MetaobjectField[];
+
+interface ShopifyResponse {
+  legacySection?: {
+    fields: MetaobjectField[];
+  };
+  faqSection?: {
+    fields: MetaobjectField[];
+  };
 }
 
 export async function getLegacyPageData(): Promise<LegacyPageData> {
-  // Flytta defaultData hit, före try-blocket
   const defaultData: LegacyPageData = {
     hero: {
       title: 'Legacy 1',
-      image: '/images/placeholders/hero.jpg',
+      image: '/images/legacy1/hero.jpg',
     },
     withYou: {
       title: 'With you for a long time',
       description: 'Default description text',
-      image: '/images/placeholders/with-you.jpg',
+      image: '/images/legacy1/with-you.jpg',
     },
     technology: {
       title: 'Technology That Evolves With You',
-      features: [
-        {
-          title: '11mm speakers',
-          description: 'For an exceptional sound',
-          image: '/images/placeholders/tech-feature.jpg'
-        }
-      ],
+      features: [],
     },
     legacyApp: {
       title: 'Legacy App',
-      features: [
-        {
-          title: 'Personalized Sound',
-          description: 'Personalized Sound & Audio',
-          subtext: 'Dual connectivity',
-          image: '/images/placeholders/app-feature.jpg'
-        }
-      ],
+      features: [],
+    },
+    faq: {
+      title: "Frequently Asked Questions",
+      items: []
     }
-  }
+  };
 
   const query = `
-    query GetLegacyPage {
-      metaobject(handle: {
+    query GetLegacyPageWithFAQ {
+      legacySection: metaobject(handle: {
         handle: "legacy-1-sections-9qrktril",
         type: "legacy_1_sections"
       }) {
@@ -74,6 +76,9 @@ export async function getLegacyPageData(): Promise<LegacyPageData> {
                   ... on MediaImage {
                     image {
                       url
+                      altText
+                      width
+                      height
                     }
                   }
                 }
@@ -82,80 +87,78 @@ export async function getLegacyPageData(): Promise<LegacyPageData> {
           }
         }
       }
-    }
-  `
-
-  try {
-    const response = await shopifyFetch({ query })
-    console.log('Full response:', JSON.stringify(response?.body, null, 2))
-    console.log('GraphQL errors:', response?.body?.errors)
-
-    // Testa en enklare query först för att se om vi kan nå metaobjektet
-    const simpleQuery = `
-      query {
-        metaobjects(type: "legacy_1_page_sections", first: 10) {
-          nodes {
-            id
-            handle
-            type
-            fields {
-              key
-              value
-            }
-          }
+      faqSection: metaobject(handle: {
+        handle: "FAQ",
+        type: "faq_sections"
+      }) {
+        fields {
+          key
+          value
+          __typename
         }
       }
-    `
-    const testResponse = await shopifyFetch({ query: simpleQuery })
-    console.log('Available metaobjects:', JSON.stringify(testResponse?.body?.data, null, 2))
-
-    if (!response?.body?.data?.metaobject) {
-      console.warn('No metaobject found, using default data')
-      return defaultData
     }
+  `;
 
-    const legacyPageData = response.body.data.metaobject.fields
-    console.log('Legacy page data:', legacyPageData)
+  try {
+    const response = await shopifyFetch({ query });
+    
+    const data = response.body.data as ShopifyResponse;
+    const legacyPageData = data?.legacySection?.fields;
+    const faqData = data?.faqSection?.fields;
 
-    // Extrahera data från metaobjektet
-    const data = {
-      hero: parseSection(legacyPageData, 'legacy_hero') || defaultData.hero,
-      withYou: parseSection(legacyPageData, 'with_you') || defaultData.withYou,
-      technology: parseSection(legacyPageData, 'technology') || defaultData.technology,
-      legacyApp: parseSection(legacyPageData, 'legacy_app') || defaultData.legacyApp
-    }
+    if (!legacyPageData) console.debug('No legacy data found');
+    if (!faqData) console.debug('No FAQ data found');
 
-    return data
-
+    return {
+      hero: parseSection<LegacyHero>(legacyPageData, 'legacy_hero') || defaultData.hero,
+      withYou: parseSection<WithYouSection>(legacyPageData, 'with_you') || defaultData.withYou,
+      technology: parseSection<{ title: string; features: TechnologyFeature[] }>(
+        legacyPageData,
+        'technology'
+      ) || defaultData.technology,
+      legacyApp: parseSection<{ title: string; features: LegacyAppFeature[] }>(
+        legacyPageData,
+        'legacy_app'
+      ) || defaultData.legacyApp,
+      faq: {
+        title: faqData?.find((f: MetaobjectField) => f.key === 'title')?.value || defaultData.faq.title,
+        items: (() => {
+          try {
+            const faqList = faqData?.find((f: MetaobjectField) => f.key === 'faq_list')?.value;
+            return faqList ? JSON.parse(faqList) : defaultData.faq.items;
+          } catch (e) {
+            console.error('Error parsing FAQ list:', e);
+            return defaultData.faq.items;
+          }
+        })()
+      }
+    };
   } catch (error) {
-    console.error('Error fetching legacy page data:', error)
-    throw error
+    console.error('Error fetching page data:', error);
+    return defaultData;
   }
 }
 
-function parseSection(fields: any[], key: string) {
-  const field = fields.find((f: any) => f.key === key)
-  if (!field?.reference?.fields) return null
+function parseSection<T>(fields: MetaobjectFields | undefined, key: string): T | null {
+  if (!fields) return null;
+  const field = fields.find((f) => f.key === key);
+  if (!field?.reference?.fields) return null;
 
-  const result = field.reference.fields.reduce((acc: any, f: any) => {
+  const result = field.reference.fields.reduce<Record<string, unknown>>((acc, f) => {
     if (f.reference?.image?.url) {
-      acc[f.key] = f.reference.image.url
+      acc[f.key] = f.reference.image.url;
     } else if (f.key === 'features') {
       try {
-        acc[f.key] = JSON.parse(f.value || '[]')
+        acc[f.key] = JSON.parse(f.value || '[]');
       } catch {
-        acc[f.key] = []
+        acc[f.key] = [];
       }
     } else {
-      acc[f.key] = f.value
+      acc[f.key] = f.value;
     }
-    return acc
-  }, {})
+    return acc;
+  }, {});
 
-  // Lägg till en tom features-array om den saknas
-  if (key === 'technology' || key === 'legacy_app') {
-    result.features = result.features || []
-  }
-
-  return result
-} 
+  return result as T;
+}
