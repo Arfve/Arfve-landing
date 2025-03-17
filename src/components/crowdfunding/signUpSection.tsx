@@ -56,7 +56,7 @@ const SignUpSection: React.FC<SignUpSectionProps> = ({
           <input
             type="text"
             placeholder={text_field}
-            className="w-[350px] border border-gray-300  px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-[350px] border border-gray-300 text-black px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <Link href="/crowdfounding/reservation">
             <button
