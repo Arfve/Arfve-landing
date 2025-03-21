@@ -177,7 +177,7 @@ export function SurveyForm({
       <div className="mt-4 flex items-center gap-4">
         <button
           onClick={handleSubmit}
-          className="bg-[#42b99f] text-white py-2 px-4 rounded">
+          className="bg-[#42b99f] text-white py-2 px-4 rounded" data-tracking-id="surver-submit-button">
           Submit
         </button>
 

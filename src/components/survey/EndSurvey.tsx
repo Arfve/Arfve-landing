@@ -35,7 +35,7 @@ export default function EndSurvey() {
           <strong>– The Arfve Team</strong>
         </p>
         <Link href="/" passHref>
-          <button className="absolute bottom-4 right-4 bg-slate-300 py-2 px-4 rounded-md">
+          <button className="absolute bottom-4 right-4 bg-slate-300 py-2 px-4 rounded-md" data-tracking-id="home-button">
             Home
           </button>
         </Link>
