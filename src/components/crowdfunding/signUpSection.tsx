@@ -23,7 +23,9 @@ const SignUpSection: React.FC<SignUpSectionProps> = ({
         if (storedCustomers && storedCustomers !== "undefined") {
           setCustomers(JSON.parse(storedCustomers));
         } else {
-          const response = await fetch("http://localhost:3000/api/crowdfunding");
+          const response = await fetch(
+            "http://localhost:3000/api/crowdfunding"
+          );
           const customersCount = await response.json();
 
           if (customersCount) {
@@ -54,10 +56,8 @@ const SignUpSection: React.FC<SignUpSectionProps> = ({
           <Link href="/crowdfounding/reservation">
             <button
               className="w-full md:w-[350px] bg-[#42b99f] hover:bg-[#308a76] text-white font-bold py-2 px-4 rounded"
+              data-tracking-id="signup-button"
             >
-            data-tracking-id="signup-button"
-              className="w-[350px] bg-[#42b99f]
-                  hover:bg-[#308a76] text-white font-bold py-2 px-4 rounded">
               {button_text}
             </button>
           </Link>
