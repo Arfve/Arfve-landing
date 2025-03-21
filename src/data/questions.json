@@ -218,7 +218,8 @@
   },
   {
     "id": "q18",
-    "text": "18. What’s your email? (For early access to exclusive discounts, product updates, and a chance to win a pair of Legacy 1 Earbuds.) ",
-    "type": "email"
+    "text": "18. What’s your email?  ",
+    "type": "email",
+     "Choice": " (For early access to exclusive discounts, product updates, and a chance to win a pair of Legacy 1 Earbuds.)"
   }
 ]

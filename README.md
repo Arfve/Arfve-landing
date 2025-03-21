@@ -315,3 +315,135 @@ The crowdfunding components follow a modular structure:
 ## Deployment
 
 The project is configured for deployment on Vercel or any platform supporting Next.js.
+
+## Survey Implementation
+
+The site includes a comprehensive user survey system designed to gather feedback and insights from potential customers. This data helps shape product development and marketing strategies.
+
+### Survey Features
+- **18-Question Survey**: Covers demographics, user preferences, product usage, and environmental concerns
+- **Multiple Question Types**: Supports radio buttons, checkboxes, text areas, and email inputs
+- **Validation**: Client-side validation ensures all required fields are completed
+- **Skip Options**: Allows users to skip certain questions (like open-ended feedback)
+- **Anonymous Option**: Users can choose to submit feedback anonymously
+- **Thank You Page**: Displays a thank you message after successful submission
+
+### Survey Flow
+1. Users access the survey at `/survey`
+2. They complete the 18-question form covering:
+   - Demographics (age, gender)
+   - Product usage (what they use earbuds for, preferred brands)
+   - Feature preferences (battery life, sound quality, etc.)
+   - Environmental concerns and sustainability preferences
+   - Purchasing intentions
+   - Contact information (optional)
+3. Upon submission, data is validated client-side
+4. If validation passes, data is sent to the `/api/survey` endpoint
+5. The API stores responses in a MySQL database
+6. Users see a thank you message with next steps
+
+### Survey Data Structure
+The survey questions are defined in `src/data/questions.json` with the following structure:
+```typescript
+interface Question {
+  id: string;           // Unique identifier (e.g., "q1")
+  text: string;         // Question text
+  type: string;         // Question type (radio, checkbox, textarea, email)
+  options?: string[];   // Available options for radio/checkbox questions
+  otherOption?: boolean; // Whether to include an "Other" option
+  likert?: boolean;     // Whether it's a Likert scale question
+  Choice?: string;      // Description of choice type (e.g., "Single Choice")
+}
+```
+
+### Database Integration
+- Survey responses are stored in a MySQL database
+- The database connection is configured in `src/lib/db.ts`
+- The API endpoint handles data validation and storage
+- Multiple choice answers are converted to comma-separated strings for storage
+
+### Survey Components
+- `SurveyForm.tsx`: Renders the survey form with all question types
+- `EndSurvey.tsx`: Displays the thank you message after submission
+- `page.tsx`: Manages form state, validation, and submission
+
+### Required Database Setup
+To enable the survey functionality:
+1. Set up a MySQL database
+2. Create a table named `usersfromsurvey` with columns for each question (Q1-Q18)
+3. Configure database connection in environment variables:
+   ```
+   DB_HOST=your-db-host
+   DB_USER=your-db-user
+   DB_PASSWORD=your-db-password
+   DB_NAME=your-db-name
+   ```
+
+### Survey Analytics
+The collected data can be used for:
+- Understanding customer demographics
+- Identifying key feature preferences
+- Gauging interest in sustainability features
+- Building an email list for marketing
+- Informing product development decisions
+
+### AWS RDS Database Setup
+The survey responses are stored in an AWS RDS MySQL database:
+
+1. **Create an AWS RDS MySQL instance**:
+   - Use the AWS Free Tier for cost-effective development
+   - Select MySQL as the database engine
+   - Configure with appropriate instance size (t2.micro for free tier)
+   - Set up a secure master username and password
+
+2. **Configure Security**:
+   - Set up security groups to allow MySQL connections (port 3306) from your application
+   - For development, you can allow connections from specific IP addresses
+   - For production, consider using more restrictive security measures
+
+3. **Database Schema**:
+   - Create the `usersfromsurvey` table with columns for each question:
+   ```sql
+   CREATE TABLE usersfromsurvey (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       Q1 VARCHAR(255),
+       Q2 VARCHAR(255),
+       Q3 VARCHAR(255),
+       Q4 VARCHAR(255),
+       Q5 TEXT,
+       Q6 TEXT,
+       Q7 TEXT,
+       Q8 VARCHAR(255),
+       Q9 TEXT,
+       Q10 VARCHAR(255),
+       Q11 VARCHAR(255),
+       Q12 VARCHAR(255),
+       Q13 VARCHAR(255),
+       Q14 VARCHAR(255),
+       Q15 VARCHAR(255),
+       Q16 TEXT,
+       Q17 TEXT,
+       Q18 VARCHAR(255),
+       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+   );
+   ```
+
+4. **Environment Variables**:
+   - Set the following environment variables in your `.env.local` file:
+   ```
+   DB_HOST=your-rds-endpoint.region.rds.amazonaws.com
+   DB_USER=your-db-username
+   DB_PASSWORD=your-db-password
+   DB_NAME=your-database-name
+   ```
+
+5. **Backup and Maintenance**:
+   - Enable automated backups in RDS settings
+   - Consider setting up a maintenance window during off-peak hours
+   - Monitor database performance using AWS CloudWatch
+
+### Survey Data Management
+- The API endpoint at `/api/survey` handles data validation and storage
+- Multiple choice answers are converted to comma-separated strings for storage
+- The database connection is configured in `src/lib/db.ts` with proper error handling
+- Environment variables are validated at application startup

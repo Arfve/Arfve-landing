@@ -16,8 +16,7 @@ export default async function page() {
       <DummyBuild/>
       <SignUpSection {...signUpSection} />
       <IndustryEndorsements {...industryEndorsements} />
-     
+
     </main>
   );
 }
-

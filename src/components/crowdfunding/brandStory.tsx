@@ -13,21 +13,22 @@ const BrandStory: React.FC<BrandStoryProps> = ({
   hero_subtitle,
 }) => {
   return (
-    <section className="flex justify-center">
-  <div className="w-full   ">
-    
-    {/* Videobild med text */}
-    <div className="relative  overflow-hidden  ">
-      <video
-        src={hero_image || "https://cdn.shopify.com/videos/c/o/v/9e0d372617804c88bf4419c760d89258.mp4"}
-        className="w-full h-auto"
-        preload="auto"
-        muted
-        autoPlay
-        loop
-      >
-        Din webbläsare stödjer inte video-taggen.
-      </video>
+    <section className="flex justify-center px-4 sm:px-8 m-5">
+      <div className="w-full max-w-7xl flex justify-center items-center flex-col mx-auto">
+        {/* Videobild med text */}
+        <video
+          src={
+            hero_image ||
+            "https://cdn.shopify.com/videos/c/o/v/9e0d372617804c88bf4419c760d89258.mp4"
+          }
+          className="w-full sm:w-[80%] md:w-[60%] h-auto border-solid border-2 border-black"
+          preload="auto"
+          muted
+          autoPlay
+          loop
+        >
+          Din webbläsare stödjer inte video-taggen.
+        </video>
 
       {/* Textöverlagring */}
       <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-gray p-4 mix-blend-difference">
