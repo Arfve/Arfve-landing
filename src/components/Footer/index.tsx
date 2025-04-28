@@ -27,54 +27,22 @@ export default function Footer({ copyright, cookieSettingsText, socialLinks, men
   return (
     <footer className="w-full bg-[#FFFFFF]">
       <div className="max-w-[1440px] mx-auto px-8 md:px-32 py-8 md:py-[32px]">
-        {/* Main Content Container */}
-        <div className="flex flex-col gap-[32px]">
-          {/* Top Row */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-[32px]">
-            {/* Logo */}
-            <Link href="/" className="shrink-0">
-              <Image
-                src="/logo.svg"
-                alt="Arfve"
-                width={113}
-                height={41}
-                className="w-[113px] h-[41px]"
-                sizes="113px"
-              />
-            </Link>
+        {/* Single Row Layout */}
+        <div className="flex items-center justify-between gap-8">
+          {/* Left Section: Logo */}
+          <Link href="/" className="shrink-0">
+            <Image
+              src="/logo.svg"
+              alt="Arfve"
+              width={113}
+              height={41}
+              className="w-[113px] h-[41px]"
+              sizes="113px"
+            />
+          </Link>
 
-            {/* Navigation Links */}
-            <nav className="flex flex-wrap justify-center items-center gap-[41px]">
-              {menuItems.map((item) => (
-                <Link
-                  key={item.id}
-                  href={item.url}
-                  className="font-inter text-base text-black hover:opacity-70 transition-opacity"
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Social Icons */}
-            <div className="flex items-center gap-[20px] shrink-0">
-              {(Object.entries(SOCIAL_ICONS) as [keyof typeof SOCIAL_ICONS, { Icon: IconType; color: string }][])
-                .map(([platform, { Icon, color }]) => (
-                  <Link
-                    key={platform}
-                    href={socialLinks?.[platform] || '#'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-[30px] h-[30px] hover:opacity-70 transition-opacity"
-                  >
-                    <Icon className="w-full h-full" style={{ color }} />
-                  </Link>
-                ))}
-            </div>
-          </div>
-
-          {/* Bottom Row */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-[12px] text-center">
+          {/* Center Section: Links and Copyright */}
+          <div className="flex items-center gap-[12px]">
             <button className="font-inter text-base text-black hover:opacity-70 transition-opacity">
               Privacy policy
             </button>
@@ -82,6 +50,22 @@ export default function Footer({ copyright, cookieSettingsText, socialLinks, men
               {cookieSettingsText || 'Cookie settings'}
             </button>
             <span className="font-inter text-base text-black">{copyright || '© 2025 Arfve'}</span>
+          </div>
+
+          {/* Right Section: Social Icons */}
+          <div className="flex items-center gap-[20px] shrink-0">
+            {(Object.entries(SOCIAL_ICONS) as [keyof typeof SOCIAL_ICONS, { Icon: IconType; color: string }][])
+              .map(([platform, { Icon, color }]) => (
+                <Link
+                  key={platform}
+                  href={socialLinks?.[platform] || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-[30px] h-[30px] hover:opacity-70 transition-opacity flex items-center"
+                >
+                  <Icon className="w-full h-full" style={{ color }} />
+                </Link>
+              ))}
           </div>
         </div>
       </div>

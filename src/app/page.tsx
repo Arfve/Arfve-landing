@@ -1,44 +1,18 @@
-import Hero from '@/components/Homepage/Hero';
-import Features from '@/components/Homepage/Features';
-import AppSection from '@/components/Homepage/AppSection';
-import ProductShowcase from '@/components/Homepage/ProductShowcase';
-import Statement from '@/components/Homepage/Statement';
-import Testimonials from '@/components/Homepage/Testimonials';
-import Newsletter from '@/components/Homepage/Newsletter';
-import { getHomePageData } from '@/lib/getHomePageData';
+import SimpleLanding from '@/components/SimpleLanding';
+import { getSimpleLandingData } from '@/lib/getSimpleLandingData';
 
 export default async function Home() {
-  const {
-    heroSection,
-    featuresSection,
-    appSection,
-    statementSection,
-    newsletterSection,
-    testimonialsSection,
-    productShowcaseSection,
-  } = await getHomePageData();
-
+  const data = await getSimpleLandingData();
+  
+  // Use fallback values if no data is returned
   return (
-    <div className="flex flex-col min-h-screen">
-      {heroSection && (
-        <Hero
-          title={heroSection.title}
-          subtitle={heroSection.subtitle}
-          buttonText={heroSection.buttonText}
-          image={heroSection.image}
-        />
-      )}
-      {featuresSection && <Features {...featuresSection} />}
-      {appSection && <AppSection {...appSection} features={appSection.features || []} />}
-      {productShowcaseSection && (
-        <ProductShowcase
-          {...productShowcaseSection}
-          features={productShowcaseSection.features || []}
-        />
-      )}
-      {statementSection && <Statement {...statementSection} />}
-      {testimonialsSection && <Testimonials {...testimonialsSection} />}
-      {newsletterSection && <Newsletter {...newsletterSection} />}
-    </div>
+    <SimpleLanding
+      videoUrl={data?.heroMedia || "/HeroVideo 1.mp4"}
+      mainHeading={data?.mainHeading || "WE'RE BUILDING TECHNOLOGY THAT'S MORE THAN SMART"}
+      subHeading={data?.subHeading || "THAT'S MORE THAN SMART"}
+      emailHeading={data?.emailHeading || "We're shaping a sustainable future for audio devices."}
+      emailSubtext={data?.emailSubtext || "More to come - stay tuned"}
+      emailImage={data?.emailImage || "/Arfve6.jpg"}
+    />
   );
 }
