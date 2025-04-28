@@ -95,7 +95,7 @@ export default function SimpleLanding({
     <main>
       {/* Hero Section */}
       <section className="w-full bg-black">
-        <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+        <div className="relative w-full" style={{ paddingTop: 'min(56.25%, calc(100vh - 80px))' }}>
           <div className="absolute inset-0 w-full">
             <video
               ref={videoRef}
@@ -133,7 +133,7 @@ export default function SimpleLanding({
             {/* Video Controls */}
             <button
               onClick={toggleMute}
-              className="absolute bottom-4 right-4 p-2 bg-black/50 rounded-full hover:bg-black/70 transition-colors"
+              className="absolute bottom-6 right-6 p-3 bg-black/50 rounded-full hover:bg-black/70 transition-colors"
             >
               <Image
                 src={isMuted ? "/volume-off.svg" : "/volume-on.svg"}
@@ -149,67 +149,37 @@ export default function SimpleLanding({
 
       {/* Text Section */}
       <section className="w-full bg-white">
-        {/* Mobile Layout */}
-        <div className="md:hidden w-full py-12">
-          <div className="w-full px-4">
+        <div className="w-full py-12 md:py-24">
+          <div className="w-[92%] lg:w-[80%] xl:w-[618px] mx-auto px-4 md:px-0">
             <h2 className="font-poppins font-normal 
-                         text-[20px] xs:text-[24px] sm:text-[28px]
-                         leading-[1.3]
-                         text-center uppercase tracking-[-0.02em] text-[#192124]
-                         max-w-[500px] mx-auto">
+                       text-[20px] xs:text-[24px] sm:text-[28px] md:text-[40px] lg:text-[50px]
+                       leading-[1.3]
+                       text-center uppercase tracking-[-0.02em] text-[#192124]
+                       transition-all duration-300
+                       animate-fade-up">
               {mainHeading}
             </h2>
             {subHeading && (
               <p className="font-poppins font-normal 
-                          text-[16px] xs:text-[20px] sm:text-[24px]
-                          leading-[1.3]
-                          text-center uppercase tracking-[-0.02em] text-[#192124]
-                          max-w-[500px] mx-auto
-                          mt-4">
+                        text-[16px] xs:text-[20px] sm:text-[24px] md:text-[32px] lg:text-[40px]
+                        leading-[1.3]
+                        text-center uppercase tracking-[-0.02em] text-[#192124]
+                        transition-all duration-300
+                        animate-fade-up
+                        mt-4 md:mt-6">
                 {subHeading}
               </p>
             )}
-          </div>
-        </div>
-
-        {/* Desktop Layout */}
-        <div className="hidden md:block">
-          <div className="relative w-full" style={{ paddingTop: '36.25%' }}>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-[92%] lg:w-[80%] xl:w-[618px] 
-                            px-fluid-4
-                            transition-all duration-300">
-                <h2 className="font-poppins font-normal 
-                             text-[clamp(28px,3.5vw,50px)]
-                             leading-[1.3]
-                             text-center uppercase tracking-[-0.02em] text-[#192124]
-                             transition-all duration-300
-                             animate-fade-up">
-                  {mainHeading}
-                </h2>
-                {subHeading && (
-                  <p className="font-poppins font-normal 
-                              text-[clamp(24px,2.5vw,40px)]
-                              leading-[1.3]
-                              text-center uppercase tracking-[-0.02em] text-[#192124]
-                              transition-all duration-300
-                              animate-fade-up
-                              mt-6">
-                    {subHeading}
-                  </p>
-                )}
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Email Section */}
       <section className="w-full bg-[#F3F3F3]">
-        <div className="relative w-full">
-          {/* Mobile layout */}
-          <div className="md:hidden">
-            <div className="w-full relative pb-[75%]">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+            {/* Image */}
+            <div className="relative w-full pb-[75%] md:pb-0 md:h-full min-h-[400px]">
               <Image
                 src={emailImage}
                 alt="Arfve earbuds"
@@ -219,26 +189,25 @@ export default function SimpleLanding({
                   duration-700 ease-in-out
                   ${imageLoading ? 'scale-110 blur-lg' : 'scale-100 blur-0'}
                 `}
-                sizes="(max-width: 768px) 100vw, 33.89vw"
+                sizes="(max-width: 768px) 100vw, 50vw"
                 quality={90}
                 priority
                 onLoad={() => setImageLoading(false)}
               />
             </div>
 
-            <div className="w-full px-4 py-6">
-              <div className="w-full">
-                <div className="flex flex-col gap-1">
-                  <h2 className="font-[&apos;Poppins&apos;] font-semibold text-[20px] leading-[1.2] text-[#192124]">
-                    {emailHeading || "We're shaping a sustainable future for audio devices."}
-                  </h2>
-                  <p className="font-[&apos;Poppins&apos;] font-semibold text-[20px] leading-[1.2] text-[#192124]">
-                    {emailSubtext || "More to come - stay tuned"}
-                  </p>
-                </div>
+            {/* Content */}
+            <div className="px-4 md:px-8 py-8 md:py-12 flex flex-col justify-center">
+              <div className="max-w-[480px]">
+                <h2 className="font-poppins font-semibold text-[20px] md:text-[24px] lg:text-[28px] leading-[1.2] text-[#192124]">
+                  {emailHeading || "We're shaping a sustainable future for audio devices."}
+                </h2>
+                <p className="font-poppins font-semibold text-[18px] md:text-[20px] lg:text-[24px] leading-[1.2] text-[#192124] mt-2">
+                  {emailSubtext || "More to come - stay tuned"}
+                </p>
 
-                <form onSubmit={handleSubmit} className="mt-4">
-                  <div className="flex h-[42px] w-full">
+                <form onSubmit={handleSubmit} className="mt-6 md:mt-8">
+                  <div className="flex h-[42px] md:h-[48px] w-full max-w-[400px]">
                     <div className="flex-[3] min-w-0">
                       <input
                         type="email"
@@ -247,126 +216,39 @@ export default function SimpleLanding({
                         placeholder="email"
                         disabled={isSubmitting}
                         className={`
-                          w-full h-full px-3
-                          rounded-l-lg border border-r-0 border-gray-300 
-                          focus:outline-none focus:border-gray-500
-                          transition-all duration-300
-                          text-[14px]
-                          disabled:bg-gray-50 disabled:cursor-not-allowed
-                          ${formState === 'error' ? 'border-red-500 focus:border-red-500' : ''}
-                          ${formState === 'success' ? 'border-green-500 focus:border-green-500' : ''}
+                          w-full h-full px-4
+                          border border-[#192124] border-r-0
+                          text-[16px] md:text-[18px]
+                          placeholder:text-[#192124]/60
+                          focus:outline-none focus:ring-2 focus:ring-[#192124]
+                          disabled:opacity-50 disabled:cursor-not-allowed
+                          transition-all duration-200
                         `}
-                        required
                       />
                     </div>
                     <button
                       type="submit"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || !email}
                       className={`
-                        h-full px-3 flex-1
-                        rounded-r-lg font-medium 
-                        bg-[#B17864] text-white
-                        hover:bg-[#9A6753] 
-                        transition-all duration-300 
-                        whitespace-nowrap
-                        text-[14px]
+                        flex-1 min-w-[100px]
+                        bg-[#192124] text-white
+                        text-[16px] md:text-[18px]
+                        font-medium
                         disabled:opacity-50 disabled:cursor-not-allowed
-                        ${isSubmitting ? 'bg-[#9A6753]' : ''}
+                        hover:bg-[#192124]/90
+                        transition-all duration-200
                       `}
                     >
-                      Sign up
+                      {isSubmitting ? 'Sending...' : 'Sign up'}
                     </button>
                   </div>
-                  <div className="mt-2 w-full">
-                    <p className="text-[12px] text-gray-600">
-                      Sign up with your email address, pay €1 to get our best opening offer
-                    </p>
-                  </div>
+                  {formState === 'success' && (
+                    <p className="mt-2 text-green-600">Thank you for signing up!</p>
+                  )}
+                  {formState === 'error' && (
+                    <p className="mt-2 text-red-600">Something went wrong. Please try again.</p>
+                  )}
                 </form>
-              </div>
-            </div>
-          </div>
-
-          {/* Desktop layout */}
-          <div className="hidden md:block" style={{ paddingTop: '56.25%' }}>
-            <div className="absolute inset-0 flex">
-              <div className="w-[33.89%] relative">
-                <div className="absolute inset-0">
-                  <Image
-                    src={emailImage}
-                    alt="Arfve earbuds"
-                    fill
-                    className={`
-                      object-cover
-                      duration-700 ease-in-out
-                      ${imageLoading ? 'scale-110 blur-lg' : 'scale-100 blur-0'}
-                    `}
-                    sizes="(max-width: 768px) 100vw, 33.89vw"
-                    quality={90}
-                    priority
-                    onLoad={() => setImageLoading(false)}
-                  />
-                </div>
-              </div>
-
-              <div className="flex-1 flex items-center pl-[8.61%] pr-[5%] py-12">
-                <div className="w-full">
-                  <div className="flex flex-col gap-1">
-                    <h2 className="font-[&apos;Poppins&apos;] font-semibold text-[clamp(16px,2.08vw,30px)] leading-[1.2] text-[#192124] break-words">
-                      {emailHeading || "We're shaping a sustainable future for audio devices."}
-                    </h2>
-                    <p className="font-['Poppins'] font-semibold text-[clamp(16px,2.08vw,30px)] leading-[1.2] text-[#192124] break-words">
-                      {emailSubtext || "More to come - stay tuned"}
-                    </p>
-                  </div>
-
-                  <form onSubmit={handleSubmit} className="mt-[clamp(16px,1.67vw,24px)]">
-                    <div className="flex h-[46px] w-full">
-                      <div className="flex-[2] min-w-0">
-                        <input
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="email"
-                          disabled={isSubmitting}
-                          className={`
-                            w-full h-full px-[clamp(12px,1.11vw,16px)]
-                            rounded-l-lg border border-r-0 border-gray-300 
-                            focus:outline-none focus:border-gray-500
-                            transition-all duration-300
-                            text-[clamp(12px,1.11vw,16px)]
-                            disabled:bg-gray-50 disabled:cursor-not-allowed
-                            ${formState === 'error' ? 'border-red-500 focus:border-red-500' : ''}
-                            ${formState === 'success' ? 'border-green-500 focus:border-green-500' : ''}
-                          `}
-                          required
-                        />
-                      </div>
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className={`
-                          h-full px-[clamp(12px,1.11vw,16px)] flex-1
-                          rounded-r-lg font-medium 
-                          bg-[#B17864] text-white
-                          hover:bg-[#9A6753] 
-                          transition-all duration-300 
-                          whitespace-nowrap
-                          text-[clamp(12px,1.11vw,16px)]
-                          disabled:opacity-50 disabled:cursor-not-allowed
-                          ${isSubmitting ? 'bg-[#9A6753]' : ''}
-                        `}
-                      >
-                        Sign up
-                      </button>
-                    </div>
-                    <div className="mt-2 w-full">
-                      <p className="text-[clamp(10px,0.97vw,14px)] text-gray-600 break-words">
-                        Sign up with your email address, pay €1 to get our best opening offer
-                      </p>
-                    </div>
-                  </form>
-                </div>
               </div>
             </div>
           </div>
